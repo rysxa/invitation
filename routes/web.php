@@ -32,18 +32,14 @@ Route::prefix('/')->group(function () {
 // Admin
 Route::prefix('/admin')->middleware("auth")->group(function () {
     Route::get('/', [AttendanceController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/login', function () {
-        return view('auth.login');
-    });
-    Route::get('/registration', function () {
-        return view('auth.register');
-    });
     
     Route::get('/message', [WishController::class, 'index'])->name('admin.data.wish');
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('admin.data.attendance');
     Route::get('/event', [EventController::class, 'index'])->name('admin.data.event');
     Route::get('/event-add', [EventController::class, 'add'])->name('admin.event.add');
     Route::post('/event/add', [EventController::class, 'create'])->name('admin.event.create');
+    Route::put('/event/update/{data}', [EventController::class, 'update'])->name('admin.event.update');
+    Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('admin.event.delete');
     
     Route::get('/story', [GalleryController::class, 'indexStory'])->name('admin.story.data');
     Route::get('/story/add', [GalleryController::class, 'addStory'])->name('admin.story.add');
