@@ -1,4 +1,23 @@
 @extends('wedding.layouts.app')
+@section('title', 'Wedding Invitation')
+@section('meta')
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Wedding Invitation" />
+    <meta name="author" content="Indry Sefviana" />
+    <meta property="title" content="@yield('title')" />
+    <meta name="description" content="{{ $event[0]->user_man . $event[0]->user_woman }}" />
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="{{ route('front.data.wish') }}" />
+    <meta property="og:site_name" content="sefviana.com" />
+    <meta property="og:description" content="Wedding Invitation {{ $event[0]->user_man . $event[0]->user_woman }}" />
+    <meta name="twitter:title" content="Wedding Invitation" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="{{ route('front.data.wish') }}" />
+    <meta name="twitter:card" content="" />
+@endsection
+
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
@@ -14,14 +33,16 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
                     <h2>{{ $event[0]->title }}</h2>
-                    <h3>{{ date('F j, Y', strtotime($event[0]->date_wedding)) }} {{ $event[0]->address }}, {{ $event[0]->city }}</h3>
+                    <h3>{{ date('F j, Y', strtotime($event[0]->date_wedding)) }} {{ $event[0]->address }},
+                        {{ $event[0]->city }}</h3>
                     <p>{{ $event[0]->caption }}</p>
                 </div>
             </div>
             <div class="couple-wrap animate-box">
                 <div class="couple-half">
                     <div class="groom">
-                        <img src="{{ Storage::url('public/images/' . $event[0]->pic_man) }}" alt="groom" class="img-responsive">
+                        <img src="{{ Storage::url('public/images/' . $event[0]->pic_man) }}" alt="groom"
+                            class="img-responsive">
                     </div>
                     <div class="desc-groom">
                         <h3>{{ $event[0]->user_man }}</h3>
@@ -31,7 +52,8 @@
                 <p class="heart text-center"><i class="icon-heart2"></i></p>
                 <div class="couple-half">
                     <div class="bride">
-                        <img src="{{ Storage::url('public/images/' . $event[0]->pic_women) }}" alt="groom" class="img-responsive">
+                        <img src="{{ Storage::url('public/images/' . $event[0]->pic_women) }}" alt="groom"
+                            class="img-responsive">
                     </div>
                     <div class="desc-bride">
                         <h3>{{ $event[0]->user_women }}</h3>
@@ -109,7 +131,9 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Your firstname" required oninvalid="this.setCustomValidity('Harap isi nama')" oninput="setCustomValidity('')">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Your firstname"
+                                    required oninvalid="this.setCustomValidity('Harap isi nama')"
+                                    oninput="setCustomValidity('')">
                             </div>
                         </div>
 
@@ -117,7 +141,8 @@
                             <div class="col-md-12">
                                 <label for="email">Email (required not publish)</label>
                                 <input type="text" id="email" name="email" class="form-control"
-                                    placeholder="Your email address" required oninvalid="this.setCustomValidity('Harap isi email')" oninput="setCustomValidity('')">
+                                    placeholder="Your email address" required
+                                    oninvalid="this.setCustomValidity('Harap isi email')" oninput="setCustomValidity('')">
                             </div>
                         </div>
 
@@ -125,7 +150,9 @@
                             <div class="col-md-12">
                                 <label for="phone">Phone/WA (required not publish)</label>
                                 <input type="number" id="phone" name="phone" class="form-control"
-                                    placeholder="Your phone number" required oninvalid="this.setCustomValidity('Harap isi no telepon')" oninput="setCustomValidity('')">
+                                    placeholder="Your phone number" required
+                                    oninvalid="this.setCustomValidity('Harap isi no telepon')"
+                                    oninput="setCustomValidity('')">
                             </div>
                         </div>
 
@@ -133,7 +160,9 @@
                             <div class="col-md-12">
                                 <label for="message">Message</label>
                                 <textarea name="message" id="message" name="message" cols="30" rows="10"
-                                    class="form-control" placeholder="Write us something" required oninvalid="this.setCustomValidity('Harap isi pesan')" oninput="setCustomValidity('')"></textarea>
+                                    class="form-control" placeholder="Write us something" required
+                                    oninvalid="this.setCustomValidity('Harap isi pesan')"
+                                    oninput="setCustomValidity('')"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -164,19 +193,24 @@
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
                                 <label for="name" class="sr-only">Name</label>
-                                <input type="name" class="form-control" id="name" name="name" placeholder="Name" required oninvalid="this.setCustomValidity('Harap isi nama')" oninput="setCustomValidity('')">
+                                <input type="name" class="form-control" id="name" name="name" placeholder="Name" required
+                                    oninvalid="this.setCustomValidity('Harap isi nama')" oninput="setCustomValidity('')">
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required oninvalid="this.setCustomValidity('Harap isi email')" oninput="setCustomValidity('')">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                    required oninvalid="this.setCustomValidity('Harap isi email')"
+                                    oninput="setCustomValidity('')">
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
                                 <label for="phone" class="sr-only">Phone</label>
-                                <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" required oninvalid="this.setCustomValidity('Harap isi no telepon')" oninput="setCustomValidity('')">
+                                <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone"
+                                    required oninvalid="this.setCustomValidity('Harap isi no telepon')"
+                                    oninput="setCustomValidity('')">
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4">

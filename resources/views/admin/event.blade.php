@@ -40,8 +40,7 @@
                                     <td>{{ $d->user_women }}</td>
                                     <td>{{ $d->address }}</td>
                                     <td>{{ $d->city }}</td>
-                                    <td><button type="button" class="btn btn-success fa-circle"><i class="fa fa-eye"
-                                                aria-hidden="true"></i></button></td>
+                                    <td><button type="button" class="btn btn-success btn-circle btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
                                 </tr>
                             @endforeach
                         </tbody>

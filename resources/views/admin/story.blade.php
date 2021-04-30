@@ -38,7 +38,7 @@
                                     <td>{{ $d->subject }}</td>
                                     <td>{{ date('F j, Y, g:i a', strtotime($d->date)) }}</td>
                                     <td>{{ $d->message }}</td>
-                                    <td><a type="button" class="btn btn-warning fa-circle"><i class="fa fa-pen"></i></a></td>
+                                    <td><a type="button" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-pen"></i></a></td>
                                 </tr>
                             @endforeach
                         </tbody>

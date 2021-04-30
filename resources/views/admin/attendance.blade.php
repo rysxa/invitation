@@ -33,7 +33,7 @@
                                     <td>{{ $d->name }}</td>
                                     <td>{{ $d->email }}</td>
                                     <td>{{ $d->phone }}</td>
-                                    <td><a href="https://wa.me/62{{ $d->phone }}">Send WA</a></td>
+                                    <td><a href="https://wa.me/62{{ $d->phone }}" type="button" class="btn btn-success btn-circle btn-sm"><i class="fa fa-paper-plane"></i></a></td>
                                 </tr>
                             @endforeach
                         </tbody>

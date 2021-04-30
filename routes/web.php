@@ -32,6 +32,13 @@ Route::prefix('/')->group(function () {
 // Admin
 Route::prefix('/admin')->middleware("auth")->group(function () {
     Route::get('/', [AttendanceController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/login', function () {
+        return view('auth.login');
+    });
+    Route::get('/registration', function () {
+        return view('auth.register');
+    });
+    
     Route::get('/message', [WishController::class, 'index'])->name('admin.data.wish');
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('admin.data.attendance');
     Route::get('/event', [EventController::class, 'index'])->name('admin.data.event');

@@ -34,8 +34,7 @@
                                     <td>{{ $i++ }}</td>
                                     <td><img src="{{ Storage::url('public/images/' . $d->picture) }}" alt="gallery" class="img-responsive" width="80"></td>
                                     <td>{{ $d->caption }}</td>
-                                    <td><button type="button" class="btn btn-warning fa-circle"><i class="fa fa-pen"
-                                                aria-hidden="true"></i></button></td>
+                                    <td><button type="button" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-pen" aria-hidden="true"></i></button></td>
                                 </tr>
                             @endforeach
                         </tbody>

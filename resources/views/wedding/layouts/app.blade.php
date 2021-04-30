@@ -4,11 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wedding &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-    <meta name="author" content="FREEHTML5.CO" />
+    <title>Wedding Invitation</title>
+    
+    @yield('meta')
 
     <!-- 
  //////////////////////////////////////////////////////
@@ -25,17 +23,6 @@
 
  //////////////////////////////////////////////////////
  -->
-
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="Wedding Invitation" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:title" content="Wedding Invitation" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
 
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet'
         type='text/css'>
@@ -88,7 +75,8 @@
                     <div class="col-md-8 col-md-offset-2 text-center">
                         <div class="display-t">
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                                <h1>{{ Str::substr($event[0]->user_man, 0,7) }} &amp; {{ Str::substr($event[0]->user_women, 0,7) }}</h1>
+                                <h1>{{ Str::substr($event[0]->user_man, 0, 7) }} &amp;
+                                    {{ Str::substr($event[0]->user_women, 0, 7) }}</h1>
                                 <h2>We Are Getting Married</h2>
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div>
