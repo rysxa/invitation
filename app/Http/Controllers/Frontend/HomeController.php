@@ -1,27 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Event;
 use App\Models\Wish;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class AttendanceController extends Controller
+class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('user');
+    }
+    
     public function index()
-    {
-        $data = Attendance::all();
-        return view('admin.attendance', compact('data'));
-    }
-
-    public function dashboard()
-    {
-        return view('admin.index');
-    }
-
-    public function indexFront()
     {
         $attendance     = Attendance::all();
         $wish           = Wish::all();
@@ -41,6 +35,4 @@ class AttendanceController extends Controller
             return redirect()->route('front.data.wish');
         }
     }
-
-    
 }

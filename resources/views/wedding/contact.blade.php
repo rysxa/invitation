@@ -5,6 +5,10 @@
             <li><a href="{{ route('front.data.wish') }}">Home</a></li>
             <li><a href="{{ route('front.data.gallery') }}">Gallery</a></li>
             <li class="active"><a href="/contact">Contact</a></li>
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </ul>
     </div>
 @endsection

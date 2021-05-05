@@ -24,6 +24,7 @@
             <li class="active"><a href="{{ route('front.data.wish') }}">Home</a></li>
             <li><a href="{{ route('front.data.gallery') }}">Gallery</a></li>
             <li><a href="/contact">Contact</a></li>
+            <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
     </div>
 @endsection

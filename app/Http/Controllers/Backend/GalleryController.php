@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Models\Event;
+use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Story;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+    
     public function index()
     {
         $data = Gallery::all();
@@ -19,14 +24,6 @@ class GalleryController extends Controller
     {
         $data = Story::all();
         return view('admin.story', compact('data'));
-    }
-
-    public function indexFront()
-    {
-        $gallery = Gallery::all();
-        $event = Event::all();
-        $story = Story::all();
-        return view('wedding.gallery', compact('event', 'gallery', 'story'));
     }
 
     public function addStory()

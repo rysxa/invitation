@@ -66,13 +66,19 @@
                                             name="password_confirmation" required autocomplete="new-password"
                                             placeholder="Confirm Password">
                                     </div>
-                                    <div class="form-group" hidden>
-                                        <input id="role" type="text"
+                                    <div class="form-group">
+                                        <select id="role" type="text"
                                             class="form-control form-control-user @error('role') is-invalid @enderror"
-                                            name="role" value="1" required autocomplete="role"
-                                            placeholder="role">
+                                            name="role" value="{{ old('role') }}" required autocomplete="role">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                            @error('role')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div>
-
 
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         {{ __('Register') }}

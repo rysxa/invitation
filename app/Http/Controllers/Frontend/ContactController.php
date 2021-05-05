@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $data = Contact::all();
-        return view('admin.contact', compact('data'));
+        $this->middleware('user');
     }
-
-    public function indexFront()
+    
+    public function index()
     {
         $event = Event::all();
         return view('wedding.contact', compact('event'));
