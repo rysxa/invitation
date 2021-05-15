@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('user');
-    }
-    
     public function index()
     {
         $gallery = Gallery::all();

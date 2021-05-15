@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-    
     public function index()
     {
         $data = Event::all();

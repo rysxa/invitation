@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-    
     public function index()
     {
         $data = Contact::all();

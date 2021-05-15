@@ -67,9 +67,9 @@
                                             placeholder="Confirm Password">
                                     </div>
                                     <div class="form-group">
-                                        <select id="role" type="text"
-                                            class="form-control form-control-user @error('role') is-invalid @enderror"
-                                            name="role" value="{{ old('role') }}" required autocomplete="role">
+                                        <select id="role"
+                                            class="form-control form-control @error('role') is-invalid @enderror"
+                                            name="role" value="{{ old('role') }}" required>
                                             <option value="admin">Admin</option>
                                             <option value="user">User</option>
                                         </select>

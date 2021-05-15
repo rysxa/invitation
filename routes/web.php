@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 // User
-Route::prefix('/')->middleware('user')->group(function () {
+Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('front.data.wish');
     Route::get('/gallery', [FrontendGalleryController::class, 'index'])->name('front.data.gallery');
     Route::get('/contact', [FrontendContactController::class, 'index'])->name('front.data.contact');
@@ -41,8 +41,8 @@ Route::prefix('/')->middleware('user')->group(function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Admin
-Route::prefix('/admin')->middleware('admin')->group(function () {
-    Route::get('/', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard');
+Route::prefix('/admin')->namespace('Backend')->middleware(['auth','admin'])->group(function () {
+    Route::get('/', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard'); 
     
     Route::get('/message', [BackendWishController::class, 'index'])->name('admin.data.wish');
     Route::get('/attendance', [BackendHomeController::class, 'index'])->name('admin.data.attendance');

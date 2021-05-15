@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('user');
-    }
-    
     public function index()
     {
         $attendance     = Attendance::all();
