@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Wedding Invitation</title>
-    
+
     @yield('meta')
 
     <!-- 
@@ -63,7 +63,6 @@
                     </div>
                     @yield('navbar')
                 </div>
-
             </div>
         </nav>
 
@@ -75,10 +74,17 @@
                     <div class="col-md-8 col-md-offset-2 text-center">
                         <div class="display-t">
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                                <h1>{{ Str::substr($event[0]->user_man, 0, 7) }} &amp;
-                                    {{ Str::substr($event[0]->user_women, 0, 7) }}</h1>
-                                <h2>We Are Getting Married</h2>
-                                <div class="simply-countdown simply-countdown-one"></div>
+                                @if ($event)
+                                    @foreach ($event as $item)
+                                        <h1>{{ Str::substr($item->user_man, 0, 7) }} &amp;
+                                            {{ Str::substr($item->user_women, 0, 7) }}</h1>
+                                        <h2>We Are Getting Married</h2>
+                                        <div class="simply-countdown simply-countdown-one"></div>
+                                    @endforeach
+
+                                @else
+                                    <h2>Create Your Invitation</h2>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -98,11 +104,16 @@
                         </p>
                         <p>
                         <ul class="fh5co-social-icons">
-                            <li><a href="https://twitter.com/indrysefvi"><i class="icon-twitter"></i></a></li>
-                            <li><a href="https://www.instagram.com/indrysefvi/"><i class="icon-instagram"></i></a></li>
-                            <li><a href="https://www.linkedin.com/in/indry-sefviana/"><i class="icon-linkedin"></i></a>
-                            </li>
-                            <li><a href="https://github.com/indrysfa"><i class="icon-github"></i></a></li>
+                            @foreach ($contact_info as $item)
+                                <li><a target="_blank" href="https://twitter.com/{{ $item->twitter }}"><i
+                                            class="icon-twitter"></i></a>
+                                </li>
+                                <li><a target="_blank" href="https://www.instagram.com/{{ $item->instagram }}/"><i
+                                            class="icon-instagram"></i></a></li>
+                                <li><a target="_blank" href="https://www.facebook.com/{{ $item->facebook }}"><i
+                                            class="icon-facebook"></i></a>
+                                </li>
+                            @endforeach
                         </ul>
                         </p>
                     </div>

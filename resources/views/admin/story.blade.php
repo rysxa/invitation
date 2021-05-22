@@ -34,11 +34,13 @@
                             @foreach ($data as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td><img src="{{ Storage::url('public/images/' . $d->picture) }}" alt="story" class="img-responsive" width="80"></td>
+                                    <td><img src="{{ Storage::url('public/images/' . $d->picture) }}" alt="story"
+                                            class="img-responsive" width="80"></td>
                                     <td>{{ $d->subject }}</td>
                                     <td>{{ date('F j, Y, g:i a', strtotime($d->date)) }}</td>
                                     <td>{{ $d->message }}</td>
-                                    <td><a type="button" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-pen"></i></a></td>
+                                    <td><a type="button" class="btn btn-warning btn-circle btn-sm"><i
+                                                class="fa fa-pen"></i></a></td>
                                 </tr>
                             @endforeach
                         </tbody>

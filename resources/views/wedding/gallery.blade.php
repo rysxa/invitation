@@ -16,8 +16,11 @@
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
                     <span>We Love Each Other</span>
                     <h2>Our Story</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                        there live the blind texts.</p>
+                    <p>
+                        @foreach ($gallery_head as $item)
+                            {{ $item->head_story }}
+                        @endforeach
+                    </p>
                 </div>
             </div>
             <div class="row">
@@ -68,8 +71,11 @@
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
                     <span>Our Memories</span>
                     <h2>Wedding Gallery</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                        there live the blind texts.</p>
+                    <p>
+                        @foreach ($gallery_head as $item)
+                            {{ $item->head_gallery }}
+                        @endforeach
+                    </p>
                 </div>
             </div>
             <div class="row row-bottom-padded-md">
@@ -78,7 +84,7 @@
                         @foreach ($gallery as $e)
                             <li class="one-third animate-box" data-animate-effect="fadeIn"
                                 style="background-image: url({{ Storage::url('public/images/' . $e->picture) }}); ">
-                                <a href="{{ Storage::url('public/images/' . $e->picture) }}">
+                                <a href="{{ Storage::url('public/images/' . $e->picture) }}" target="_blank">
                                     <div class="case-studies-summary">
                                         <h2>{{ $e->caption }}</h2>
                                     </div>
@@ -97,8 +103,11 @@
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
                     <h2>Wedding Video</h2>
-                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem
-                        provident. Odit ab aliquam dolor eius.</p>
+                    <p>
+                        @foreach ($gallery_head as $item)
+                            {{ $item->head_video }}
+                        @endforeach
+                    </p>
                 </div>
             </div>
 
@@ -114,9 +123,9 @@
 
             <div class="row">
                 <div class="col-md-6 animate-box">
-                    <a href="https://www.youtube.com/watch?v=4n5bpeh5NNg" class="popup-vimeo"><i
+                    <a href="https://www.youtube.com/watch?v=oSSil-4MJtY" class="popup-vimeo"><i
                             class="icon-video2"></i></a>
-                    <iframe class="popup-vimeo" width="560" height="315" src="https://www.youtube.com/embed/4n5bpeh5NNg"
+                    <iframe class="popup-vimeo" width="560" height="315" src="https://www.youtube.com/embed/oSSil-4MJtY"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen><i class="icon-video2"></i></iframe>

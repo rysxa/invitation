@@ -14,6 +14,8 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\WishController as FrontendWishController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WishController;
+use App\Models\Contact;
+use App\Models\Contact_info;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,13 +29,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 // User
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('front.data.wish');
     Route::get('/gallery', [FrontendGalleryController::class, 'index'])->name('front.data.gallery');
     Route::get('/contact', [FrontendContactController::class, 'index'])->name('front.data.contact');
-    
+
     Route::post('/message/post', [FrontendWishController::class, 'create'])->name('post.wish');
     Route::post('/attendance/post', [HomeController::class, 'create'])->name('post.attendance');
     Route::post('/contact/post', [FrontendContactController::class, 'create'])->name('post.contact');
@@ -41,9 +44,9 @@ Route::prefix('/')->group(function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Admin
-Route::prefix('/admin')->namespace('Backend')->middleware(['auth','admin'])->group(function () {
-    Route::get('/', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard'); 
-    
+Route::prefix('/admin')->namespace('Backend')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard');
+
     Route::get('/message', [BackendWishController::class, 'index'])->name('admin.data.wish');
     Route::get('/attendance', [BackendHomeController::class, 'index'])->name('admin.data.attendance');
     Route::get('/event', [BackendEventController::class, 'index'])->name('admin.data.event');
@@ -51,14 +54,21 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth','admin'])->gro
     Route::post('/event/add', [BackendEventController::class, 'create'])->name('admin.event.create');
     Route::put('/event/update/{data}', [BackendEventController::class, 'update'])->name('admin.event.update');
     Route::delete('/event/delete/{event}', [BackendEventController::class, 'destroy'])->name('admin.event.delete');
-    
+
     Route::get('/story', [BackendGalleryController::class, 'indexStory'])->name('admin.story.data');
     Route::get('/story/add', [BackendGalleryController::class, 'addStory'])->name('admin.story.add');
     Route::post('/story/add', [BackendGalleryController::class, 'createStory'])->name('admin.story.create');
 
+    Route::get('/contact-info', [BackendContactController::class, 'indexContactInfo'])->name('admin.contactinfo.data');
+    Route::get('/contact-info/add', [BackendContactController::class, 'addContactInfo'])->name('admin.contactinfo.add');
+    Route::post('/contact-info/add', [BackendContactController::class, 'createContactInfo'])->name('admin.contactinfo.create');
+
     Route::get('/gallery', [BackendGalleryController::class, 'index'])->name('admin.gallery.data');
     Route::get('/gallery/add', [BackendGalleryController::class, 'addGallery'])->name('admin.gallery.add');
     Route::post('/gallery/add', [BackendGalleryController::class, 'createGallery'])->name('admin.gallery.create');
+    Route::get('/gallery-head', [BackendGalleryController::class, 'headGallery'])->name('admin.gallery.head');
+    Route::get('/gallery-head/add', [BackendGalleryController::class, 'addheadGallery'])->name('admin.gallery-head.add');
+    Route::post('/gallery-head/add', [BackendGalleryController::class, 'createheadGallery'])->name('admin.gallery-head.create');
 
     Route::get('/contact', [BackendContactController::class, 'index'])->name('admin.contact.data');
 });

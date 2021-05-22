@@ -37,8 +37,10 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.data.event') }}">Event</a>
+                <a class="collapse-item" href="{{ route('admin.gallery.head') }}">Head Gallery</a>
                 <a class="collapse-item" href="{{ route('admin.story.data') }}">Story</a>
                 <a class="collapse-item" href="{{ route('admin.gallery.data') }}">Gallery</a>
+                <a class="collapse-item" href="{{ route('admin.contactinfo.data') }}">Contact Information</a>
             </div>
         </div>
     </li>
@@ -46,8 +48,8 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
-     <!-- Nav Item - Pages Collapse Menu -->
-     <li class="nav-item">
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-fw fa-book"></i>

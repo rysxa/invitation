@@ -22,7 +22,7 @@
                     <input type="text" class="form-control" name="caption" value="{{ old('caption') }}" required>
                 </div>
             </div>
-            
+
             <a type="button" href="{{ route('admin.gallery.data') }}" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>

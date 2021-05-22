@@ -5,7 +5,8 @@
             <li><a href="{{ route('front.data.wish') }}">Home</a></li>
             <li><a href="{{ route('front.data.gallery') }}">Gallery</a></li>
             <li class="active"><a href="/contact">Contact</a></li>
-            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+            <li><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
@@ -69,10 +70,24 @@
                     <div class="fh5co-contact-info">
                         <h3>Contact Information</h3>
                         <ul>
-                            <li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
-                            <li class="phone"><a href="tel://81222878183">+ 81222 87 8183</a></li>
-                            <li class="email"><a href="mailto:indry@sefviana.com">indry@sefviana.com</a></li>
-                            <li class="url"><a href="http://sefviana.com/indry">sefviana.com</a></li>
+                            @foreach ($contact_info as $item)
+                                <li class="address">{{ $item->address }}</li>
+                                <li class="phone"><a target="_blank" href="tel://{{ $item->phone }}">+
+                                        {{ $item->phone }}</a></li>
+                                <li class="fa-whatsapp"><a target="_blank"
+                                        href="https://api.whatsapp.com/send?phone=62{{ $item->wa }}&text=Saya%0Aingin%0Abertanya%0Amengenai%0Aacara%0Apernikahan%0Akamu">+
+                                        {{ $item->wa }}</a></li>
+                                <li class="email"><a target="_blank"
+                                        href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
+                                <li class="icon-facebook"><a target="_blank"
+                                        href="https://www.facebook.com/{{ $item->facebook }}">{{ $item->facebook }}</a>
+                                </li>
+                                <li class="icon-instagram"><a target="_blank"
+                                        href="https://www.instagram.com/{{ $item->instagram }}">{{ $item->instagram }}</a>
+                                </li>
+                                <li class="icon-twitter"><a target="_blank"
+                                        href="https://twitter.com/{{ $item->twitter }}">{{ $item->twitter }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
 

@@ -12,7 +12,13 @@ class EventController extends Controller
     public function index()
     {
         $data = Event::all();
+
+        // if ($data->isEmpty()) {
+        //     return view('admin.event', compact('data'));
+        // }
+        // if ($data->isNotEmpty()) {
         return view('admin.event', compact('data'));
+        // }
     }
 
     public function add()

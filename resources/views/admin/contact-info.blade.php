@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
-@section('title', 'Gallery User Page')
+@section('title', 'Contact Information Page')
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Gallery User Page</h1>
+        <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <a href="{{ route('admin.gallery.add') }}" class="nav-link">
+                <a href="{{ route('admin.contactinfo.add') }}" class="nav-link">
                     <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add New
-                            Gallery</i></button>
+                            Contact Information</i></button>
                 </a>
             </div>
             <div class="card-body">
@@ -21,9 +21,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Picture</th>
-                                <th>Caption Image</th>
-                                <th></th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>WA</th>
+                                <th>Twitter</th>
+                                <th>Instagram</th>
+                                <th>Facebook</th>
                             </tr>
                         </thead>
 
@@ -32,11 +36,13 @@
                             @foreach ($data as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td><img src="{{ Storage::url('public/images/' . $d->picture) }}" alt="gallery"
-                                            class="img-responsive" width="80"></td>
-                                    <td>{{ $d->caption }}</td>
-                                    <td><button type="button" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-pen"
-                                                aria-hidden="true"></i></button></td>
+                                    <td>{{ $d->address }}</td>
+                                    <td>{{ $d->phone }}</td>
+                                    <td>{{ $d->email }}</td>
+                                    <td>{{ $d->wa }}</td>
+                                    <td>{{ $d->twitter }}</td>
+                                    <td>{{ $d->instagram }}</td>
+                                    <td>{{ $d->facebook }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
