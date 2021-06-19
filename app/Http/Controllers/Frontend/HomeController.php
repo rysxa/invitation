@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Contact_info;
 use App\Models\Event;
+use App\Models\User;
 use App\Models\Wish;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
         $attendance     = Attendance::all();
         $wish           = Wish::all();
@@ -23,13 +24,13 @@ class HomeController extends Controller
     public function create(Request $request)
     {
         $data = Attendance::create([
-            'name'      => $request->name,
+            'name'      => ucwords($request->name),
             'email'     => $request->email,
             'phone'     => $request->phone
         ]);
 
         if ($data) {
-            return redirect()->route('front.data.wish');
+            return redirect()->route('front.data.wish')->with('success', 'Thank you, the form you have filled has been accepted');
         }
     }
 }

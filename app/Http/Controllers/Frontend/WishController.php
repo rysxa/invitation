@@ -11,14 +11,14 @@ class WishController extends Controller
     public function create(Request $request)
     {
         $data = Wish::create([
-            'name'      => $request->name,
+            'name'      => ucwords($request->name),
             'email'     => $request->email,
             'phone'     => $request->phone,
             'message'   => $request->message
         ]);
 
         if ($data) {
-            return redirect()->route('front.data.wish');
+            return redirect()->route('front.data.wish')->with('success', 'Thank you for your kind wishes');
         }
     }
 }

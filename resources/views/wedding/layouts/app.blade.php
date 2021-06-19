@@ -76,12 +76,11 @@
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
                                 @if ($event)
                                     @foreach ($event as $item)
-                                        <h1>{{ Str::substr($item->user_man, 0, 7) }} &amp;
-                                            {{ Str::substr($item->user_women, 0, 7) }}</h1>
+                                        <h1>{{ $item->man_first }} &amp;
+                                            {{ $item->women_first }}</h1>
                                         <h2>We Are Getting Married</h2>
-                                        <div class="simply-countdown simply-countdown-one"></div>
+                                        {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
                                     @endforeach
-
                                 @else
                                     <h2>Create Your Invitation</h2>
                                 @endif
@@ -100,7 +99,7 @@
                 <div class="row copyright">
                     <div class="col-md-12 text-center">
                         <p>
-                            <small class="block">&copy; 2021 indrysfa All Rights Reserved.</small>
+                            <small class="block">&copy; 2021 sefviana.com All Rights Reserved.</small>
                         </p>
                         <p>
                         <ul class="fh5co-social-icons">

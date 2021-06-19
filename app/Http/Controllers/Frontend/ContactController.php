@@ -12,7 +12,6 @@ class ContactController extends Controller
 {
     public function index()
     {
-        // issue get last data
         $event = Event::all();
         $contact_info = Contact_info::all();
         return view('wedding.contact', compact('event', 'contact_info'));
@@ -21,14 +20,14 @@ class ContactController extends Controller
     public function create(Request $request)
     {
         $data = Contact::create([
-            'name'      => $request->name,
+            'name'      => ucwords($request->name),
             'email'     => $request->email,
             'phone'     => $request->phone,
             'message'   => $request->message
         ]);
 
         if ($data) {
-            return redirect()->route('front.data.contact');
+            return redirect()->route('front.data.contact')->with('success', 'Thank you for contacting us');
         }
     }
 }

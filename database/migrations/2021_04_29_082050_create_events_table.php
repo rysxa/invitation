@@ -20,11 +20,13 @@ class CreateEventsTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->longText('caption');
-            $table->string('user_man');
-            $table->string('pic_man');
+            $table->string('man_first');
+            $table->string('man_last');
+            $table->string('pic_man')->nullable();
             $table->longText('caption_man');
-            $table->string('user_women');
-            $table->string('pic_women');
+            $table->string('women_first');
+            $table->string('women_last');
+            $table->string('pic_women')->nullable();
             $table->longText('caption_women');
             $table->date('ceremony_date');
             $table->time('ceremony_time_start');

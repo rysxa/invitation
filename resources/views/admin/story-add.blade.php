@@ -5,7 +5,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Add New Story User</h1>
+        <h1 class="h3 mb-4 text-gray-800">Add New Story</h1>
 
         <form action="{{ route('admin.story.create') }}" method="POST" enctype="multipart/form-data">
             @csrf

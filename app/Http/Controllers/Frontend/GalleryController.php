@@ -14,9 +14,6 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        // issue get last data
-        // $data = Gallery_caption::orderBy('created_at', 'desc')->first();
-        // $data = Gallery_caption::all()->last()->pluck('created_at');
         $gallery        = Gallery::all();
         $event          = Event::all();
         $story          = Story::all();

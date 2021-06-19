@@ -13,9 +13,9 @@ class EventController extends Controller
     {
         $data = Event::all();
 
-        if ($data->find($data->username)->all()) {
-            return view('admin.event', compact('data'));
-        }
+        // if ($data->find($data->username)->all()) {
+        // }
+        return view('admin.event', compact('data'));
         // if ($data->isEmpty()) {
         //     return view('admin.event', compact('data'));
         // }
@@ -49,10 +49,12 @@ class EventController extends Controller
             'address'               => $request->address,
             'city'                  => $request->city,
             'caption'               => $request->caption,
-            'user_man'              => $request->user_man,
+            'man_first'             => $request->man_first,
+            'man_last'              => $request->man_last,
             'pic_man'               => $pic_man->hashName(),
             'caption_man'           => $request->caption_man,
-            'user_women'            => $request->user_women,
+            'women_first'            => $request->women_first,
+            'women_last'            => $request->women_last,
             'pic_women'             => $pic_women->hashName(),
             'caption_women'         => $request->caption_women,
             'ceremony_date'         => $request->ceremony_date,
@@ -67,24 +69,28 @@ class EventController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.data.event');
+            return redirect()->route('admin.data.event')->with('success', 'Data added successfully');
         }
     }
 
     public function update(Request $request, Event $data)
     {
+        $this->authorize('update', Event::class);
+
         $data = Event::findOrFail($data->id);
 
-        if ($request->file('image') == "") {
+        if ($request->file('pic_man') === "" || $request->file('pic_women') === "") {
             $data->update([
                 'title'                 => $request->title,
                 'date_wedding'          => $request->date_wedding,
                 'address'               => $request->address,
                 'city'                  => $request->city,
                 'caption'               => $request->caption,
-                'user_man'              => $request->user_man,
+                'man_first'             => $request->man_first,
+                'man_last'              => $request->man_last,
                 'caption_man'           => $request->caption_man,
-                'user_women'            => $request->user_women,
+                'women_first'           => $request->women_first,
+                'women_last'            => $request->women_last,
                 'caption_women'         => $request->caption_women,
                 'ceremony_date'         => $request->ceremony_date,
                 'ceremony_time_start'   => $request->ceremony_time_start,
@@ -110,10 +116,12 @@ class EventController extends Controller
                 'address'               => $request->address,
                 'city'                  => $request->city,
                 'caption'               => $request->caption,
-                'user_man'              => $request->user_man,
+                'man_first'             => $request->man_first,
+                'man_last'              => $request->man_last,
                 'pic_man'               => $pic_man->hashName(),
                 'caption_man'           => $request->caption_man,
-                'user_women'            => $request->user_women,
+                'women_first'           => $request->women_first,
+                'women_last'            => $request->women_last,
                 'pic_women'             => $pic_women->hashName(),
                 'caption_women'         => $request->caption_women,
                 'ceremony_date'         => $request->ceremony_date,
@@ -129,18 +137,22 @@ class EventController extends Controller
         }
 
         if ($data) {
-            return redirect()->route('admin.data.event');
+            return redirect()->route('admin.data.event')->with('success', 'Data updated successfully');
         }
     }
 
     public function destroy(Event $event)
     {
+        $this->authorize('delete', Event::class);
+
         $event->find($event->id)->all();
 
+        Storage::disk('local')->delete('public/images/' . $event->pic_man);
+        Storage::disk('local')->delete('public/images/' . $event->pic_women);
         $event->delete();
 
         if ($event) {
-            return redirect()->route('admin.data.event');
+            return redirect()->route('admin.data.event')->with('success', 'Data deleted successfully');
         }
     }
 }

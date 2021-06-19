@@ -5,11 +5,6 @@
             <li><a href="{{ route('front.data.wish') }}">Home</a></li>
             <li><a href="{{ route('front.data.gallery') }}">Gallery</a></li>
             <li class="active"><a href="/contact">Contact</a></li>
-            <li><a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
         </ul>
     </div>
 @endsection
@@ -19,6 +14,12 @@
             <div class="row">
                 <div class="col-md-6 col-md-push-6 animate-box">
                     <h3>Get In Touch</h3>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
                     <form action="{{ route('post.contact') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row form-group">

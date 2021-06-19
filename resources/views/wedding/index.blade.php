@@ -24,11 +24,6 @@
             <li class="active"><a href="{{ route('front.data.wish') }}">Home</a></li>
             <li><a href="{{ route('front.data.gallery') }}">Gallery</a></li>
             <li><a href="/contact">Contact</a></li>
-            <li><a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
         </ul>
     </div>
 @endsection
@@ -52,7 +47,7 @@
                                 class="img-responsive">
                         </div>
                         <div class="desc-groom">
-                            <h3>{{ $item->user_man }}</h3>
+                            <h3>{{ $item->man_first . ' ' . $item->man_last }}</h3>
                             <p>{{ $item->caption_man }}</p>
                         </div>
                     </div>
@@ -63,7 +58,7 @@
                                 class="img-responsive">
                         </div>
                         <div class="desc-bride">
-                            <h3>{{ $item->user_women }}</h3>
+                            <h3>{{ $item->women_first . ' ' . $item->women_last }}</h3>
                             <p>{{ $item->caption_women }}</p>
                         </div>
                     </div>
@@ -184,7 +179,12 @@
 
             </div>
         </div>
-
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
         <div id="fh5co-started" class="fh5co-bg" style="background-image:url(wedding/wedding/images/img_bg_4.jpg);">
             <div class="overlay"></div>
             <div class="container">

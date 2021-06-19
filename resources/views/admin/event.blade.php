@@ -11,13 +11,21 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <a href="{{ route('admin.event.add') }}" class="nav-link">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add New
-                            Event</i></button>
-                </a>
+                @can('create', App\Event::class)
+                    <a href="{{ route('admin.event.add') }}" class="nav-link">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add New
+                                Event</i></button>
+                    </a>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -41,8 +49,8 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ date('F j, Y, g:i a', strtotime($d->created_at)) }}</td>
-                                    <td>{{ $d->user_man }}</td>
-                                    <td>{{ $d->user_women }}</td>
+                                    <td>{{ $d->man_first . ' ' . $d->man_last }}</td>
+                                    <td>{{ $d->women_first . ' ' . $d->women_last }}</td>
                                     <td>{{ $d->address }}</td>
                                     <td>{{ $d->city }}</td>
 
@@ -57,16 +65,20 @@
                                         <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal"
                                             data-target="#modal-detail{{ $d->id }}"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
-                                            data-target="#modal-edit{{ $d->id }}"><i class="fa fa-pen"
-                                                aria-hidden="true"></i></button>
-                                        <form action="{{ route('admin.event.delete', $d->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
+                                        @can('update', App\Event::class)
+                                            <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
+                                                data-target="#modal-edit{{ $d->id }}"><i class="fa fa-pen"
+                                                    aria-hidden="true"></i></button>
+                                        @endcan
+                                        @can('delete', App\Event::class)
+                                            <form action="{{ route('admin.event.delete', $d->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button type="submit" class="btn btn-danger btn-circle btn-sm"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
+                                                <button type="submit" class="btn btn-danger btn-circle btn-sm"><i
+                                                        class="fas fa-trash"></i></button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
@@ -121,11 +133,11 @@
                             <div class="form-group row">
                                 <div class="form-group col-md-6">
                                     <label for="user_man"><b>Name Man</b></label>
-                                    {{ $item->user_man }}
+                                    {{ $item->man_first . ' ' . $item->man_last }}
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="user_women"><b>Name Woman</b></label>
-                                    {{ $item->user_women }}
+                                    {{ $item->women_first . ' ' . $item->women_last }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -174,7 +186,7 @@
                             <hr>
                             <div class="form-group row">
                                 <div class="form-group col-md-4">
-                                    <label for="party_date"><b>Party Date</b></label>
+                                    <label for="party_date"><b>Party Date---</b></label>
                                     {{ $item->party_date }}
                                 </div>
                                 <div class="form-group col-md-4">
@@ -257,14 +269,26 @@
                             </div>
                             <div class="form-group row">
                                 <div class="form-group col-md-6">
-                                    <label for="user_man">Name Man</label>
-                                    <input type="text" class="form-control" name="user_man"
-                                        value="{{ old('user_man', $d->user_man) }}">
+                                    <label for="man_first">Name Man</label>
+                                    <input type="text" class="form-control" name="man_first"
+                                        value="{{ old('man_first', $d->man_first) }}">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="user_women">Name Woman</label>
-                                    <input type="text" class="form-control" name="user_women"
-                                        value="{{ old('user_women', $d->user_women) }}">
+                                    <label for="women_first">Name Woman</label>
+                                    <input type="text" class="form-control" name="women_first"
+                                        value="{{ old('women_first', $d->women_first) }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-group col-md-6">
+                                    <label for="man_last">Name Man</label>
+                                    <input type="text" class="form-control" name="man_last"
+                                        value="{{ old('man_last', $d->man_last) }}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="women_last">Name Woman</label>
+                                    <input type="text" class="form-control" name="women_last"
+                                        value="{{ old('women_last', $d->women_last) }}">
                                 </div>
                             </div>
                             <div class="form-group row">
