@@ -13,11 +13,13 @@ class EventController extends Controller
     {
         $data = Event::all();
 
+        if ($data->find($data->username)->all()) {
+            return view('admin.event', compact('data'));
+        }
         // if ($data->isEmpty()) {
         //     return view('admin.event', compact('data'));
         // }
         // if ($data->isNotEmpty()) {
-        return view('admin.event', compact('data'));
         // }
     }
 
@@ -26,8 +28,11 @@ class EventController extends Controller
         return view('admin.event-add');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
+        // privilege
+        $this->authorize('create', Event::class);
+
         $this->validate($request, [
             'pic_man'   => 'required|image|mimes:png,jpg,jpeg',
             'pic_women' => 'required|image|mimes:png,jpg,jpeg',
