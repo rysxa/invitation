@@ -80,7 +80,7 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     // Friends Wishes
     Route::get('/message', [BackendWishController::class, 'index'])->name('admin.data.wish');
     Route::put('/message/update/{data}', [BackendWishController::class, 'updateMessage'])->name('admin.message.update');
-    Route::delete('/message/delete/{message}', [BackendWishController::class, 'destroyMessage'])->name('admin.message.delete');
+    Route::delete('/message/delete/{wish}', [BackendWishController::class, 'destroyMessage'])->name('admin.message.delete');
 
     Route::get('/attendance', [BackendHomeController::class, 'index'])->name('admin.data.attendance');
     Route::put('/attendance/update/{data}', [BackendWishController::class, 'updateAttendance'])->name('admin.attendance.update');
