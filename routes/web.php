@@ -33,13 +33,16 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 // User
 Route::prefix('/')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('front.data.wish');
-    Route::get('/gallery', [FrontendGalleryController::class, 'index'])->name('front.data.gallery');
-    Route::get('/contact', [FrontendContactController::class, 'index'])->name('front.data.contact');
+    Route::get('/', [HomeController::class, 'dashboard'])->name('front.dashboard');
+    Route::get('/{username}', [HomeController::class, 'index'])->name('front.data.wish');
 
-    Route::post('/message/post', [FrontendWishController::class, 'create'])->name('post.wish');
-    Route::post('/attendance/post', [HomeController::class, 'create'])->name('post.attendance');
-    Route::post('/contact/post', [FrontendContactController::class, 'create'])->name('post.contact');
+    Route::get('/{username}/gallery', [FrontendGalleryController::class, 'index'])->name('front.data.gallery');
+    
+    Route::post('/{username}/message/post', [FrontendWishController::class, 'create'])->name('post.wish');
+    Route::post('/{username}/attendance/post', [HomeController::class, 'create'])->name('post.attendance');
+    
+    Route::get('/{username}/contact', [FrontendContactController::class, 'index'])->name('front.data.contact');
+    Route::post('/{username}/contact/post', [FrontendContactController::class, 'create'])->name('post.contact');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -89,6 +92,8 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::get('/contact', [BackendContactController::class, 'index'])->name('admin.contact.data');
     Route::put('/contact/update/{data}', [BackendContactController::class, 'updateContact'])->name('admin.contact.update');
     Route::delete('/contact/delete/{contact}', [BackendContactController::class, 'destroyContact'])->name('admin.contact.delete');
+
+    Route::get('/profile', [BackendContactController::class, 'index'])->name('admin.profile.data');
 });
 
 

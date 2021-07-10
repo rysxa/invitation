@@ -2,9 +2,9 @@
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
-            <li><a href="{{ route('front.data.wish') }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery') }}">Gallery</a></li>
-            <li class="active"><a href="/contact">Contact</a></li>
+            <li><a href="{{ route('front.data.wish', $user['username']) }}">Home</a></li>
+            <li><a href="{{ route('front.data.gallery', $user['username']) }}">Gallery</a></li>
+            <li class="active"><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
         </ul>
     </div>
 @endsection
@@ -20,8 +20,9 @@
                             <strong>{{ $message }}</strong>
                         </div>
                     @endif
-                    <form action="{{ route('post.contact') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('post.contact', $user) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" class="form-control" name="username_id" value="{{ $user->username }}">
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="fname">Name</label>

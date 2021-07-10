@@ -9,6 +9,8 @@
 
         <form action="{{ route('admin.gallery-head.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            <input type="text" class="form-control" name="title" value="username_id" hidden>
             <div class="form-group row">
                 <label for="head_story" class="col-sm-4 col-form-label">Caption Story</label>
                 <div class="col-sm-8">

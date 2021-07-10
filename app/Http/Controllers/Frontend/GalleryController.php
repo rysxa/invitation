@@ -3,22 +3,35 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contact_info;
-use App\Models\Event;
-use App\Models\Gallery;
-use App\Models\Gallery_caption;
-use App\Models\Story;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class GalleryController extends Controller
 {
-    public function index()
+    public function index($username)
     {
-        $gallery        = Gallery::all();
-        $event          = Event::all();
-        $story          = Story::all();
-        $gallery_head   = Gallery_caption::all();
-        $contact_info   = Contact_info::all();
-        return view('wedding.gallery', compact('event', 'gallery', 'story', 'gallery_head', 'contact_info'));
+        $user = User::where('username', $username)->first(); 
+        $gallery = DB::table('users')
+            ->join('galleries', 'users.username', '=', 'galleries.username_id')
+            ->select('*')
+            ->get();
+        $event = DB::table('users')
+            ->join('events', 'users.username', '=', 'events.username_id')
+            ->select('*')
+            ->where('status', '=', 1)
+            ->get();
+        $story = DB::table('users')
+            ->join('stories', 'users.username', '=', 'stories.username_id')
+            ->select('*')
+            ->get();
+        $gallery_head = DB::table('users')
+            ->join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
+            ->select('*')
+            ->get();
+        $contact_info = DB::table('users')
+            ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
+            ->select('*')
+            ->get();
+        return view('wedding.gallery', compact('event', 'gallery', 'story', 'gallery_head', 'contact_info', 'user'));
     }
 }

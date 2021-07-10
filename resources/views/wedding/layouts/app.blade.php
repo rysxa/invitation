@@ -58,7 +58,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div id="fh5co-logo"><a href="{{ route('front.data.wish') }}">Wedding<strong>.</strong></a>
+                        <div id="fh5co-logo"><a
+                                href="{{ route('front.data.wish', $user) }}">Wedding<strong>.</strong></a>
                         </div>
                     </div>
                     @yield('navbar')
@@ -166,7 +167,6 @@
             day: d.getDate(),
             enableUtc: false
         });
-
     </script>
 
 </body>

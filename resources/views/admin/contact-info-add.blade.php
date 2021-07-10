@@ -9,6 +9,8 @@
 
         <form action="{{ route('admin.contactinfo.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            <input type="text" class="form-control" name="title" value="username_id" hidden>
             <div class="form-group row">
                 <label for="address" class="col-sm-4 col-form-label">Address</label>
                 <div class="col-sm-8">

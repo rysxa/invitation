@@ -9,6 +9,8 @@
 
         <form action="{{ route('admin.event.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            <input type="text" class="form-control" name="title" value="username_id" hidden>
             <div class="form-group row">
                 <label for="title" class="col-sm-4 col-form-label">Title</label>
                 <div class="col-sm-8">

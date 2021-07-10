@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Contact_info;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -29,13 +30,14 @@ class ContactController extends Controller
     public function createContactInfo(Request $request)
     {
         $data = Contact_info::create([
-            'address'   => $request->address,
-            'phone'     => $request->phone,
-            'email'     => $request->email,
-            'wa'        => $request->wa,
-            'twitter'   => $request->twitter,
-            'instagram' => $request->instagram,
-            'facebook'  => $request->facebook
+            'username_id'   => Auth::user()->username,
+            'address'       => $request->address,
+            'phone'         => $request->phone,
+            'email'         => $request->email,
+            'wa'            => $request->wa,
+            'twitter'       => $request->twitter,
+            'instagram'     => $request->instagram,
+            'facebook'      => $request->facebook
         ]);
 
         if ($data) {
@@ -50,13 +52,14 @@ class ContactController extends Controller
         $data = Contact_info::findOrFail($data->id);
 
         $data->update([
-            'address'   => $request->address,
-            'phone'     => $request->phone,
-            'email'     => $request->email,
-            'wa'        => $request->wa,
-            'twitter'   => $request->twitter,
-            'instagram' => $request->instagram,
-            'facebook'  => $request->facebook
+            'username_id'   => Auth::user()->username,
+            'address'       => $request->address,
+            'phone'         => $request->phone,
+            'email'         => $request->email,
+            'wa'            => $request->wa,
+            'twitter'       => $request->twitter,
+            'instagram'     => $request->instagram,
+            'facebook'      => $request->facebook
         ]);
 
         if ($data) {
@@ -84,9 +87,10 @@ class ContactController extends Controller
         $data = Contact::findOrFail($data->id);
 
         $data->update([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'phone'     => $request->phone
+            'username_id'   => Auth::user()->username,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'phone'         => $request->phone
         ]);
 
         if ($data) {

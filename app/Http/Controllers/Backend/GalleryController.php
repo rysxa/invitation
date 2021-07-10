@@ -7,6 +7,7 @@ use App\Models\Gallery;
 use App\Models\Gallery_caption;
 use App\Models\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\Nullable;
 
@@ -42,15 +43,17 @@ class GalleryController extends Controller
     public function storeGallery(Request $request)
     {
         $this->validate($request, [
-            'picture'   => 'required|image|mimes:png,jpg,jpeg'
+            'username_id'   => Auth::user()->username,
+            'picture'       => 'required|image|mimes:png,jpg,jpeg'
         ]);
 
         $picture = $request->file('picture');
         $picture->storeAs('public/images', $picture->hashName());
 
         $data = Gallery::create([
-            'picture'           => $picture->hashName(),
-            'caption'           => $request->caption,
+            'username_id'   => Auth::user()->username,
+            'picture'       => $picture->hashName(),
+            'caption'       => $request->caption,
         ]);
 
         if ($data) {
@@ -70,6 +73,7 @@ class GalleryController extends Controller
 
         if ($request->file('picture') == "") {
             $data->update([
+                'username_id'   => Auth::user()->username,
                 'caption'       => $request->caption
             ]);
         } else {
@@ -78,6 +82,7 @@ class GalleryController extends Controller
             $picture->storeAs('public/images', $picture->hashName());
 
             $data->update([
+                'username_id'   => Auth::user()->username,
                 'caption'       => $request->caption,
                 'picture'       => $picture->hashName()
             ]);
@@ -112,6 +117,7 @@ class GalleryController extends Controller
         $picture->storeAs('public/images', $picture->hashName());
 
         $data = Story::create([
+            'username_id'   => Auth::user()->username,
             'subject'       => $request->subject,
             'picture'       => $picture->hashName(),
             'date'          => $request->date,
@@ -135,6 +141,7 @@ class GalleryController extends Controller
 
         if ($request->file('picture') == "") {
             $data->update([
+                'username_id'   => Auth::user()->username,
                 'subject'       => $request->subject,
                 'date'          => $request->date,
                 'message'       => $request->message
@@ -182,6 +189,7 @@ class GalleryController extends Controller
         $this->authorize('create', Gallery_caption::class);
 
         $data = Gallery_caption::create([
+            'username_id'   => Auth::user()->username,
             'head_story'    => $request->head_story,
             'head_gallery'  => $request->head_gallery,
             'head_video'    => $request->head_video
@@ -199,6 +207,7 @@ class GalleryController extends Controller
         $data = Gallery_caption::findOrFail($data->id);
 
         $data->update([
+            'username_id'   => Auth::user()->username,
             'head_story'    => $request->head_story,
             'head_gallery'  => $request->head_gallery,
             'head_video'    => $request->head_video,

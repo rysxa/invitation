@@ -8,17 +8,18 @@ use Illuminate\Http\Request;
 
 class WishController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request, $username)
     {
         $data = Wish::create([
-            'name'      => ucwords($request->name),
-            'email'     => $request->email,
-            'phone'     => $request->phone,
-            'message'   => $request->message
+            'name'          => ucwords($request->name),
+            'username_id'   => $request->username_id,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'message'       => $request->message
         ]);
 
         if ($data) {
-            return redirect()->route('front.data.wish')->with('success', 'Thank you for your kind wishes');
+            return redirect()->route('front.data.wish', $data['username_id'])->with('success', 'Thank you for your kind wishes');
         }
     }
 }

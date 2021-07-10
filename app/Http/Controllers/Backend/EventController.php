@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
@@ -36,6 +37,7 @@ class EventController extends Controller
         $this->validate($request, [
             'pic_man'   => 'required|image|mimes:png,jpg,jpeg',
             'pic_women' => 'required|image|mimes:png,jpg,jpeg',
+            'username_id' => 'limit'
         ]);
 
         $pic_man = $request->file('pic_man');
@@ -44,6 +46,7 @@ class EventController extends Controller
         $pic_women->storeAs('public/images', $pic_women->hashName());
 
         $data = Event::create([
+            'username_id'           => Auth::user()->username,
             'title'                 => $request->title,
             'date_wedding'          => $request->date_wedding,
             'address'               => $request->address,
@@ -81,6 +84,7 @@ class EventController extends Controller
 
         if ($request->file('pic_man') === "" || $request->file('pic_women') === "") {
             $data->update([
+                'username_id'           => Auth::user()->username,
                 'title'                 => $request->title,
                 'date_wedding'          => $request->date_wedding,
                 'address'               => $request->address,
