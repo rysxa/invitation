@@ -45,7 +45,7 @@
 
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($data as $d)
+                            @foreach ($event as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ date('F j, Y, g:i a', strtotime($d->created_at)) }}</td>
@@ -93,7 +93,7 @@
     <!-- /.container-fluid -->
 
     {{-- Modal Detail --}}
-    @foreach ($data as $item)
+    @foreach ($event as $item)
         <div class="modal fade col-12" id="modal-detail{{ $item->id }}" tabindex="-1"
             aria-labelledby="modal-detailLabel" aria-hidden="true">
             <div class="modal-dialog">

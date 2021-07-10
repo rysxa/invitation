@@ -40,7 +40,7 @@ Route::prefix('/')->group(function () {
     
     Route::post('/{username}/message/post', [FrontendWishController::class, 'create'])->name('post.wish');
     Route::post('/{username}/attendance/post', [HomeController::class, 'create'])->name('post.attendance');
-    
+
     Route::get('/{username}/contact', [FrontendContactController::class, 'index'])->name('front.data.contact');
     Route::post('/{username}/contact/post', [FrontendContactController::class, 'create'])->name('post.contact');
 });
@@ -48,9 +48,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Admin
 Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(function () {
-    Route::get('/', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/{username}', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/event', [BackendEventController::class, 'index'])->name('admin.data.event');
+    Route::get('/{username}/event', [BackendEventController::class, 'index'])->name('admin.data.event');
     Route::get('/event-add', [BackendEventController::class, 'add'])->name('admin.event.add');
     Route::post('/event/add', [BackendEventController::class, 'store'])->name('admin.event.create');
     Route::put('/event/update/{data}', [BackendEventController::class, 'update'])->name('admin.event.update');

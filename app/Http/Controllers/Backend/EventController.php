@@ -4,24 +4,21 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index($username)
     {
-        $data = Event::all();
-
-        // if ($data->find($data->username)->all()) {
-        // }
-        return view('admin.event', compact('data'));
-        // if ($data->isEmpty()) {
-        //     return view('admin.event', compact('data'));
-        // }
-        // if ($data->isNotEmpty()) {
-        // }
+        $user = User::where('username', $username)->first();
+        $event = User::join('events', 'users.username', '=', 'events.username_id')
+            ->where('status', '=', 1)
+            ->get();
+        return view('admin.event', compact('user', 'event'));
     }
 
     public function add()

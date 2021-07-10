@@ -2,7 +2,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+        href="{{ route('admin.dashboard', $user['username']) }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-rocket"></i>
         </div>
@@ -14,7 +15,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard', $user['username']) }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -36,7 +37,7 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.data.event') }}">Event</a>
+                <a class="collapse-item" href="{{ route('admin.data.event', $user['username']) }}">Event</a>
                 <a class="collapse-item" href="{{ route('admin.gallery.head') }}">Head Gallery</a>
                 <a class="collapse-item" href="{{ route('admin.story.data') }}">Story</a>
                 <a class="collapse-item" href="{{ route('admin.gallery.data') }}">Gallery</a>

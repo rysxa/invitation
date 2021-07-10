@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index($username)
     {
+        $user = User::where('username', $username)->first();
         $data = Attendance::all();
-        return view('admin.attendance', compact('data'));
+        return view('admin.attendance', compact('data', 'user'));
     }
 
-    public function dashboard()
+    public function dashboard($username)
     {
-        return view('admin.index');
+        $user = User::where('username', $username)->first();
+        return view('admin.index', compact('user'));
     }
 }

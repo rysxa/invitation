@@ -84,7 +84,7 @@
                     <div>
                         <h1>Buat Undangan Pernikahan Gratisss</h1>
                         <h2>Dengan Dinamis Website Frontend & Backend</h2>
-                        <a href="/admin" class="btn-get-started scrollto">Daftar</a>
+                        <a href="/register" class="btn-get-started scrollto">Daftar</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
