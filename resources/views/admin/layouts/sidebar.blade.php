@@ -37,6 +37,7 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('front.data.wish', $user['username']) }}">Frontend Web</a>
                 <a class="collapse-item" href="{{ route('admin.data.event', $user['username']) }}">Event</a>
                 <a class="collapse-item" href="{{ route('admin.gallery.head') }}">Head Gallery</a>
                 <a class="collapse-item" href="{{ route('admin.story.data') }}">Story</a>

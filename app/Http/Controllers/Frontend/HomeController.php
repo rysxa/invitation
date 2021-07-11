@@ -10,30 +10,27 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function index($username)
+    public function index($username = '')
     {
-        $user = User::where('username', $username)->first(); 
-        $attendance = DB::table('users')
-            ->join('attendances', 'users.username', '=', 'attendances.username_id')
-            ->select('*')
+        $user = User::where('username', $username)->first();
+        $attendance = User::join('attendances', 'users.username', '=', 'attendances.username_id')
+            ->where('username_id', '=', $user->username)
             ->get();
-        $wish = DB::table('users')
-            ->join('wishes', 'users.username', '=', 'wishes.username_id')
-            ->select('*')
+        $wish = User::join('wishes', 'users.username', '=', 'wishes.username_id')
+            ->where('username_id', '=', $user->username)
             ->get();
-        $event = DB::table('users')
-            ->join('events', 'users.username', '=', 'events.username_id')
-            ->select('*')
+        $event = User::join('events', 'users.username', '=', 'events.username_id')
             ->where('status', '=', 1)
+            ->where('username_id', '=', $user->username)
             ->get();
-        $contact_info = DB::table('users')
-            ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-            ->select('*')
+        $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
+            ->where('username_id', '=', $user->username)
             ->get();
+        
         return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'user'));
     }
 
-    public function dashboard() // example
+    public function dashboard()
     {
         return view('wedding.dashboard');
     }

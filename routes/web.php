@@ -1,21 +1,14 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Backend\ContactController as BackendContactController;
 use App\Http\Controllers\Backend\EventController as BackendEventController;
 use App\Http\Controllers\Backend\GalleryController as BackendGalleryController;
 use App\Http\Controllers\Backend\HomeController as BackendHomeController;
 use App\Http\Controllers\Backend\WishController as BackendWishController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\GalleryController as FrontendGalleryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\WishController as FrontendWishController;
-use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\WishController;
-use App\Models\Contact;
-use App\Models\Contact_info;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

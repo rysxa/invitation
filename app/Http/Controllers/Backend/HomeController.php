@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,12 @@ class HomeController extends Controller
     {
         $user = User::where('username', $username)->first();
         $data = Attendance::all();
-        return view('admin.attendance', compact('data', 'user'));
+        // $auth = Auth::user()->username;
+        // if ($auth->username) {
+            redirect('/login');
+        // } else {
+            return view('admin.attendance', compact('data', 'user'));
+        // }
     }
 
     public function dashboard($username)

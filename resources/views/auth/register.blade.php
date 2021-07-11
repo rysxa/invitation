@@ -66,7 +66,8 @@
                                             name="password_confirmation" required autocomplete="new-password"
                                             placeholder="Confirm Password">
                                     </div>
-                                    <div class="form-group">
+                                    <input type="hidden" class="form-control" name="role" value="user">
+                                    {{-- <div class="form-group">
                                         <select id="role"
                                             class="form-control form-control @error('role') is-invalid @enderror"
                                             name="role" value="{{ old('role') }}" required>
@@ -78,7 +79,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                    </div>
+                                    </div> --}}
 
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         {{ __('Register') }}

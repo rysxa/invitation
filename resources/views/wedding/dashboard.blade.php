@@ -181,7 +181,7 @@
                         <p> Silahkan Login disini untuk dapat mengakses halaman.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="/admin">Login</a>
+                        <a class="cta-btn align-middle" href="/login">Login</a>
                     </div>
                 </div>
 

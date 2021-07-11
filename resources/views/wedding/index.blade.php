@@ -22,8 +22,8 @@
     <div class="col-xs-10 text-right menu-1">
         <ul>
             <li class="active"><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery', $user['username']) }}">Gallery</a></li>
-            <li><a href="{{ route('front.data.contact', $user['username']) }}">Contact</a></li>
+            <li><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
+            <li><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
         </ul>
     </div>
 @endsection

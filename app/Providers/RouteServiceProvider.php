@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Backend\HomeController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -15,9 +16,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * This is used by Laravel authentication to redirect users after login.
      *
-     * @var string
+     * @var string|null
      */
-    public const HOME = '/admin';
+    
+    public const HOME =  '/admin';
+    
 
     /**
      * The controller namespace for the application.

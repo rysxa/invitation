@@ -17,6 +17,7 @@ class EventController extends Controller
         $user = User::where('username', $username)->first();
         $event = User::join('events', 'users.username', '=', 'events.username_id')
             ->where('status', '=', 1)
+            ->where('username_id', '=', $user->username)
             ->get();
         return view('admin.event', compact('user', 'event'));
     }
