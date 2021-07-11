@@ -1,12 +1,15 @@
 <?php
-
+/*
+|--------------------------------------------------------------------------
+| @author: Indry Sefviana | github @indrysfa
+|--------------------------------------------------------------------------
+*/
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,7 +26,6 @@ class HomeController extends Controller
             ->where('status', '=', 1)
             ->where('username_id', '=', $user->username)
             ->get();
-            // dd($event);
         $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
             ->where('username_id', '=', $user->username)
             ->get();

@@ -4,9 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wedding Invitation</title>
-
-    @yield('meta')
+    <title>@yield('title')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Wedding Invitation by Sefviana.com" />
+    <meta name="keywords" content="Wedding Invitation Gratis" />
+    <meta name="keywords" content="Buat Undangan Pernikahan Gratis" />
+    <meta name="google" content="Buat Undangan Pernikahan Gratis" />
+    <meta name="author" content="Indry Sefviana - Modify" />
 
     <!-- 
  //////////////////////////////////////////////////////

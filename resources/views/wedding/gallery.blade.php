@@ -1,4 +1,5 @@
 @extends('wedding.layouts.app')
+@section('title', 'Gallery - WI Sefviana.com')
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>

@@ -1,10 +1,5 @@
-{{-- @if ($event['title'] == '') --}}
-{{-- {{ dd($event) }} --}}
-{{-- <p>Form belum disini silahkan isi form terlebih dahulu</p>
-    <a class="btn btn-primary" href="{{ route('admin.data.event', $user) }}">Isi Form</a> --}}
-{{-- @else --}}
 @extends('wedding.layouts.app')
-@section('title', 'Wedding Invitation')
+@section('title', 'WI Sefviana.com')
 @section('meta')
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Wedding Invitation" />
