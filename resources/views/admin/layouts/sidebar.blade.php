@@ -60,7 +60,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.data.wish', $user) }}">Message</a>
-                <a class="collapse-item" href="{{ route('admin.data.attendance') }}">RSVP</a>
+                <a class="collapse-item" href="{{ route('admin.data.attendance', $user) }}">RSVP</a>
                 <a class="collapse-item" href="{{ route('admin.contact.data', $user) }}">Contact</a>
             </div>
         </div>

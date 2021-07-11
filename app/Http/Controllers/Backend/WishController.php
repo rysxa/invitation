@@ -59,33 +59,51 @@ class WishController extends Controller
         }
     }
 
-    public function updateAttendance(Request $request, Attendance $data)
+    public function indexAttendance($username) //ok
+    {
+        $user = Auth::user()->username;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $attendance = User::join('attendances', 'users.username', '=', 'attendances.username_id')->get();
+        } else {
+            $attendance = User::join('attendances', 'users.username', '=', 'attendances.username_id')
+            ->where('username_id', '=', $user)
+            ->get();
+        }
+
+        return view('admin.attendance', compact('role', 'user', 'attendance'));
+    }
+
+    public function updateAttendance(Request $request, Attendance $data) //ok
     {
         $this->authorize('update', Attendance::class);
 
+        $userUpdate = Auth::user()->username;
         $data = Attendance::findOrFail($data->id);
 
         $data->update([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'phone'     => $request->phone
+            'username_id'   => $request->username_id,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'phone'         => $request->phone
         ]);
 
         if ($data) {
-            return redirect()->route('admin.data.attendance')->with('success', 'Data updated successfully');
+            return redirect()->route('admin.data.attendance', $userUpdate)->with('success', 'Data updated successfully');
         }
     }
 
-    public function destroyAttendance(Attendance $attendance)
+    public function destroyAttendance(Attendance $attendance) //ok
     {
         $this->authorize('delete', Attendance::class);
 
         $attendance->find($attendance->id)->all();
+        $username = $attendance['username_id'];
 
         $attendance->delete();
 
         if ($attendance) {
-            return redirect()->route('admin.data.attendance')->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.data.attendance', $username)->with('success', 'Data deleted successfully');
         }
     }
 }

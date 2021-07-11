@@ -78,7 +78,7 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::put('/message/update/{data}', [BackendWishController::class, 'updateMessage'])->name('admin.message.update');
     Route::delete('/message/delete/{wish}', [BackendWishController::class, 'destroyMessage'])->name('admin.message.delete');
 
-    Route::get('/attendance', [BackendHomeController::class, 'index'])->name('admin.data.attendance');
+    Route::get('/{username}/attendance', [BackendWishController::class, 'indexAttendance'])->name('admin.data.attendance');
     Route::put('/attendance/update/{data}', [BackendWishController::class, 'updateAttendance'])->name('admin.attendance.update');
     Route::delete('/attendance/delete/{attendance}', [BackendWishController::class, 'destroyAttendance'])->name('admin.attendance.delete');
 

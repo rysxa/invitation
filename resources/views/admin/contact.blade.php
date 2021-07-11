@@ -3,7 +3,7 @@
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        @can('view', App\Gallery::class)
+        @can('view', App\Contact::class)
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 Halaman ini untuk melihat siapa saja yang telah menghubungi kamu melalui website.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

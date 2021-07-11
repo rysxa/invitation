@@ -10,19 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index($username)
-    {
-        $user = Auth::user()->username;
-        // $user = User::where('username', $username)->first();
-        $data = Attendance::all();
-        // $auth = Auth::user()->username;
-        // if ($auth->username) {
-            redirect('/login');
-        // } else {
-            return view('admin.attendance', compact('data', 'user'));
-        // }
-    }
-
     public function dashboard($username)
     {
         $user = Auth::user()->username;
