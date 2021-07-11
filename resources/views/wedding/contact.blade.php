@@ -76,19 +76,24 @@
                                 <li class="address">{{ $item->address }}</li>
                                 <li class="phone"><a target="_blank" href="tel://{{ $item->phone }}">+
                                         {{ $item->phone }}</a></li>
-                                <li class="fa-whatsapp"><a target="_blank"
+                                <li class="fa fa-whatsapp"><a target="_blank"
                                         href="https://api.whatsapp.com/send?phone=62{{ $item->wa }}&text=Saya%0Aingin%0Abertanya%0Amengenai%0Aacara%0Apernikahan%0Akamu">+
                                         {{ $item->wa }}</a></li>
                                 <li class="email"><a target="_blank"
                                         href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
-                                <li class="icon-facebook"><a target="_blank"
-                                        href="https://www.facebook.com/{{ $item->facebook }}">{{ $item->facebook }}</a>
-                                </li>
-                                <li class="icon-instagram"><a target="_blank"
-                                        href="https://www.instagram.com/{{ $item->instagram }}">{{ $item->instagram }}</a>
-                                </li>
-                                <li class="icon-twitter"><a target="_blank"
-                                        href="https://twitter.com/{{ $item->twitter }}">{{ $item->twitter }}</a></li>
+                                @if ($contact_info->isEmpty())
+                                    {{ '' }}
+                                @else
+                                    <li class="icon-facebook"><a target="_blank"
+                                            href="https://www.facebook.com/{{ $item->facebook }}">{{ $item->facebook }}</a>
+                                    </li>
+                                    <li class="icon-instagram"><a target="_blank"
+                                            href="https://www.instagram.com/{{ $item->instagram }}">{{ $item->instagram }}</a>
+                                    </li>
+                                    <li class="fa fa-twitter" aria-hidden="true"><a target="_blank"
+                                            href="https://twitter.com/{{ $item->twitter }}">{{ $item->twitter }}</a>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>

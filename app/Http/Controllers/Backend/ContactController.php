@@ -11,10 +11,51 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index() //ok
     {
-        $data = Contact::all();
-        return view('admin.contact', compact('data',));
+        $user = Auth::user()->username;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $contact = User::join('contacts', 'users.username', '=', 'contacts.username_id')->get();
+        } else {
+            $contact = User::join('contacts', 'users.username', '=', 'contacts.username_id')
+            ->where('username_id', '=', $user)
+            ->get();
+        }
+        return view('admin.contact', compact('user', 'role', 'contact'));
+    }
+
+    public function updateContact(Request $request, Contact $data)
+    {
+        $this->authorize('update', Contact::class);
+
+        $userUpdate = Auth::user()->username;
+        $data = Contact::findOrFail($data->id);
+
+        $data->update([
+            'username_id'   => $request->username_id,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'phone'         => $request->phone
+        ]);
+
+        if ($data) {
+            return redirect()->route('admin.contact.data', $userUpdate)->with('success', 'Data updated successfully');
+        }
+    }
+
+    public function destroyContact(Contact $contact)
+    {
+        $this->authorize('delete', Contact::class);
+
+        $contact->find($contact->id)->all();
+        $username = $contact['username_id'];
+
+        $contact->delete();
+
+        if ($contact) {
+            return redirect()->route('admin.contact.data', $username)->with('success', 'Data deleted successfully');
+        }
     }
 
     public function indexContactInfo($username) //ok
@@ -104,37 +145,6 @@ class ContactController extends Controller
 
         if ($contactInfo) {
             return redirect()->route('admin.contactinfo.data', $username)->with('success', 'Data deleted successfully');
-        }
-    }
-
-    public function updateContact(Request $request, Contact $data)
-    {
-        $this->authorize('update', Contact::class);
-
-        $data = Contact::findOrFail($data->id);
-
-        $data->update([
-            'username_id'   => Auth::user()->username,
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'phone'         => $request->phone
-        ]);
-
-        if ($data) {
-            return redirect()->route('admin.contact.data')->with('success', 'Data updated successfully');
-        }
-    }
-
-    public function destroyContact(Contact $contact)
-    {
-        $this->authorize('delete', Contact::class);
-
-        $contact->find($contact->id)->all();
-
-        $contact->delete();
-
-        if ($contact) {
-            return redirect()->route('admin.contact.data')->with('success', 'Data deleted successfully');
         }
     }
 }

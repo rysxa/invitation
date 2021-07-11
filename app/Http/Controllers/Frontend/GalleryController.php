@@ -23,6 +23,7 @@ class GalleryController extends Controller
         $story = DB::table('users')
             ->join('stories', 'users.username', '=', 'stories.username_id')
             ->select('*')
+            ->orderBy('date')
             ->get();
         $gallery_head = DB::table('users')
             ->join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')

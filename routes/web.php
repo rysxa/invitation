@@ -82,7 +82,7 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::put('/attendance/update/{data}', [BackendWishController::class, 'updateAttendance'])->name('admin.attendance.update');
     Route::delete('/attendance/delete/{attendance}', [BackendWishController::class, 'destroyAttendance'])->name('admin.attendance.delete');
 
-    Route::get('/contact', [BackendContactController::class, 'index'])->name('admin.contact.data');
+    Route::get('/{username}/contact', [BackendContactController::class, 'index'])->name('admin.contact.data');
     Route::put('/contact/update/{data}', [BackendContactController::class, 'updateContact'])->name('admin.contact.update');
     Route::delete('/contact/delete/{contact}', [BackendContactController::class, 'destroyContact'])->name('admin.contact.delete');
 
