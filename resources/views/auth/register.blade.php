@@ -11,7 +11,8 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">{{ __('Register') }}</h1>
-                                </div>
+                                    <img src="{{ asset('images/logo_wis.png') }}" alt="logo" class="img-fluid">
+                                </div><br>
                                 <form class="user" action="{{ route('register') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
