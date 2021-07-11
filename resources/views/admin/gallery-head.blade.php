@@ -3,6 +3,18 @@
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        @can('view', App\Gallery_caption::class)
+            @if ($gallery_caption->isEmpty())
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Perhatikan!</strong> Pastikan halaman ini sudah ada data, jika belum silahkan Add New!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @else
+                {{ '' }}
+            @endif
+        @endcan
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
@@ -16,10 +28,19 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @can('create', App\Gallery_caption::class)
-                    <a href="{{ route('admin.gallery-head.add') }}" class="nav-link">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add New
-                                Caption Gallery</i></button>
-                    </a>
+                    @if ($gallery_caption->isEmpty() && $role == 'user')
+                        <a href="{{ route('admin.gallery-head.add', $user) }}" class="nav-link">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
+                                    New</i></button>
+                        </a>
+                    @elseif ($role == 'admin')
+                        <a href="{{ route('admin.gallery-head.add', $user) }}" class="nav-link">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
+                                    New</i></button>
+                        </a>
+                    @elseif ($gallery_caption && $role == 'user')
+                        {{ '' }}
+                    @endif
                 @endcan
             </div>
             <div class="card-body">
@@ -28,6 +49,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Username</th>
                                 <th>Caption Story</th>
                                 <th>Caption Gallery</th>
                                 <th>Caption Video</th>
@@ -37,9 +59,10 @@
 
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($data as $d)
+                            @foreach ($gallery_caption as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
+                                    <td>{{ $d->username_id }}</td>
                                     <td>{{ $d->head_story }}</td>
                                     <td>{{ $d->head_gallery }}</td>
                                     <td>{{ $d->head_video }}</td>
@@ -70,7 +93,7 @@
     </div>
     <!-- /.container-fluid -->
 
-    @foreach ($data as $item)
+    @foreach ($gallery_caption as $item)
         {{-- Modal Edit --}}
         <div class="modal fade" id="modal-edit{{ $item->id }}" tabindex="-1" aria-labelledby="modal-editLabel"
             aria-hidden="true">
@@ -88,6 +111,18 @@
                             @csrf
                             @method('PUT')
 
+                            @if ($role == 'user')
+                                <input type="text" class="form-control" name="username_id"
+                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @else
+                                <div class="form-group row">
+                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="username_id"
+                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="form-group row">
                                 <label for="head_story" class="col-sm-2 col-form-label">Head Story</label>
                                 <div class="col-sm-10">

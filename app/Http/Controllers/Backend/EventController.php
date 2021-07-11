@@ -108,7 +108,6 @@ class EventController extends Controller
         $this->authorize('update', Event::class);
 
         $userUpdate = Auth::user()->username;
-        // $user = User::where('username', $data)->first();
         $data = Event::findOrFail($data->id);
 
         if ($request->file('pic_man') == "" || $request->file('pic_women') == "") {

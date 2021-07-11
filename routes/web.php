@@ -67,9 +67,9 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::put('/gallery/update/{data}', [BackendGalleryController::class, 'updateGallery'])->name('admin.gallery.update');
     Route::delete('/gallery/delete/{gallery}', [BackendGalleryController::class, 'destroyGallery'])->name('admin.gallery.delete');
 
-    Route::get('/gallery-head', [BackendGalleryController::class, 'headGallery'])->name('admin.gallery.head');
-    Route::get('/gallery-head/add', [BackendGalleryController::class, 'addheadGallery'])->name('admin.gallery-head.add');
-    Route::post('/gallery-head/add', [BackendGalleryController::class, 'storeheadGallery'])->name('admin.gallery-head.create');
+    Route::get('/{username}/gallery-head', [BackendGalleryController::class, 'headGallery'])->name('admin.gallery.head');
+    Route::get('/{username}/gallery-head/add', [BackendGalleryController::class, 'addheadGallery'])->name('admin.gallery-head.add');
+    Route::post('/{username}/gallery-head/add', [BackendGalleryController::class, 'storeheadGallery'])->name('admin.gallery-head.create');
     Route::put('/gallery-head/update/{data}', [BackendGalleryController::class, 'updateHeadGallery'])->name('admin.gallery-head.update');
     Route::delete('/gallery-head/delete/{galleryCaption}', [BackendGalleryController::class, 'destroyHeadGallery'])->name('admin.gallery-head.delete');
 

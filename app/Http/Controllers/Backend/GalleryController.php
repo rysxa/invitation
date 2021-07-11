@@ -14,7 +14,7 @@ use phpDocumentor\Reflection\Types\Nullable;
 
 class GalleryController extends Controller
 {
-    public function index($username)
+    public function index($username) //ok
     {
         $user = Auth::user()->username;
         $role = Auth::user()->role;
@@ -48,11 +48,6 @@ class GalleryController extends Controller
             $user = Auth::user()->username;
         }
         return view('admin.gallery-add', compact('user', 'role'));
-    }
-
-    public function addheadGallery()
-    {
-        return view('admin.gallery-head-add');
     }
 
     public function storeGallery(Request $request, $user) //ok
@@ -194,56 +189,82 @@ class GalleryController extends Controller
         }
     }
 
-    public function headGallery()
+    public function headGallery() //ok
     {
-        $data = Gallery_caption::all();
-        return view('admin.gallery-head', compact('data'));
+        $user = Auth::user()->username;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $gallery_caption = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')->get();
+        } else {
+            $gallery_caption = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
+            ->where('username_id', '=', $user)
+            ->get();
+        }
+
+        return view('admin.gallery-head', compact('user', 'role', 'gallery_caption'));
     }
 
-    public function storeheadGallery(Request $request)
+    public function addheadGallery($username) //ok
+    {
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $user = User::where('username', $username)->first();
+        } else {
+            $user = Auth::user()->username;
+        }
+        return view('admin.gallery-head-add', compact('user', 'role'));
+    }
+
+    public function storeheadGallery(Request $request, $user) //ok
     {
         $this->authorize('create', Gallery_caption::class);
-
+        $user = Auth::user()->username;
+        $this->validate($request, [
+            'head_story'    => 'required',
+            'head_gallery'  => 'required',
+            'head_video'    => 'required',
+        ]);
         $data = Gallery_caption::create([
-            'username_id'   => Auth::user()->username,
+            'username_id'   => $request->username_id,
             'head_story'    => $request->head_story,
             'head_gallery'  => $request->head_gallery,
             'head_video'    => $request->head_video
         ]);
 
         if ($data) {
-            return redirect()->route('admin.gallery.head')->with('success', 'Data added successfully');
+            return redirect()->route('admin.gallery.head', $user)->with('success', 'Data added successfully');
         }
     }
 
-    public function updateHeadGallery(Request $request, Gallery_caption $data)
+    public function updateHeadGallery(Request $request, Gallery_caption $data) //ok
     {
         $this->authorize('update', Gallery_caption::class);
 
+        $userUpdate = Auth::user()->username;
         $data = Gallery_caption::findOrFail($data->id);
-
         $data->update([
-            'username_id'   => Auth::user()->username,
+            'username_id'   => $request->username_id,
             'head_story'    => $request->head_story,
             'head_gallery'  => $request->head_gallery,
             'head_video'    => $request->head_video,
         ]);
 
         if ($data) {
-            return redirect()->route('admin.gallery.head')->with('success', 'Data updated successfully');
+            return redirect()->route('admin.gallery.head', $userUpdate)->with('success', 'Data updated successfully');
         }
     }
 
-    public function destroyHeadGallery(Gallery_caption $galleryCaption)
+    public function destroyHeadGallery(Gallery_caption $galleryCaption) //ok
     {
         $this->authorize('delete', Gallery_caption::class);
 
         $galleryCaption->find($galleryCaption->id)->all();
+        $username = $galleryCaption['username_id'];
 
         $galleryCaption->delete();
 
         if ($galleryCaption) {
-            return redirect()->route('admin.gallery.head')->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.gallery.head', $username)->with('success', 'Data deleted successfully');
         }
     }
 }
