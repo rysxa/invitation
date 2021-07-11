@@ -4,8 +4,10 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         @can('view', App\Event::class)
-            @if (empty($event[0]->title))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @if ($event->isEmpty())
+                <div class="alert alert-warning alert-dismissible fade show" role="aler
+                        
+                        t">
                     <strong>Perhatikan!</strong> Pastikan halaman ini sudah ada data, jika belum silahkan Add New!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

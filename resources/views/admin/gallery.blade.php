@@ -13,7 +13,7 @@
                 </div>
             @elseif ($gallery)
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    Kamu bisa juga menambahkan gallery lebih dari satu, sesuaikan dengan kebutuhanmu..
+                    Kamu bisa juga menambahkan gallery lebih banyak lagi, sesuaikan dengan kebutuhanmu..
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -35,19 +35,10 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @can('create', App\Gallery::class)
-                    @if (empty($gallery[0]->title) && $role == 'user')
-                        <a href="{{ route('admin.gallery.add', $user) }}" class="nav-link">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
-                                    New</i></button>
-                        </a>
-                    @elseif ($role == 'admin')
-                        <a href="{{ route('admin.gallery.add', $user) }}" class="nav-link">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
-                                    New</i></button>
-                        </a>
-                    @elseif (($gallery[0]->title) && $role == 'user')
-                        {{ '' }}
-                    @endif
+                    <a href="{{ route('admin.gallery.add', $user) }}" class="nav-link">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
+                                New</i></button>
+                    </a>
                 @endcan
             </div>
             <div class="card-body">
@@ -73,7 +64,7 @@
                                             class="img-responsive" width="80"></td>
                                     <td>{{ $d->caption }}</td>
                                     <td>
-                                        @can('viewAny', App\Gallery::class)
+                                        @can('update', App\Gallery::class)
                                             <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
                                                 data-target="#modal-edit{{ $d->id }}"><i class="fa fa-pen"
                                                     aria-hidden="true"></i></button>

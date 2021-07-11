@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Story extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'id',
+        'username_id',
+        'subject',
+        'picture',
+        'date',
+        'message',
+    ];
 }

@@ -28,15 +28,103 @@ class GalleryController extends Controller
         return view('admin.gallery', compact('gallery', 'user', 'role'));
     }
 
-    public function indexStory()
+    public function indexStory($username) //ok
     {
-        $data = Story::all();
-        return view('admin.story', compact('data'));
+        $user = Auth::user()->username;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $story = User::join('stories', 'users.username', '=', 'stories.username_id')->get();
+        } else {
+            $story = User::join('stories', 'users.username', '=', 'stories.username_id')
+            ->where('username_id', '=', $user)
+            ->get();
+        }
+        return view('admin.story', compact('user', 'role', 'story'));
     }
 
-    public function addStory()
+    public function addStory($username) //ok
     {
-        return view('admin.story-add');
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $user = User::where('username', $username)->first();
+        } else {
+            $user = Auth::user()->username;
+        }
+        return view('admin.story-add', compact('user', 'role'));
+    }
+
+    public function storeStory(Request $request, $user) //ok
+    {
+        $this->validate($request, [
+            'picture'   => 'required|image|mimes:png,jpg,jpeg',
+            'subject'   => 'required',
+            'date'      => 'required',
+            'message'   => 'required',
+        ]);
+
+        $picture = $request->file('picture');
+        $user = Auth::user()->username;
+        $picture->storeAs('public/images', $picture->hashName());
+
+        $data = Story::create([
+            'username_id'   => $request->username_id,
+            'subject'       => $request->subject,
+            'picture'       => $picture->hashName(),
+            'date'          => $request->date,
+            'message'       => $request->message
+        ]);
+
+        if ($data) {
+            return redirect()->route('admin.story.data', $user)->with('success', 'Data added successfully');
+        }
+    }
+
+    public function updateStory(Request $request, Story $data) //ok
+    {
+        $this->authorize('update', Story::class);
+
+        $userUpdate = Auth::user()->username;
+        $data = Story::findOrFail($data->id);
+
+        if ($request->file('picture') == "") {
+            $data->update([
+                'username_id'   => $request->username_id,
+                'subject'       => $request->subject,
+                'date'          => $request->date,
+                'message'       => $request->message
+            ]);
+        } else {
+            Storage::disk('local')->delete('public/images/' . $data->picture);
+            $picture = $request->file('picture');
+            $picture->storeAs('public/images', $picture->hashName());
+
+            $data->update([
+                'username_id'   => $request->username_id,
+                'subject'       => $request->subject,
+                'picture'       => $picture->hashName(),
+                'date'          => $request->date,
+                'message'       => $request->message
+            ]);
+        }
+
+        if ($data) {
+            return redirect()->route('admin.story.data', $userUpdate)->with('success', 'Data updated successfully');
+        }
+    }
+
+    public function destroyStory(Story $story) //ok
+    {
+        $this->authorize('delete', Story::class);
+
+        $story->find($story->id)->all();
+        $username = $story['username_id'];
+
+        Storage::disk('local')->delete('public/images/' . $story->picture);
+        $story->delete();
+
+        if ($story) {
+            return redirect()->route('admin.story.data', $username)->with('success', 'Data deleted successfully');
+        }
     }
 
     public function addGallery($username) //ok
@@ -115,77 +203,6 @@ class GalleryController extends Controller
 
         if ($gallery) {
             return redirect()->route('admin.gallery.data', $username)->with('success', 'Data deleted successfully');
-        }
-    }
-
-    public function storeStory(Request $request)
-    {
-        $this->validate($request, [
-            'picture'   => 'required|image|mimes:png,jpg,jpeg'
-        ]);
-
-        $picture = $request->file('picture');
-        $picture->storeAs('public/images', $picture->hashName());
-
-        $data = Story::create([
-            'username_id'   => Auth::user()->username,
-            'subject'       => $request->subject,
-            'picture'       => $picture->hashName(),
-            'date'          => $request->date,
-            'message'       => $request->message
-        ]);
-
-        if ($data) {
-            return redirect()->route('admin.story.data')->with('success', 'Data added successfully');
-        }
-    }
-
-    public function updateStory(Request $request, Story $data)
-    {
-        $this->authorize('update', Story::class);
-
-        $this->validate($request, [
-            'picture'   => 'required|image|mimes:png,jpg,jpeg'
-        ]);
-
-        $data = Story::findOrFail($data->id);
-
-        if ($request->file('picture') == "") {
-            $data->update([
-                'username_id'   => Auth::user()->username,
-                'subject'       => $request->subject,
-                'date'          => $request->date,
-                'message'       => $request->message
-            ]);
-        } else {
-            Storage::disk('local')->delete('public/images/' . $data->picture);
-            $picture = $request->file('picture');
-            $picture->storeAs('public/images', $picture->hashName());
-
-            $data->update([
-                'subject'       => $request->subject,
-                'picture'       => $picture->hashName(),
-                'date'          => $request->date,
-                'message'       => $request->message
-            ]);
-        }
-
-        if ($data) {
-            return redirect()->route('admin.story.data')->with('success', 'Data updated successfully');
-        }
-    }
-
-    public function destroyStory(Story $story)
-    {
-        $this->authorize('delete', Story::class);
-
-        $story->find($story->id)->all();
-
-        Storage::disk('local')->delete('public/images/' . $story->picture);
-        $story->delete();
-
-        if ($story) {
-            return redirect()->route('admin.story.data')->with('success', 'Data deleted successfully');
         }
     }
 

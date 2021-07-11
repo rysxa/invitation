@@ -19,7 +19,7 @@
                         <select name="username_id" class="form-control selectpicker" data-live-search="true"
                             data-max-options="5">
                             @foreach ($data as $item)
-                                <option value="{{ old('username_id') }}"
+                                <option value="{{ $item->username }}"
                                     {{ old('username_id') == "$item->username" ? selected : '' }}>
                                     {{ $item->username }}
                                 </option>

@@ -49,9 +49,9 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::put('/event/update/{data}', [BackendEventController::class, 'update'])->name('admin.event.update');
     Route::delete('/event/delete/{event}', [BackendEventController::class, 'destroy'])->name('admin.event.delete');
 
-    Route::get('/story', [BackendGalleryController::class, 'indexStory'])->name('admin.story.data');
-    Route::get('/story/add', [BackendGalleryController::class, 'addStory'])->name('admin.story.add');
-    Route::post('/story/add', [BackendGalleryController::class, 'storeStory'])->name('admin.story.create');
+    Route::get('/{username}/story', [BackendGalleryController::class, 'indexStory'])->name('admin.story.data');
+    Route::get('/{username}/story/add', [BackendGalleryController::class, 'addStory'])->name('admin.story.add');
+    Route::post('/{username}/story/add', [BackendGalleryController::class, 'storeStory'])->name('admin.story.create');
     Route::put('/story/update/{data}', [BackendGalleryController::class, 'updateStory'])->name('admin.story.update');
     Route::delete('/story/delete/{story}', [BackendGalleryController::class, 'destroyStory'])->name('admin.story.delete');
 
