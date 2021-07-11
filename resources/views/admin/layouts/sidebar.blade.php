@@ -39,9 +39,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('front.data.wish', $user) }}">Frontend Web</a>
                 <a class="collapse-item" href="{{ route('admin.data.event', $user) }}">Event</a>
-                <a class="collapse-item" href="{{ route('admin.gallery.head') }}">Head Gallery</a>
+                <a class="collapse-item" href="{{ route('admin.gallery.head', $user) }}">Head Gallery</a>
                 <a class="collapse-item" href="{{ route('admin.story.data') }}">Story</a>
-                <a class="collapse-item" href="{{ route('admin.gallery.data') }}">Gallery</a>
+                <a class="collapse-item" href="{{ route('admin.gallery.data', $user) }}">Gallery</a>
                 <a class="collapse-item" href="{{ route('admin.contactinfo.data') }}">Contact Information</a>
             </div>
         </div>

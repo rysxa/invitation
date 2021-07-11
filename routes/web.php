@@ -61,9 +61,9 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::put('/contact-info/update/{data}', [BackendContactController::class, 'updateContactInfo'])->name('admin.contact-info.update');
     Route::delete('/contact-info/delete/{contactInfo}', [BackendContactController::class, 'destroyContactInfo'])->name('admin.contact-info.delete');
 
-    Route::get('/gallery', [BackendGalleryController::class, 'index'])->name('admin.gallery.data');
-    Route::get('/gallery/add', [BackendGalleryController::class, 'addGallery'])->name('admin.gallery.add');
-    Route::post('/gallery/add', [BackendGalleryController::class, 'storeGallery'])->name('admin.gallery.create');
+    Route::get('/{username}/gallery', [BackendGalleryController::class, 'index'])->name('admin.gallery.data');
+    Route::get('/{username}/gallery/add', [BackendGalleryController::class, 'addGallery'])->name('admin.gallery.add');
+    Route::post('/{username}/gallery/add', [BackendGalleryController::class, 'storeGallery'])->name('admin.gallery.create');
     Route::put('/gallery/update/{data}', [BackendGalleryController::class, 'updateGallery'])->name('admin.gallery.update');
     Route::delete('/gallery/delete/{gallery}', [BackendGalleryController::class, 'destroyGallery'])->name('admin.gallery.delete');
 

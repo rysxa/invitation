@@ -3,6 +3,25 @@
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        @can('view', App\Gallery::class)
+            @if ($gallery->isEmpty())
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Perhatikan!</strong> Pastikan halaman ini sudah ada data, jika belum silahkan Add New!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @elseif ($gallery)
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Kamu bisa juga menambahkan gallery lebih dari satu, sesuaikan dengan kebutuhanmu..
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @else
+                {{ '' }}
+            @endif
+        @endcan
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
@@ -16,10 +35,19 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @can('create', App\Gallery::class)
-                    <a href="{{ route('admin.gallery.add') }}" class="nav-link">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add New
-                                Gallery</i></button>
-                    </a>
+                    @if (empty($gallery[0]->title) && $role == 'user')
+                        <a href="{{ route('admin.gallery.add', $user) }}" class="nav-link">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
+                                    New</i></button>
+                        </a>
+                    @elseif ($role == 'admin')
+                        <a href="{{ route('admin.gallery.add', $user) }}" class="nav-link">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
+                                    New</i></button>
+                        </a>
+                    @elseif (($gallery[0]->title) && $role == 'user')
+                        {{ '' }}
+                    @endif
                 @endcan
             </div>
             <div class="card-body">
@@ -28,6 +56,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Username</th>
                                 <th>Picture</th>
                                 <th>Caption Image</th>
                                 <th></th>
@@ -36,14 +65,15 @@
 
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($data as $d)
+                            @foreach ($gallery as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
+                                    <td>{{ $d->username_id }}</td>
                                     <td><img src="{{ Storage::url('public/images/' . $d->picture) }}" alt="gallery"
                                             class="img-responsive" width="80"></td>
                                     <td>{{ $d->caption }}</td>
                                     <td>
-                                        @can('update', App\Gallery::class)
+                                        @can('viewAny', App\Gallery::class)
                                             <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
                                                 data-target="#modal-edit{{ $d->id }}"><i class="fa fa-pen"
                                                     aria-hidden="true"></i></button>
@@ -69,7 +99,7 @@
     </div>
     <!-- /.container-fluid -->
 
-    @foreach ($data as $item)
+    @foreach ($gallery as $item)
         {{-- Modal Edit --}}
         <div class="modal fade" id="modal-edit{{ $item->id }}" tabindex="-1" aria-labelledby="modal-editLabel"
             aria-hidden="true">
@@ -87,6 +117,18 @@
                             @csrf
                             @method('PUT')
 
+                            @if ($role == 'user')
+                                <input type="text" class="form-control" name="username_id"
+                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @else
+                                <div class="form-group row">
+                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="username_id"
+                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="form-group row">
                                 <label for="caption" class="col-sm-2 col-form-label">Caption</label>
                                 <div class="col-sm-10">

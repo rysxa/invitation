@@ -11,7 +11,7 @@
             @csrf
             <?php $data = App\Models\User::all('username'); ?>
             @if ($role == 'user')
-                <input type="text" class="form-control" name="username_id" value="username_id" hidden>
+                <input type="text" class="form-control" name="username_id" value="{{ Auth::user()->username }}" hidden>
             @else
                 <div class="form-group row">
                     <label for="username_id" class="col-sm-4 col-form-label">Username</label>

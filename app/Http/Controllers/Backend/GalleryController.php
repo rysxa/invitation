@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Gallery_caption;
 use App\Models\Story;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,18 @@ use phpDocumentor\Reflection\Types\Nullable;
 
 class GalleryController extends Controller
 {
-    public function index()
+    public function index($username)
     {
-        $data = Gallery::all();
-        return view('admin.gallery', compact('data'));
+        $user = Auth::user()->username;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $gallery = User::join('galleries', 'users.username', '=', 'galleries.username_id')->get();
+        } else {
+            $gallery = User::join('galleries', 'users.username', '=', 'galleries.username_id')
+            ->where('username_id', '=', $user)
+            ->get();
+        }
+        return view('admin.gallery', compact('gallery', 'user', 'role'));
     }
 
     public function indexStory()
@@ -30,9 +39,15 @@ class GalleryController extends Controller
         return view('admin.story-add');
     }
 
-    public function addGallery()
+    public function addGallery($username) //ok
     {
-        return view('admin.gallery-add');
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $user = User::where('username', $username)->first();
+        } else {
+            $user = Auth::user()->username;
+        }
+        return view('admin.gallery-add', compact('user', 'role'));
     }
 
     public function addheadGallery()
@@ -40,70 +55,71 @@ class GalleryController extends Controller
         return view('admin.gallery-head-add');
     }
 
-    public function storeGallery(Request $request)
+    public function storeGallery(Request $request, $user) //ok
     {
+        $user = Auth::user()->username;
         $this->validate($request, [
-            'username_id'   => Auth::user()->username,
-            'picture'       => 'required|image|mimes:png,jpg,jpeg'
+            'picture'       => 'required|image|mimes:png,jpg,jpeg',
+            'caption'       => 'required',
         ]);
 
         $picture = $request->file('picture');
         $picture->storeAs('public/images', $picture->hashName());
 
         $data = Gallery::create([
-            'username_id'   => Auth::user()->username,
+            'username_id'   => $request->username_id,
             'picture'       => $picture->hashName(),
             'caption'       => $request->caption,
         ]);
 
         if ($data) {
-            return redirect()->route('admin.gallery.data')->with('success', 'Data added successfully');
+            return redirect()->route('admin.gallery.data', $user)->with('success', 'Data added successfully');
         }
     }
 
-    public function updateGallery(Request $request, Gallery $data)
+    public function updateGallery(Request $request, Gallery $data) //ok
     {
         $this->authorize('update', Gallery::class);
 
-        $this->validate($request, [
-            'picture'   => 'required|image|mimes:png,jpg,jpeg'
-        ]);
+        $userUpdate = Auth::user()->username;
 
         $data = Gallery::findOrFail($data->id);
 
         if ($request->file('picture') == "") {
             $data->update([
-                'username_id'   => Auth::user()->username,
+                'username_id'   => $request->username_id,
                 'caption'       => $request->caption
             ]);
+            // dd($data);
         } else {
             Storage::disk('local')->delete('public/images/' . $data->picture);
             $picture = $request->file('picture');
             $picture->storeAs('public/images', $picture->hashName());
 
             $data->update([
-                'username_id'   => Auth::user()->username,
+                'username_id'   => $request->username_id,
                 'caption'       => $request->caption,
                 'picture'       => $picture->hashName()
             ]);
         }
 
         if ($data) {
-            return redirect()->route('admin.gallery.data')->with('success', 'Data updated successfully');
+            return redirect()->route('admin.gallery.data', $userUpdate)->with('success', 'Data updated successfully');
         }
     }
 
-    public function destroyGallery(Gallery $gallery)
+    public function destroyGallery(Gallery $gallery) //ok
     {
         $this->authorize('delete', Gallery::class);
 
         $gallery->find($gallery->id)->all();
+        $username = $gallery['username_id'];
 
         Storage::disk('local')->delete('public/images/' . $gallery->picture);
         $gallery->delete();
 
         if ($gallery) {
-            return redirect()->route('admin.gallery.data')->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.gallery.data', $username)->with('success', 'Data deleted successfully');
         }
     }
 

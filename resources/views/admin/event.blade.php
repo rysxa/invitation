@@ -41,7 +41,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @can('create', App\Event::class)
-                    @if (empty($event[0]->title) && $role == 'user')
+                    @if ($event->isEmpty() && $role == 'user')
                         <a href="{{ route('admin.event.add', $user) }}" class="nav-link">
                             <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
                                     New</i></button>
