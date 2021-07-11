@@ -74,7 +74,7 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::delete('/gallery-head/delete/{galleryCaption}', [BackendGalleryController::class, 'destroyHeadGallery'])->name('admin.gallery-head.delete');
 
     // Friends Wishes
-    Route::get('/message', [BackendWishController::class, 'index'])->name('admin.data.wish');
+    Route::get('/{username}/message', [BackendWishController::class, 'index'])->name('admin.data.wish');
     Route::put('/message/update/{data}', [BackendWishController::class, 'updateMessage'])->name('admin.message.update');
     Route::delete('/message/delete/{wish}', [BackendWishController::class, 'destroyMessage'])->name('admin.message.delete');
 

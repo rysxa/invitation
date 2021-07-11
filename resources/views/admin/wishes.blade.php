@@ -20,6 +20,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Username</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -31,9 +32,10 @@
 
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($data as $d)
+                            @foreach ($wish as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
+                                    <td>{{ $d->username_id }}</td>
                                     <td>{{ $d->name }}</td>
                                     <td>{{ $d->email }}</td>
                                     <td>{{ $d->phone }}</td>
@@ -68,7 +70,7 @@
     </div>
     <!-- /.container-fluid -->
 
-    @foreach ($data as $item)
+    @foreach ($wish as $item)
         {{-- Modal Edit --}}
         <div class="modal fade" id="modal-edit{{ $item->id }}" tabindex="-1" aria-labelledby="modal-editLabel"
             aria-hidden="true">
@@ -86,6 +88,18 @@
                             @csrf
                             @method('PUT')
 
+                            @if ($role == 'user')
+                                <input type="text" class="form-control" name="username_id"
+                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @else
+                                <div class="form-group row">
+                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="username_id"
+                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">

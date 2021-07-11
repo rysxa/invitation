@@ -4,45 +4,58 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\User;
 use App\Models\Wish;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishController extends Controller
 {
-    public function index()
+    public function index($username) //ok
     {
-        $data = Wish::all();
-        return view('admin.wishes', compact('data'));
+        $user = Auth::user()->username;
+        $role = Auth::user()->role;
+        if ($role == 'admin') {
+            $wish = User::join('wishes', 'users.username', '=', 'wishes.username_id')->get();
+        } else {
+            $wish = User::join('wishes', 'users.username', '=', 'wishes.username_id')
+            ->where('username_id', '=', $user)
+            ->get();
+        }
+        return view('admin.wishes', compact('user', 'role', 'wish'));
     }
 
-    public function updateMessage(Request $request, Wish $data)
+    public function updateMessage(Request $request, Wish $data) //ok
     {
         $this->authorize('update', Wish::class);
 
+        $userUpdate = Auth::user()->username;
         $data = Wish::findOrFail($data->id);
 
         $data->update([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'phone'     => $request->phone,
-            'message'   => $request->message
+            'username_id'   => $request->username_id,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'message'       => $request->message
         ]);
 
         if ($data) {
-            return redirect()->route('admin.data.wish')->with('success', 'Data updated successfully');
+            return redirect()->route('admin.data.wish', $userUpdate)->with('success', 'Data updated successfully');
         }
     }
 
-    public function destroyMessage(Wish $wish)
+    public function destroyMessage(Wish $wish) //ok
     {
         $this->authorize('delete', Wish::class);
 
+        $username = $wish['username_id'];
         $wish->find($wish->id)->all();
 
         $wish->delete();
 
         if ($wish) {
-            return redirect()->route('admin.data.wish')->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.data.wish', $username)->with('success', 'Data deleted successfully');
         }
     }
 
