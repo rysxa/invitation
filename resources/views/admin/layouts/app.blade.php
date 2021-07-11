@@ -20,9 +20,12 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <!-- Latest compiled and minified CSS -->
+    <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
+
 </head>
 
-<body id="page-top">
+<body id=" page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -63,9 +66,16 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Latest compiled and minified JavaScript -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script> --}}
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('admin2/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+    <script>
+        $('.selectpicker').selectpicker();
+    </script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('admin2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>

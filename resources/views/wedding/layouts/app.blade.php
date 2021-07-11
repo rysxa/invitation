@@ -76,12 +76,10 @@
                         <div class="display-t">
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
                                 @if ($event)
-                                    @foreach ($event as $item)
-                                        <h1>{{ $item->man_first }} &amp;
-                                            {{ $item->women_first }}</h1>
-                                        <h2>We Are Getting Married</h2>
-                                        {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
-                                    @endforeach
+                                    <h1>{{ $event[0]->man_first }} &amp;
+                                        {{ $event[0]->women_first }}</h1>
+                                    <h2>We Are Getting Married</h2>
+                                    {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
                                 @else
                                     <h2>Create Your Invitation</h2>
                                 @endif

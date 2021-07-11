@@ -44,8 +44,8 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::get('/{username}', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/{username}/event', [BackendEventController::class, 'index'])->name('admin.data.event');
-    Route::get('/event-add', [BackendEventController::class, 'add'])->name('admin.event.add');
-    Route::post('/event/add', [BackendEventController::class, 'store'])->name('admin.event.create');
+    Route::get('/{username}/event-add', [BackendEventController::class, 'add'])->name('admin.event.add');
+    Route::post('/{username}/event/add', [BackendEventController::class, 'store'])->name('admin.event.create');
     Route::put('/event/update/{data}', [BackendEventController::class, 'update'])->name('admin.event.update');
     Route::delete('/event/delete/{event}', [BackendEventController::class, 'destroy'])->name('admin.event.delete');
 

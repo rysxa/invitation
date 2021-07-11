@@ -12,7 +12,8 @@ class HomeController extends Controller
 {
     public function index($username)
     {
-        $user = User::where('username', $username)->first();
+        $user = Auth::user()->username;
+        // $user = User::where('username', $username)->first();
         $data = Attendance::all();
         // $auth = Auth::user()->username;
         // if ($auth->username) {
@@ -24,7 +25,8 @@ class HomeController extends Controller
 
     public function dashboard($username)
     {
-        $user = User::where('username', $username)->first();
+        $user = Auth::user()->username;
+        // $user = User::where('username', $username)->first();
         return view('admin.index', compact('user'));
     }
 }

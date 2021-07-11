@@ -110,24 +110,12 @@
                 </div>
             </div>
 
-            {{-- <div class="row">
-                <div class="col-md-6 animate-box">
-                    <div class="fh5co-video fh5co-bg" style="background-image: url(https://www.youtube.com/watch?v=4n5bpeh5NNg); ">
-                        <a href="https://www.youtube.com/watch?v=4n5bpeh5NNg" class="popup-vimeo"><i
-                                class="icon-video2"></i></a>
-                        <div class="overlay"></div>
-                    </div>
-                </div>
-            </div> --}}
-
             <div class="row">
-                <div class="col-md-6 animate-box">
-                    <a href="https://www.youtube.com/watch?v=oSSil-4MJtY" class="popup-vimeo"><i
-                            class="icon-video2"></i></a>
-                    <iframe class="popup-vimeo" width="560" height="315" src="https://www.youtube.com/embed/oSSil-4MJtY"
+                <div class="col-md-6">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/2IkoKhr6Tss"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen><i class="icon-video2"></i></iframe>
+                        allowfullscreen></iframe>
                     <div class="overlay"></div>
                 </div>
             </div>

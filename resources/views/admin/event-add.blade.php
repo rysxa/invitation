@@ -7,58 +7,84 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Add New Wedding</h1>
 
-        <form action="{{ route('admin.event.create') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.event.create', $user) }}" method="POST" enctype="multipart/form-data">
             @csrf
-
-            <input type="text" class="form-control" name="title" value="username_id" hidden>
+            <?php $data = App\Models\User::all('username'); ?>
+            @if ($role == 'user')
+                <input type="text" class="form-control" name="username_id" value="username_id" hidden>
+            @else
+                <div class="form-group row">
+                    <label for="username_id" class="col-sm-4 col-form-label">Username</label>
+                    <div class="col-sm-8">
+                        <select name="username_id" class="form-control selectpicker" data-live-search="true"
+                            data-max-options="5">
+                            @foreach ($data as $item)
+                                <option value="{{ old('username_id') }}"
+                                    {{ old('username_id') == "$item->username" ? selected : '' }}>
+                                    {{ $item->username }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            @endif
             <div class="form-group row">
                 <label for="title" class="col-sm-4 col-form-label">Title</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
+                        value="{{ old('title') }}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="date_wedding" class="col-sm-4 col-form-label">Date Wedding</label>
                 <div class="col-sm-8">
-                    <input type="date" class="form-control" name="date_wedding" value="{{ old('date_wedding') }}">
+                    <input type="date" class="form-control @error('date_wedding') is-invalid @enderror" name="date_wedding"
+                        value="{{ old('date_wedding') }}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="address" class="col-sm-4 col-form-label">Address</label>
                 <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="address" value="{{ old('address') }}"></textarea>
+                    <textarea type="text" class="form-control @error('address') is-invalid @enderror" name="address"
+                        value="{{ old('address') }}"></textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="city" class="col-sm-4 col-form-label">City</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="city" value="{{ old('city') }}">
+                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city"
+                        value="{{ old('city') }}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="caption" class="col-sm-4 col-form-label">Caption</label>
                 <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="caption" value="{{ old('caption') }}"></textarea>
+                    <textarea type="text" class="form-control @error('caption') is-invalid @enderror" name="caption"
+                        value="{{ old('caption') }}"></textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="form-group col-md-6">
                     <label for="man_first">First Name Man</label>
-                    <input type="text" class="form-control" name="man_first" value="{{ old('man_first') }}">
+                    <input type="text" class="form-control @error('man_first') is-invalid @enderror" name="man_first"
+                        value="{{ old('man_first') }}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="women_first">First Name Woman</label>
-                    <input type="text" class="form-control" name="women_first" value="{{ old('women_first') }}">
+                    <input type="text" class="form-control @error('women_first') is-invalid @enderror" name="women_first"
+                        value="{{ old('women_first') }}">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="form-group col-md-6">
                     <label for="man_last">Last Name Man</label>
-                    <input type="text" class="form-control" name="man_last" value="{{ old('man_last') }}">
+                    <input type="text" class="form-control @error('man_last') is-invalid @enderror" name="man_last"
+                        value="{{ old('man_last') }}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="women_last">Last Name Woman</label>
-                    <input type="text" class="form-control" name="women_last" value="{{ old('women_last') }}">
+                    <input type="text" class="form-control @error('women_last') is-invalid @enderror" name="women_last"
+                        value="{{ old('women_last') }}">
                 </div>
             </div>
             <div class="form-group row">
@@ -76,63 +102,66 @@
             <div class="form-group row">
                 <div class="form-group col-md-6">
                     <label for="caption_man">Caption Man</label>
-                    <textarea type="text" class="form-control" name="caption_man"
+                    <textarea type="text" class="form-control @error('caption_man') is-invalid @enderror" name="caption_man"
                         value="{{ old('caption_man') }}"></textarea>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="caption_women">Caption Woman</label>
-                    <textarea type="text" class="form-control" name="caption_women"
-                        value="{{ old('caption_women') }}"></textarea>
+                    <textarea type="text" class="form-control @error('caption_women') is-invalid @enderror"
+                        name="caption_women" value="{{ old('caption_women') }}"></textarea>
                 </div>
             </div>
             <hr>
             <div class="form-group row">
                 <div class="form-group col-md-4">
                     <label for="ceremony_date">Ceremony Date</label>
-                    <input type="date" class="form-control" name="ceremony_date" value="{{ old('ceremony_date') }}">
+                    <input type="date" class="form-control @error('ceremony_date') is-invalid @enderror"
+                        name="ceremony_date" value="{{ old('ceremony_date') }}">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="ceremony_time_start">Start Ceremony Time</label>
-                    <input type="time" class="form-control" name="ceremony_time_start"
-                        value="{{ old('ceremony_time_start') }}">
+                    <input type="time" class="form-control @error('ceremony_time_start') is-invalid @enderror"
+                        name="ceremony_time_start" value="{{ old('ceremony_time_start') }}">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="ceremony_time_end">End Ceremony Time</label>
-                    <input type="time" class="form-control" name="ceremony_time_end"
-                        value="{{ old('ceremony_time_end') }}">
+                    <input type="time" class="form-control @error('ceremony_time_end') is-invalid @enderror"
+                        name="ceremony_time_end" value="{{ old('ceremony_time_end') }}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="ceremony_caption" class="col-sm-4 col-form-label">Ceremony Caption</label>
                 <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="ceremony_caption"
-                        value="{{ old('ceremony_caption') }}"></textarea>
+                    <textarea type="text" class="form-control @error('ceremony_caption') is-invalid @enderror"
+                        name="ceremony_caption" value="{{ old('ceremony_caption') }}"></textarea>
                 </div>
             </div>
             <hr>
             <div class="form-group row">
                 <div class="form-group col-md-4">
                     <label for="party_date">Party Date</label>
-                    <input type="date" class="form-control" name="party_date" value="{{ old('party_date') }}">
+                    <input type="date" class="form-control @error('party_date') is-invalid @enderror" name="party_date"
+                        value="{{ old('party_date') }}">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="party_time_start">Start Party Time</label>
-                    <input type="time" class="form-control" name="party_time_start"
-                        value="{{ old('party_time_start') }}">
+                    <input type="time" class="form-control @error('party_time_start') is-invalid @enderror"
+                        name="party_time_start" value="{{ old('party_time_start') }}">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="party_time_end">End Party Time</label>
-                    <input type="time" class="form-control" name="party_time_end" value="{{ old('party_time_end') }}">
+                    <input type="time" class="form-control @error('party_time_end') is-invalid @enderror"
+                        name="party_time_end" value="{{ old('party_time_end') }}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="party_caption" class="col-sm-4 col-form-label">Party Caption</label>
                 <div class="col-sm-8">
-                    <textarea type="text" class="form-control" name="party_caption"
-                        value="{{ old('party_caption') }}"></textarea>
+                    <textarea type="text" class="form-control @error('party_caption') is-invalid @enderror"
+                        name="party_caption" value="{{ old('party_caption') }}"></textarea>
                 </div>
             </div>
-            <a type="button" href="{{ route('admin.data.event') }}" class="btn btn-secondary">Back</a>
+            <a type="button" href="{{ route('admin.data.event', $user) }}" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
 

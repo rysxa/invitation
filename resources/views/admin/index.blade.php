@@ -19,7 +19,7 @@
 
             </div>
             <br>
-            <h5>Cek Halaman kamu >><a href="{{ route('front.data.wish', $user['username']) }}"> Disini</a> atau bisa juga
+            <h5>Cek Halaman kamu >><a href="{{ route('front.data.wish', $user) }}"> Disini</a> atau bisa juga
                 di sidebar <b>Master -> Frontend Web</b></h5>
 
         </div>

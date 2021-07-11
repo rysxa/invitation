@@ -1,3 +1,8 @@
+{{-- @if ($event['title'] == '') --}}
+{{-- {{ dd($event) }} --}}
+{{-- <p>Form belum disini silahkan isi form terlebih dahulu</p>
+    <a class="btn btn-primary" href="{{ route('admin.data.event', $user) }}">Isi Form</a> --}}
+{{-- @else --}}
 @extends('wedding.layouts.app')
 @section('title', 'Wedding Invitation')
 @section('meta')
@@ -22,13 +27,13 @@
     <div class="col-xs-10 text-right menu-1">
         <ul>
             <li class="active"><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
-            <li><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
+            <li><a href="{{ route('front.data.gallery', $user['username']) }}">Gallery</a></li>
+            <li><a href="{{ route('front.data.contact', $user['username']) }}">Contact</a></li>
         </ul>
     </div>
 @endsection
 @section('content')
-    {{-- @foreach ($event as $item) --}}
+
 
     <div id="fh5co-couple">
         <div class="container">
@@ -275,6 +280,5 @@
             </div>
         </div>
     </div>
-    {{-- @endforeach --}}
 
 @endsection

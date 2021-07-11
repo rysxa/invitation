@@ -23,11 +23,16 @@ class HomeController extends Controller
             ->where('status', '=', 1)
             ->where('username_id', '=', $user->username)
             ->get();
+            // dd($event);
         $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
             ->where('username_id', '=', $user->username)
             ->get();
-        
-        return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'user'));
+            
+        if ($event->isEmpty()) {
+            return view('emptypage');
+        } else {
+            return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'user'));
+        }
     }
 
     public function dashboard()
