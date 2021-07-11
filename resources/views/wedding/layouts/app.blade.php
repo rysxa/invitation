@@ -72,7 +72,8 @@
         </nav>
 
         <header id="fh5co-header" class="fh5co-cover" role="banner"
-            style="background-image:url(wedding/wedding/images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
+            style="background-image:url({{ Storage::url('public/images/' . $gallery_head[0]->head_picture) }});"
+            data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">

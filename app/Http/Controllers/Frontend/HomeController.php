@@ -29,11 +29,12 @@ class HomeController extends Controller
         $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
             ->where('username_id', '=', $user->username)
             ->get();
+        $gallery_head = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')->get();
             
         if ($event->isEmpty()) {
             return view('emptypage');
         } else {
-            return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'user'));
+            return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'user', 'gallery_head'));
         }
     }
 

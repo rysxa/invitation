@@ -113,7 +113,8 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/2IkoKhr6Tss"
+                    <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/{{ $gallery_head[0]->url_video }}"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>

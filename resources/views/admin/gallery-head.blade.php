@@ -50,9 +50,11 @@
                             <tr>
                                 <th>No</th>
                                 <th>Username</th>
+                                <th>Picture Dashboard</th>
                                 <th>Caption Story</th>
                                 <th>Caption Gallery</th>
                                 <th>Caption Video</th>
+                                <th>URL Video</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -63,9 +65,14 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $d->username_id }}</td>
+                                    <td>
+                                        <img style="width: 90px"
+                                            src="{{ Storage::url('public/images/' . $d->head_picture) }}">
+                                    </td>
                                     <td>{{ $d->head_story }}</td>
                                     <td>{{ $d->head_gallery }}</td>
                                     <td>{{ $d->head_video }}</td>
+                                    <td>{{ $d->url_video }}</td>
                                     <td>
                                         @can('update', App\Gallery_caption::class)
                                             <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
@@ -144,6 +151,14 @@
                                         name="head_video">{{ old('head_video', $item->head_video) }}</textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="url_video" class="col-sm-2 col-form-label">URL Video</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="url_video"
+                                        value="{{ old('url_video', $item->url_video) }}">
+                                </div>
+                            </div>
+                            <img src="{{ asset('images/url.png') }}" class="img-fluid" alt="url_video"><br><br>
 
 
                             <div class="modal-footer">

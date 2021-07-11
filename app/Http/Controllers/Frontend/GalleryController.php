@@ -14,29 +14,17 @@ class GalleryController extends Controller
 {
     public function index($username)
     {
-        $user = User::where('username', $username)->first(); 
-        $gallery = DB::table('users')
-            ->join('galleries', 'users.username', '=', 'galleries.username_id')
-            ->select('*')
-            ->get();
-        $event = DB::table('users')
-            ->join('events', 'users.username', '=', 'events.username_id')
-            ->select('*')
+        $user = User::where('username', $username)->first();
+        $gallery = User::join('galleries', 'users.username', '=', 'galleries.username_id')->get();
+        $event = User::join('events', 'users.username', '=', 'events.username_id')
             ->where('status', '=', 1)
             ->get();
-        $story = DB::table('users')
-            ->join('stories', 'users.username', '=', 'stories.username_id')
-            ->select('*')
+        $story = User::join('stories', 'users.username', '=', 'stories.username_id')
             ->orderBy('date')
             ->get();
-        $gallery_head = DB::table('users')
-            ->join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
-            ->select('*')
-            ->get();
-        $contact_info = DB::table('users')
-            ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-            ->select('*')
-            ->get();
+        $gallery_head = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')->get();
+        $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')->get();
+
         return view('wedding.gallery', compact('event', 'gallery', 'story', 'gallery_head', 'contact_info', 'user'));
     }
 }

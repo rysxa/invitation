@@ -16,9 +16,11 @@ class CreateGalleryCaptionsTable extends Migration
         Schema::create('gallery_captions', function (Blueprint $table) {
             $table->id();
             $table->string('username_id');
+            $table->string('head_picture')->nullable();
             $table->string('head_story');
             $table->string('head_gallery');
             $table->string('head_video');
+            $table->string('url_video');
             $table->timestamps();
         });
     }

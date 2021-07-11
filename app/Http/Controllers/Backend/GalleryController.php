@@ -240,15 +240,22 @@ class GalleryController extends Controller
         $this->authorize('create', Gallery_caption::class);
         $user = Auth::user()->username;
         $this->validate($request, [
+            'head_picture'  => 'required|image|mimes:png,jpg,jpeg',
             'head_story'    => 'required',
             'head_gallery'  => 'required',
             'head_video'    => 'required',
         ]);
+
+        $head_picture = $request->file('head_picture');
+        $head_picture->storeAs('public/images', $head_picture->hashName());
+
         $data = Gallery_caption::create([
             'username_id'   => $request->username_id,
+            'head_picture'               => $head_picture->hashName(),
             'head_story'    => $request->head_story,
             'head_gallery'  => $request->head_gallery,
-            'head_video'    => $request->head_video
+            'head_video'    => $request->head_video,
+            'url_video'     => $request->url_video,
         ]);
 
         if ($data) {
@@ -262,12 +269,29 @@ class GalleryController extends Controller
 
         $userUpdate = Auth::user()->username;
         $data = Gallery_caption::findOrFail($data->id);
-        $data->update([
-            'username_id'   => $request->username_id,
-            'head_story'    => $request->head_story,
-            'head_gallery'  => $request->head_gallery,
-            'head_video'    => $request->head_video,
-        ]);
+       
+        if ($request->file('pic_man') == "" || $request->file('pic_women') == "") {
+            $data->update([
+                'username_id'   => $request->username_id,
+                'head_story'    => $request->head_story,
+                'head_gallery'  => $request->head_gallery,
+                'head_video'    => $request->head_video,
+                'url_video'     => $request->url_video,
+            ]);
+        } else {
+            Storage::disk('local')->delete('public/images/' . $data->head_picture);
+            $head_picture = $request->file('head_picture');
+            $head_picture->storeAs('public/images', $head_picture->hashName());
+
+            $data->update([
+                'username_id'   => $request->username_id,
+                'head_picture'  => $head_picture->hashName(),
+                'head_story'    => $request->head_story,
+                'head_gallery'  => $request->head_gallery,
+                'head_video'    => $request->head_video,
+                'url_video'     => $request->url_video,
+            ]);
+        }
 
         if ($data) {
             return redirect()->route('admin.gallery.head', $userUpdate)->with('success', 'Data updated successfully');

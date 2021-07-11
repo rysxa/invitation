@@ -17,16 +17,13 @@ class ContactController extends Controller
     public function index($username)
     {
         $user = User::where('username', $username)->first(); 
-        $event = DB::table('users')
-            ->join('events', 'users.username', '=', 'events.username_id')
-            ->select('*')
+        $event = User::join('events', 'users.username', '=', 'events.username_id')
             ->where('status', '=', 1)
             ->get();
-        $contact_info = DB::table('users')
-            ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-            ->select('*')
-            ->get();
-        return view('wedding.contact', compact('event', 'contact_info', 'user'));
+        $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')->get();
+        $gallery_head = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')->get();
+
+        return view('wedding.contact', compact('event', 'contact_info', 'user', 'gallery_head'));
     }
 
     public function create(Request $request, $username)
