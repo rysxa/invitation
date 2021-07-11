@@ -4,12 +4,15 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
-        <!-- Page Heading -->
-        {{-- <h1 class="h3 mb-4 text-gray-800">Blank Page</h1> --}}
-
         <!-- Content Row -->
         <div class="row">
-
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Terima kasih sudah bergabung, Tinggal satu langkah lagi untuk dapat mengakses Wedding Invitation kamu,
+                Silahkan isi semua data pada menu <b>Master</b> !.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <!-- Border Left Utilities -->
             <div class="col-lg-12">
                 <marquee scrolldelay="50" title="Welcome">
