@@ -42,7 +42,7 @@
                 <a class="collapse-item" href="{{ route('admin.gallery.head', $user) }}">Head Gallery</a>
                 <a class="collapse-item" href="{{ route('admin.story.data', $user) }}">Story</a>
                 <a class="collapse-item" href="{{ route('admin.gallery.data', $user) }}">Gallery</a>
-                <a class="collapse-item" href="{{ route('admin.contactinfo.data') }}">Contact Information</a>
+                <a class="collapse-item" href="{{ route('admin.contactinfo.data', $user) }}">Contact Information</a>
             </div>
         </div>
     </li>

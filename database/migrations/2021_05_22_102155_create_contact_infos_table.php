@@ -20,9 +20,9 @@ class CreateContactInfosTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('wa');
-            $table->string('twitter');
-            $table->string('instagram');
-            $table->string('facebook');
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('facebook')->nullable();
             $table->timestamps();
         });
     }

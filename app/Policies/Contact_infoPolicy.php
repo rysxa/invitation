@@ -12,17 +12,17 @@ class Contact_infoPolicy
 
     public function viewAny(User $user)
     {
-        //
+        return in_array($user->role, ['admin', 'user']);
     }
 
     public function view(User $user)
     {
-        return in_array($user->role, ['admin', 'user']);
+        return $user->role === 'user';
     }
 
     public function create(User $user)
     {
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'user']);
     }
 
     public function update(User $user)

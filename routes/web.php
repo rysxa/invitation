@@ -55,9 +55,9 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(funct
     Route::put('/story/update/{data}', [BackendGalleryController::class, 'updateStory'])->name('admin.story.update');
     Route::delete('/story/delete/{story}', [BackendGalleryController::class, 'destroyStory'])->name('admin.story.delete');
 
-    Route::get('/contact-info', [BackendContactController::class, 'indexContactInfo'])->name('admin.contactinfo.data');
-    Route::get('/contact-info/add', [BackendContactController::class, 'addContactInfo'])->name('admin.contactinfo.add');
-    Route::post('/contact-info/add', [BackendContactController::class, 'createContactInfo'])->name('admin.contactinfo.create');
+    Route::get('/{username}/contact-info', [BackendContactController::class, 'indexContactInfo'])->name('admin.contactinfo.data');
+    Route::get('/{username}/contact-info/add', [BackendContactController::class, 'addContactInfo'])->name('admin.contactinfo.add');
+    Route::post('/{username}/contact-info/add', [BackendContactController::class, 'createContactInfo'])->name('admin.contactinfo.create');
     Route::put('/contact-info/update/{data}', [BackendContactController::class, 'updateContactInfo'])->name('admin.contact-info.update');
     Route::delete('/contact-info/delete/{contactInfo}', [BackendContactController::class, 'destroyContactInfo'])->name('admin.contact-info.delete');
 
