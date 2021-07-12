@@ -2,16 +2,15 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+    <a class="sidebar-brand d-flex align-items-center justify-content-center pt-5"
         href="{{ route('admin.dashboard', $user) }}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-rocket"></i>
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('images/logo_wis.png') }}" alt="logo" class="img-fluid" width="170">
         </div>
-        <div class="sidebar-brand-text mx-3">Wedding <sup>admin</sup></div>
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider my-0 mt-4">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
