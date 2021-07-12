@@ -25,9 +25,10 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 Thank you Laravel 8 for helping me finish my project quickly, thank you also for the website theme that i got for free ^-^
 
+- [Home Page](http://127.0.0.1:8000).
 - [Login Page](http://127.0.0.1:8000/login).
 - [Registration Page](http://127.0.0.1:8000/register). first register automatically becomes admin, and then becomes user
-- [Frontend Page](http://127.0.0.1:8000).
+- [Frontend Page](http://127.0.0.1:8000). must be accompanied by parameters as URI
 - [Backend Page](http://127.0.0.1:8000/admin). must be accompanied by parameters as URI
 
 ## Aplication Wedding Invitation
