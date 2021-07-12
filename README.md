@@ -21,6 +21,15 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Introduction
+
+Thank you Laravel 8 for helping me finish my project quickly, thank you also for the website theme that i got for free ^-^
+
+- [Login Page](http://127.0.0.1:8000/login).
+- [Registration Page](http://127.0.0.1:8000/register). first register automatically becomes admin, and then becomes user
+- [Frontend Page](http://127.0.0.1:8000).
+- [Backend Page](http://127.0.0.1:8000/admin). must be accompanied by parameters as URI
+
 ## Aplication Wedding Invitation
 ![image](https://user-images.githubusercontent.com/61085159/116580830-f2690480-a93d-11eb-97f0-1e425e00f001.png)
 ![image](https://user-images.githubusercontent.com/61085159/116580892-ff85f380-a93d-11eb-90d7-7f2c20229f27.png)
