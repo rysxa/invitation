@@ -4,6 +4,8 @@ use App\Http\Controllers\Backend\ContactController as BackendContactController;
 use App\Http\Controllers\Backend\EventController as BackendEventController;
 use App\Http\Controllers\Backend\GalleryController as BackendGalleryController;
 use App\Http\Controllers\Backend\HomeController as BackendHomeController;
+use App\Http\Controllers\Backend\StatusController as BackendStatusController;
+use App\Http\Controllers\Backend\UserController as BackendUserController;
 use App\Http\Controllers\Backend\WishController as BackendWishController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\GalleryController as FrontendGalleryController;
@@ -43,6 +45,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('/admin')->namespace('Backend')->middleware(['auth'])->group(function () {
     Route::get('/{username}', [BackendHomeController::class, 'dashboard'])->name('admin.dashboard');
 
+    // Config
+    Route::get('/{username}/user', [BackendUserController::class, 'index'])->name('admin.user.data');
+    Route::get('/{username}/user-add', [BackendUserController::class, 'add'])->name('admin.user.add');
+    Route::post('/{username}/user/add', [BackendUserController::class, 'store'])->name('admin.user.create');
+    Route::put('/user/update/{data}', [BackendUserController::class, 'update'])->name('admin.user.update');
+    Route::delete('/user/delete/{user}', [BackendUserController::class, 'destroy'])->name('admin.user.delete');
+    Route::get('/{username}/status', [BackendStatusController::class, 'index'])->name('admin.status.data');
+
+    // Master
     Route::get('/{username}/event', [BackendEventController::class, 'index'])->name('admin.data.event');
     Route::get('/{username}/event-add', [BackendEventController::class, 'add'])->name('admin.event.add');
     Route::post('/{username}/event/add', [BackendEventController::class, 'store'])->name('admin.event.create');

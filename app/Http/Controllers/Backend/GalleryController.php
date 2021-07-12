@@ -305,6 +305,7 @@ class GalleryController extends Controller
         $galleryCaption->find($galleryCaption->id)->all();
         $username = $galleryCaption['username_id'];
 
+        Storage::disk('local')->delete('public/images/' . $galleryCaption->picture);
         $galleryCaption->delete();
 
         if ($galleryCaption) {
