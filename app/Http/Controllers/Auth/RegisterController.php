@@ -81,12 +81,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = User::all();
+        if ($user->isEmpty()) {
+            $pick_role = 'admin';
+        } else {
+            $pick_role = $data['role'];
+        }
+
         return User::create([
             'name' => ucwords($data['name']),
             'email' => $data['email'],
             'username' => strtolower($data['username']),
             'password' => Hash::make($data['password']),
-            'role' => $data['role'],
+            'role' => $pick_role,
         ]);
     }
 }
