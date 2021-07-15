@@ -45,8 +45,8 @@
             <div class="form-group row">
                 <label for="address" class="col-sm-4 col-form-label">Address</label>
                 <div class="col-sm-8">
-                    <textarea type="text" class="form-control @error('address') is-invalid @enderror" name="address"
-                        value="{{ old('address') }}"></textarea>
+                    <textarea class="form-control @error('address') is-invalid @enderror"
+                        name="address">{{ old('address') }}</textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -59,8 +59,8 @@
             <div class="form-group row">
                 <label for="caption" class="col-sm-4 col-form-label">Caption</label>
                 <div class="col-sm-8">
-                    <textarea type="text" class="form-control @error('caption') is-invalid @enderror" name="caption"
-                        value="{{ old('caption') }}"></textarea>
+                    <textarea type="text" class="form-control @error('caption') is-invalid @enderror"
+                        name="caption">{{ old('caption') }}</textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -102,13 +102,13 @@
             <div class="form-group row">
                 <div class="form-group col-md-6">
                     <label for="caption_man">Caption Man</label>
-                    <textarea type="text" class="form-control @error('caption_man') is-invalid @enderror" name="caption_man"
-                        value="{{ old('caption_man') }}"></textarea>
+                    <textarea type="text" class="form-control @error('caption_man') is-invalid @enderror"
+                        name="caption_man">{{ old('caption_man') }}</textarea>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="caption_women">Caption Woman</label>
                     <textarea type="text" class="form-control @error('caption_women') is-invalid @enderror"
-                        name="caption_women" value="{{ old('caption_women') }}"></textarea>
+                        name="caption_women">{{ old('caption_women') }}</textarea>
                 </div>
             </div>
             <hr>
@@ -133,7 +133,7 @@
                 <label for="ceremony_caption" class="col-sm-4 col-form-label">Ceremony Caption</label>
                 <div class="col-sm-8">
                     <textarea type="text" class="form-control @error('ceremony_caption') is-invalid @enderror"
-                        name="ceremony_caption" value="{{ old('ceremony_caption') }}"></textarea>
+                        name="ceremony_caption">{{ old('ceremony_caption') }}</textarea>
                 </div>
             </div>
             <hr>
@@ -158,7 +158,7 @@
                 <label for="party_caption" class="col-sm-4 col-form-label">Party Caption</label>
                 <div class="col-sm-8">
                     <textarea type="text" class="form-control @error('party_caption') is-invalid @enderror"
-                        name="party_caption" value="{{ old('party_caption') }}"></textarea>
+                        name="party_caption">{{ old('party_caption') }}</textarea>
                 </div>
             </div>
             <a type="button" href="{{ route('admin.data.event', $user) }}" class="btn btn-secondary">Back</a>

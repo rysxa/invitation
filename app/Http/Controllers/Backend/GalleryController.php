@@ -78,7 +78,7 @@ class GalleryController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.story.data', $user)->with('success', 'Data added successfully');
+            return redirect()->route('admin.story.data', $user)->with('success', 'Data berhasil ditambahkan, Silahkan isi form berikutnya == Master -> Gallery ==');
         }
     }
 
@@ -159,7 +159,7 @@ class GalleryController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.gallery.data', $user)->with('success', 'Data added successfully');
+            return redirect()->route('admin.gallery.data', $user)->with('success', 'Selesai! Data berhasil ditambahkan, Silahkan cek == Master -> Contact Information ==');
         }
     }
 
@@ -243,7 +243,6 @@ class GalleryController extends Controller
             'head_picture'  => 'required|image|mimes:png,jpg,jpeg',
             'head_story'    => 'required',
             'head_gallery'  => 'required',
-            'head_video'    => 'required',
         ]);
 
         $head_picture = $request->file('head_picture');
@@ -251,7 +250,7 @@ class GalleryController extends Controller
 
         $data = Gallery_caption::create([
             'username_id'   => $request->username_id,
-            'head_picture'               => $head_picture->hashName(),
+            'head_picture'  => $head_picture->hashName(),
             'head_story'    => $request->head_story,
             'head_gallery'  => $request->head_gallery,
             'head_video'    => $request->head_video,
@@ -259,7 +258,7 @@ class GalleryController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.gallery.head', $user)->with('success', 'Data added successfully');
+            return redirect()->route('admin.gallery.head', $user)->with('success', 'Data berhasil ditambahkan, Silahkan isi form berikutnya == Master -> Story ==');
         }
     }
 

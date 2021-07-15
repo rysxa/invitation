@@ -1,13 +1,11 @@
 @extends('admin.layouts.app')
-@section('title', 'Wedding User Page')
+@section('title', 'Wedding Event Page')
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
         @can('view', App\Event::class)
             @if ($event->isEmpty())
-                <div class="alert alert-warning alert-dismissible fade show" role="aler
-                        
-                        t">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Perhatikan!</strong> Pastikan halaman ini sudah ada data, jika belum silahkan Add New!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

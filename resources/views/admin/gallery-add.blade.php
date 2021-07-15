@@ -5,7 +5,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Add New Gallery User</h1>
+        <h1 class="h3 mb-4 text-gray-800">Add New Gallery</h1>
 
         <form action="{{ route('admin.gallery.create', $user) }}" method="POST" enctype="multipart/form-data">
             @csrf

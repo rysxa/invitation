@@ -102,7 +102,7 @@ class EventController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.data.event', $user)->with('success', 'Data added successfully');
+            return redirect()->route('admin.data.event', $user)->with('success', 'Data berhasil ditambahkan, Silahkan isi form berikutnya == Master -> Head Gallery ==');
         }
     }
 

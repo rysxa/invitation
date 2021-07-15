@@ -19,8 +19,8 @@ class CreateGalleryCaptionsTable extends Migration
             $table->string('head_picture')->nullable();
             $table->string('head_story');
             $table->string('head_gallery');
-            $table->string('head_video');
-            $table->string('url_video');
+            $table->string('head_video')->nullable();
+            $table->string('url_video')->nullable();
             $table->timestamps();
         });
     }

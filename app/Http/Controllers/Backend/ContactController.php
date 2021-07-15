@@ -111,7 +111,7 @@ class ContactController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.contactinfo.data', $user);
+            return redirect()->route('admin.contactinfo.data', $user)->with('success', 'Data berhasil ditambahkan, Silahkan cek == Master -> Frontend Web ==');
         }
     }
 

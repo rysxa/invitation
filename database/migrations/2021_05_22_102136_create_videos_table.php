@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->string('username_id');
             $table->string('subject');
-            $table->string('caption_head');
+            $table->string('caption_head')->nullable();
             $table->string('url');
             $table->timestamps();
         });
