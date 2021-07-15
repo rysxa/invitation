@@ -23,7 +23,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Introduction
 
-Thank you Laravel 8 for helping me finish my project quickly, thank you also for the website theme that i got for free ^-^
+Thank you Laravel 8 for helping me finish my project quickly, thank you also for the website theme that I got for free ^-^
 
 - [Home Page](http://127.0.0.1:8000).
 - [Login Page](http://127.0.0.1:8000/login).
