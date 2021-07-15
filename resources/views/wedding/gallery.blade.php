@@ -99,28 +99,30 @@
 
     <div id="fh5co-services" class="fh5co-section-gray">
         <div class="container">
-
-            <div class="row animate-box">
-                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <h2>Wedding Video</h2>
-                    <p>
-                        @foreach ($gallery_head as $item)
-                            {{ $item->head_video }}
-                        @endforeach
-                    </p>
+            @if ($gallery_head[0]->head_video == null || $gallery_head[0]->url_video == null)
+                {{ '' }}
+            @else
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                        <h2>Wedding Video</h2>
+                        <p>
+                            @foreach ($gallery_head as $item)
+                                {{ $item->head_video }}
+                            @endforeach
+                        </p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/{{ $gallery_head[0]->url_video }}"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                    <div class="overlay"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/{{ $gallery_head[0]->url_video }}"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <div class="overlay"></div>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection

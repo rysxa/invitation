@@ -231,30 +231,39 @@
         </div>
     </div>
 
+
     <div id="fh5co-couple-story">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-md-offset-0">
-                    <ul class="timeline animate-box">
-                        @foreach ($wish as $d)
-                            <li class="animate-box">
-                                <div class="timeline-badge"
-                                    style="background-image:url(wedding/wedding/images/couple-1.jpg);">
-                                </div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h3 class="timeline-title">{{ $d->name }}</h3>
-                                        <span class="date">{{ date('F j, Y, g:i a', strtotime($d->created_at)) }}</span>
+            @if ($wish->isEmpty())
+                <div class="alert alert-info" role="alert">
+                    Saat ini belum ada tanggapan apapun, jadilah orang pertama yang memberi tanggapan!
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0">
+
+                        <ul class="timeline animate-box">
+                            @foreach ($wish as $d)
+                                <li class="animate-box">
+                                    <div class="timeline-badge"
+                                        style="background-image:url(wedding/wedding/images/couple-1.jpg);">
                                     </div>
-                                    <div class="timeline-body">
-                                        <p>{{ $d->message }}
-                                        </p>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h3 class="timeline-title">{{ $d->name }}</h3>
+                                            <span
+                                                class="date">{{ date('F j, Y, g:i a', strtotime($d->created_at)) }}</span>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>{{ $d->message }}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-                        {{-- issue kiri kanan content --}}
-                        {{-- <li class="timeline-inverted animate-box">
+                                </li>
+                            @endforeach
+
+                            {{-- issue kiri kanan content --}}
+                            {{-- <li class="timeline-inverted animate-box">
                         <div class="timeline-badge" style="background-image:url(wedding/wedding/images/couple-2.jpg);">
                         </div>
                         <div class="timeline-panel">
@@ -270,10 +279,13 @@
                             </div>
                         </div>
                     </li> --}}
-                    </ul>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
+
 
 @endsection
