@@ -5,7 +5,8 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center pt-5"
         href="{{ route('admin.dashboard', $user) }}">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('images/logo_wis.png') }}" alt="logo" class="img-fluid" width="170">
+            <img src="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" alt="logo" class="img-fluid"
+                width="130">
         </div>
     </a>
 

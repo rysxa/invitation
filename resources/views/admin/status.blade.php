@@ -1,12 +1,17 @@
 @can('view', App\User::class)
     @extends('admin.layouts.app')
-    @section('title', 'User Page')
+    @section('title', 'Status Page')
     @section('content')
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Halaman ini berisi mengenai status masa berlaku event akun, saat ini masih tahap pengembangan.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>

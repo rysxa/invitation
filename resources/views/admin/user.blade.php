@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered ms-auto" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -134,3 +134,13 @@
         @endforeach
     @endsection
 @endcan
+@section('datatables')
+    {{-- Datatables --}}
+    <script src="{{ asset('admin2/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+@endsection
