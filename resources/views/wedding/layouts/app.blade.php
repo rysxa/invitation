@@ -62,8 +62,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-2">
-                        <div id="fh5co-logo"><a
-                                href="{{ route('front.data.wish', $user) }}">Wedding<strong>.</strong></a>
+                        <div>
+                            <a href="{{ route('front.data.wish', $user) }}">{{ $event[0]->man_first }} &amp;
+                                {{ $event[0]->women_first }}<strong>.</strong></a>
                         </div>
                     </div>
                     @yield('navbar')
@@ -103,7 +104,7 @@
                 <div class="row copyright">
                     <div class="col-md-12 text-center">
                         <p>
-                            <small class="block">&copy; 2021 sefviana.com All Rights Reserved.</small>
+                            <small class="block">&copy; 2021 niceWone.com All Rights Reserved.</small>
                         </p>
                         <p>
                         <ul class="fh5co-social-icons">
