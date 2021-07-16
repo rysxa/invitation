@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Wedding Invitation</title>
-    <meta content="Wedding Invitation Sefviana" name="title">
+    <title>niceWone - Wedding Invitation</title>
+    <meta content="Wedding Invitation niceWone" name="title">
     <meta content="{{ asset('images/logo_wis.png') }}" name="image">
-    <meta content="Buat Undangan Website Gratis" name="description">
-    <meta content="Wedding Invitation Sefviana" name="keywords">
+    <meta content="Buat Website Undangan Pernikahan Gratisss" name="description">
+    <meta content="Wedding Invitation niceWone" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('images/logo_wis.png') }}" rel="icon">
-    <link href="{{ asset('Scaffold/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    {{-- <link href="{{ asset('images/logo_wis.png') }}" rel="icon">
+    <link href="{{ asset('Scaffold/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
 
     <!-- Google Fonts -->
     <link
@@ -82,7 +82,7 @@
                     data-aos="fade-up">
                     <div>
                         <h1>Buat Undangan Pernikahan Gratisss</h1>
-                        <h2>Dengan Dinamis Website Frontend & Backend</h2>
+                        <h2>Dengan dinamis website yang sudah terintegrasi dengan baik.</h2>
                         <a href="/register" class="btn-get-started scrollto">Daftar</a>
                     </div>
                 </div>
@@ -124,7 +124,9 @@
                             <li class="nav-item mt-2" data-aos="fade-up" data-aos-delay="300">
                                 <a class="nav-link" data-toggle="tab" href="#tab-4">
                                     <h4>GOOGLE MAPS</h4>
-                                    <p>Memastikan para tamu undangan datang ke tempat yang tepat dengan google maps.</p>
+                                    <p>Memastikan para tamu undangan datang ke tempat yang tepat dengan google maps.
+                                        <b>ditambahkan dalam waktu dekat</b>
+                                    </p>
                                 </a>
                             </li>
                             <li class="nav-item mt-2" data-aos="fade-up" data-aos-delay="300">
@@ -446,7 +448,7 @@
                             </div>
 
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.7676358457763!2d106.78305827032553!3d-6.245131062450257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f11749fd14ed%3A0xd727710a12daeb77!2sJl.%20Sultan%20Iskandar%20Muda%2C%20RT.10%2FRW.6%2C%20Kby.%20Lama%20Utara%2C%20Kec.%20Kby.%20Lama%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2012240!5e0!3m2!1sid!2sid!4v1626422183521!5m2!1sid!2sid"
                                 frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
                         </div>
 
