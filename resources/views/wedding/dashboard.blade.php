@@ -7,13 +7,13 @@
 
     <title>niceWone - Wedding Invitation</title>
     <meta content="Wedding Invitation niceWone" name="title">
-    <meta content="{{ asset('images/logo_wis.png') }}" name="image">
+    <meta content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" name="image">
     <meta content="Buat Website Undangan Pernikahan Gratisss" name="description">
     <meta content="Wedding Invitation niceWone" name="keywords">
 
     <!-- Favicons -->
-    {{-- <link href="{{ asset('images/logo_wis.png') }}" rel="icon">
-    <link href="{{ asset('Scaffold/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
+    {{-- <link href="{{ asset('images/logo_wis.png') }}" rel="icon"> --}}
+    {{-- <link href="{{ asset('Scaffold/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
 
     <!-- Google Fonts -->
     <link
@@ -432,13 +432,13 @@
                             <div class="address">
                                 <i class="icofont-google-map"></i>
                                 <h4>Location:</h4>
-                                <p>Jakarta Barat</p>
+                                <p>DKI Jakarta</p>
                             </div>
 
                             <div class="email">
                                 <i class="icofont-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>indry@sefviana.com</p>
+                                <p>admin@nicewone.com</p>
                             </div>
 
                             <div class="phone">
