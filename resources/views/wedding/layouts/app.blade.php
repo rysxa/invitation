@@ -108,13 +108,10 @@
                         </p>
                         <p>
                         <ul class="fh5co-social-icons">
-                            @foreach ($contact_info as $item)
-                                <li><a target="_blank" href="https://twitter.com/niceweone"><i
-                                            class="icon-twitter"></i></a>
-                                </li>
-                                <li><a target="_blank" href="https://www.instagram.com/nicewone/"><i
-                                            class="icon-instagram"></i></a></li>
-                            @endforeach
+                            <li><a target="_blank" href="https://twitter.com/niceweone"><i class="icon-twitter"></i></a>
+                            </li>
+                            <li><a target="_blank" href="https://www.instagram.com/nicewone/"><i
+                                        class="icon-instagram"></i></a></li>
                         </ul>
                         </p>
                     </div>

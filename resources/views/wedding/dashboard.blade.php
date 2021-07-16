@@ -30,6 +30,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('Scaffold/css/style.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('images/logo-nicewone-landscape-transparant.png') }}">
 
     <!-- =======================================================
   * Modify:      Indry Sefviana
@@ -50,7 +51,8 @@
             <div class="logo mr-auto">
                 {{-- <h1 class="text-light"><a href="/"><span>WIS</span></a></h1> --}}
                 <!-- Uncomment below if you prefer to use an image logo -->
-                <a href="/"><img src="{{ asset('images/logo_wis.png') }}" alt="WIS Logo" class="img-fluid"></a>
+                <a href="/"><img src="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" alt="WIS Logo"
+                        class="img-fluid"></a>
             </div>
 
             <nav class="nav-menu d-none d-lg-block">
@@ -64,11 +66,8 @@
             </nav><!-- .nav-menu -->
 
             <div class="header-social-links">
-                <a href="https://twitter.com/indrysefvi" class="twitter"><i class="icofont-twitter"></i></a>
-                <a href="https://facebook.com/indrysefvi" class="facebook"><i class="icofont-facebook"></i></a>
-                <a href="https://www.instagram.com/indrysefvi/" class="instagram"><i class="icofont-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/indry-sefviana/" class="linkedin"><i
-                        class="icofont-linkedin"></i></i></a>
+                <a href="https://twitter.com/niceweone" class="twitter"><i class="icofont-twitter"></i></a>
+                <a href="https://www.instagram.com/nicewone/" class="instagram"><i class="icofont-instagram"></i></a>
             </div>
 
         </div>
@@ -501,7 +500,7 @@
     <footer id="footer">
         <div class="container">
             <div class="copyright">
-                &copy; Copyright - 2021 <strong><span>Sefviana.com</span></strong>. All Rights Reserved
+                &copy; Copyright - 2021 <strong><span>niceWone.com</span></strong>. All Rights Reserved
             </div>
         </div>
     </footer><!-- End Footer -->
