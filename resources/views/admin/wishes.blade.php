@@ -48,7 +48,7 @@
                                     <td>{{ $d->email }}</td>
                                     <td>{{ $d->phone }}</td>
                                     <td>{{ $d->message }}</td>
-                                    <td><a href="https://wa.me/62{{ $d->phone }}" type="button"
+                                    <td><a target="_blank" href="https://wa.me/62{{ $d->phone }}" type="button"
                                             class="btn btn-success btn-circle btn-sm"><i class="fa fa-paper-plane"></i></a>
                                     </td>
                                     <td>

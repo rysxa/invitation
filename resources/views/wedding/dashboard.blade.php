@@ -43,24 +43,29 @@
         <div class="container d-flex">
 
             <div class="logo mr-auto">
-                <a href="/"><img src="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" alt="WIS Logo"
-                        class="img-fluid"></a>
+                <a href="/"><img src="{{ asset('images/logo-nicewone-landscape-transparant.png') }}"
+                        alt="niceWone Logo" class="img-fluid"></a>
             </div>
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
+                    <li>
+                        <a class="btn btn-outline-dark" href="{{ route('login') }}">Login</a>
+                    </li>
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="https: //saweria.co/sailingxlt">Donate</a></li>
+                    <li><a href="https://saweria.co/sailingxlt">Donate</a></li>
 
                 </ul>
             </nav><!-- .nav-menu -->
 
             <div class="header-social-links">
-                <a href="https://twitter.com/niceweone" class="twitter"><i class="icofont-twitter"></i></a>
-                <a href="https://www.instagram.com/nicewone/" class="instagram"><i class="icofont-instagram"></i></a>
+                <a target="_blank" href="https://twitter.com/niceweone" class="twitter"><i
+                        class="icofont-twitter"></i></a>
+                <a target="_blank" href="https://www.instagram.com/nicewone/" class="instagram"><i
+                        class="icofont-instagram"></i></a>
             </div>
 
         </div>
@@ -174,7 +179,7 @@
                         <p> Silahkan Login disini untuk dapat mengakses halaman.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="/login">Login</a>
+                        <a class="cta-btn align-middle" href="{{ route('login') }}">Login</a>
                     </div>
                 </div>
 

@@ -14,6 +14,15 @@ class HomeController extends Controller
     public function dashboard($username)
     {
         $user = Auth::user()->username;
-        return view('admin.index', compact('user'));
+        if ($username != $user) {
+            return redirect()->route('login');
+        } else {
+            if (!$user) {
+                return redirect()->route('login');
+            } else {
+                return view('admin.index', compact('user'));
+            }
+        }
+        
     }
 }
