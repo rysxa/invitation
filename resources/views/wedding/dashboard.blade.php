@@ -33,12 +33,10 @@
     <link rel="shortcut icon" href="{{ asset('images/logo-nicewone-landscape-transparant.png') }}">
 
     <!-- =======================================================
-  * Modify:      Indry Sefviana
-  * Github:      https://github.com/indrysfa
-  * Template Name: Scaffold - v2.2.1
-  * Template URL: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
+  * Modify          : Indry Sefviana
+  * Co-founder      : http://sefviana.com/
+  * Author          : BootstrapMade.com
+  * License         : https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
 

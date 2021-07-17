@@ -19,12 +19,10 @@
  FREE HTML5 TEMPLATE 
  DESIGNED & DEVELOPED by FREEHTML5.CO
 
- Modify:      Indry Sefviana
- Github:      https://github.com/indrysfa
- Website: 		http://freehtml5.co/
- Email: 			info@freehtml5.co
- Twitter: 		http://twitter.com/fh5co
- Facebook: 		https://www.facebook.com/fh5co
+ Modify     : Indry Sefviana
+ Co-founder : http://sefviana.com/
+
+ Website    : http://freehtml5.co/
 
  //////////////////////////////////////////////////////
  -->
