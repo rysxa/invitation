@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title')</title>
+    <title>@yield('title') {{ $event[0]->man_first }} &amp;
+        {{ $event[0]->women_first }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Wedding Invitation by Sefviana.com" />
     <meta name="keywords" content="Wedding Invitation Gratis" />
     <meta name="keywords" content="Buat Undangan Pernikahan Gratis" />
     <meta name="google" content="Buat Undangan Pernikahan Gratis" />
+    <meta property="og:image" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}">
     <meta name="author" content="Indry Sefviana - Modify" />
 
     <!-- 
@@ -148,7 +149,7 @@
     <!-- Main -->
     <script src="{{ asset('wedding/wedding/js/main.js') }}"></script>
 
-    <script>
+    {{-- <script>
         var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
 
         // default example
@@ -165,7 +166,7 @@
             day: d.getDate(),
             enableUtc: false
         });
-    </script>
+    </script> --}}
 
 </body>
 

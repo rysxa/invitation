@@ -61,6 +61,7 @@
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="https: //saweria.co/sailingxlt">Donate</a></li>
 
                 </ul>
             </nav><!-- .nav-menu -->
@@ -125,7 +126,6 @@
                                 <a class="nav-link" data-toggle="tab" href="#tab-4">
                                     <h4>GOOGLE MAPS</h4>
                                     <p>Memastikan para tamu undangan datang ke tempat yang tepat dengan google maps.
-                                        <b>ditambahkan dalam waktu dekat</b>
                                     </p>
                                 </a>
                             </li>
@@ -438,7 +438,7 @@
                             <div class="email">
                                 <i class="icofont-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>admin@nicewone.com</p>
+                                <p>indry@sefviana.com</p>
                             </div>
 
                             <div class="phone">

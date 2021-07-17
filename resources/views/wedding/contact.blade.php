@@ -1,5 +1,8 @@
 @extends('wedding.layouts.app')
-@section('title', 'Contact - WI Sefviana.com')
+@section('title', 'Contact - ')
+@section('meta')
+    <meta name="description" content="Jika ada pertanyaan silahkan hubungi kami" />
+@endsection
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>

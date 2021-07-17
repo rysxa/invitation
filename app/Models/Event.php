@@ -32,6 +32,7 @@ class Event extends Model
         'party_time_start',
         'party_time_end',
         'party_caption',
+        'gps',
         'status',
     ];
 }

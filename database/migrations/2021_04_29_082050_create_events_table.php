@@ -38,6 +38,7 @@ class CreateEventsTable extends Migration
             $table->time('party_time_end');
             $table->longText('party_caption');
             $table->integer('status');
+            $table->string('gps');
             $table->timestamps();
         });
     }

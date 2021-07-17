@@ -235,6 +235,12 @@
                                     {{ $item->party_caption }}
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="gps" class="col-sm-4 col-form-label"><b>URL GPS</b></label>
+                                <div class="col-sm-8">
+                                    {{ $item->gps }}
+                                </div>
+                            </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -409,6 +415,14 @@
                                 <div class="col-sm-8">
                                     <textarea type="text" class="form-control"
                                         name="party_caption">{{ old('party_caption', $item->party_caption) }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="gps" class="col-sm-4 col-form-label">URL GPS</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="gps"
+                                        value="{{ old('gps', $item->gps) }}">
+                                    <img class="img-fluid" src="{{ asset('images/gps.png') }}" alt="gps">
                                 </div>
                             </div>
 

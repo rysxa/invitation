@@ -20,10 +20,15 @@ class GalleryController extends Controller
             ->where('status', '=', 1)
             ->get();
         $story = User::join('stories', 'users.username', '=', 'stories.username_id')
+            // ->where('username_id', '=', $user)
             ->orderBy('date')
             ->get();
-        $gallery_head = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')->get();
-        $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')->get();
+        $gallery_head = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
+            // ->where('username_id', '=', $username)
+            ->get();
+        $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
+            // ->where('username_id', '=', $user)
+            ->get();
 
         return view('wedding.gallery', compact('event', 'gallery', 'story', 'gallery_head', 'contact_info', 'user'));
     }

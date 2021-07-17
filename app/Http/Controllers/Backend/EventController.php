@@ -68,6 +68,7 @@ class EventController extends Controller
             'party_time_start'      => 'required',
             'party_time_end'        => 'required',
             'party_caption'         => 'required',
+            'gps'                   => 'required',
         ]);
 
         $pic_man = $request->file('pic_man');
@@ -98,6 +99,7 @@ class EventController extends Controller
             'party_time_start'      => $request->party_time_start,
             'party_time_end'        => $request->party_time_end,
             'party_caption'         => $request->party_caption,
+            'gps'                   => $request->gps,
             'status'                => 1
         ]);
 
@@ -135,6 +137,7 @@ class EventController extends Controller
                 'party_time_start'      => $request->party_time_start,
                 'party_time_end'        => $request->party_time_end,
                 'party_caption'         => $request->party_caption,
+                'gps'                   => $request->gps,
                 'status'                => 1
             ]);
         } else {
@@ -168,6 +171,7 @@ class EventController extends Controller
                 'party_time_start'      => $request->party_time_start,
                 'party_time_end'        => $request->party_time_end,
                 'party_caption'         => $request->party_caption,
+                'gps'                   => $request->gps,
                 'status'                => 1
             ]);
         }

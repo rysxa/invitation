@@ -161,6 +161,15 @@
                         name="party_caption">{{ old('party_caption') }}</textarea>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="gps" class="col-sm-4 col-form-label">URL GPS</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control @error('gps') is-invalid @enderror" name="gps"
+                        value="{{ old('gps') }}" placeholder="Isi dengan kode link dibelakang saja">
+                    <img src="{{ asset('images/gps.png') }}" alt="gps">
+                </div>
+            </div>
+
             <a type="button" href="{{ route('admin.data.event', $user) }}" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>

@@ -1,11 +1,11 @@
 @extends('wedding.layouts.app')
-@section('title', 'WI Sefviana.com')
+@section('title', 'Invitation Wedding')
 @section('meta')
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Wedding Invitation" />
     <meta name="author" content="Indry Sefviana" />
     <meta property="title" content="" />
-    <meta name="description" content="" />
+    <meta name="description" content="Kami mengundang kamu ke pernikahan kami" />
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content="" />
     <meta property="og:image" content="" />
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div id="fh5co-event" class="fh5co-bg" style="background-image:url(images/img_bg_3.jpg);">
+    <div id="fh5co-event" class="fh5co-bg" style="background-image:url(wedding/wedding/images/img_bg_3.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -110,6 +110,12 @@
                                     </div>
                                     <p>{{ $event[0]->party_caption }}</p>
                                 </div>
+                            </div>
+                            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                                <a type="submit" class="btn btn-primary"
+                                    href="https://goo.gl/maps/{{ $event[0]->gps }}">GPS
+                                    Location</a>
+                                {{-- <input type="submit" value="GPS Location" class="btn btn-primary"> --}}
                             </div>
                         </div>
                     </div>
@@ -184,7 +190,7 @@
             <strong>{{ $message }}</strong>
         </div>
     @endif
-    <div id="fh5co-started" class="fh5co-bg" style="background-image:url(wedding/wedding/images/img_bg_4.jpg);">
+    <div id="fh5co-started" class="fh5co-bg" style="background-image:url(wedding/wedding/images/gallery-3.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row animate-box">
@@ -230,7 +236,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="fh5co-couple-story">
         <div class="container">
@@ -287,5 +292,23 @@
         </div>
     </div>
 
+    <div class="fh5co-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 animate-box">
+                    <div class="row animate-box">
+                        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                            <span>Tetap Jalankan!</span>
+                            <h2>Prokes</h2>
+                        </div>
+                    </div>
+                    <div class="container rounded mx-auto d-block">
+                        <img src="images/prokes6m.jpg" class="img-responsive" alt="prokes">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 @endsection
