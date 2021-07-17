@@ -4,13 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title') {{ $event[0]->man_first }} &amp;
-        {{ $event[0]->women_first }}</title>
+    <title>@yield('title') {{ $event->man_first }} &amp;
+        {{ $event->women_first }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Wedding Invitation Gratis" />
     <meta name="keywords" content="Buat Undangan Pernikahan Gratis" />
     <meta name="google" content="Buat Undangan Pernikahan Gratis" />
-    <meta property="og:image" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}">
     <meta name="author" content="Indry Sefviana - Modify" />
 
     <!-- 
@@ -62,8 +61,8 @@
                 <div class="row">
                     <div class="col-xs-2">
                         <div>
-                            <a href="{{ route('front.data.wish', $user) }}">{{ $event[0]->man_first }} &amp;
-                                {{ $event[0]->women_first }}<strong>.</strong></a>
+                            <a href="{{ route('front.data.wish', $user) }}">{{ $event->man_first }} &amp;
+                                {{ $event->women_first }}<strong>.</strong></a>
                         </div>
                     </div>
                     @yield('navbar')
@@ -72,7 +71,7 @@
         </nav>
 
         <header id="fh5co-header" class="fh5co-cover" role="banner"
-            style="background-image:url({{ Storage::url('public/images/' . $gallery_head[0]->head_picture) }});"
+            style="background-image:url({{ Storage::url('public/images/' . $gallery_head->head_picture) }});"
             data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
             <div class="container">
@@ -80,14 +79,10 @@
                     <div class="col-md-8 col-md-offset-2 text-center">
                         <div class="display-t">
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                                @if ($event)
-                                    <h1>{{ $event[0]->man_first }} &amp;
-                                        {{ $event[0]->women_first }}</h1>
-                                    <h2>We Are Getting Married</h2>
-                                    {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
-                                @else
-                                    <h2>Create Your Invitation</h2>
-                                @endif
+                                <h1>{{ $event->man_first }} &amp;
+                                    {{ $event->women_first }}</h1>
+                                <h2>We Are Getting Married</h2>
+                                {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
                             </div>
                         </div>
                     </div>

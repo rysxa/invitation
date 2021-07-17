@@ -2,64 +2,65 @@
 @section('title', 'Invitation Wedding')
 @section('meta')
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Wedding Invitation" />
+    <meta name="keywords" content="{{ $event->man_first }} &amp;
+                                {{ $event->women_first }} Invitation Wedding" />
     <meta name="author" content="Indry Sefviana" />
     <meta property="title" content="" />
     <meta name="description" content="Kami mengundang kamu ke pernikahan kami" />
     <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
+    <meta property="og:title" content="{{ $event->man_first }} &amp;
+                                {{ $event->women_first }} Invitation Wedding" />
+    <meta property="og:image" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" />
     <meta property="og:url" content="{{ route('front.data.wish', $user) }}" />
-    <meta property="og:site_name" content="sefviana.com" />
-    <meta property="og:description" content="Wedding Invitation " />
-    <meta name="twitter:title" content="Wedding Invitation" />
-    <meta name="twitter:image" content="" />
+    <meta property="og:site_name" content="nicewone.com/{{ $event->username_id }}" />
+    <meta property="og:description" content="Kami mengundang kamu ke pernikahan kami" />
+    <meta name="twitter:title" content="{{ $event->man_first }} &amp;
+                                {{ $event->women_first }} Invitation Wedding" />
+    <meta name="twitter:image" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" />
     <meta name="twitter:url" content="{{ route('front.data.wish', $user) }}" />
-    <meta name="twitter:card" content="" />
+    <meta name="twitter:card" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" />
 @endsection
 
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
             <li class="active"><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery', $user['username']) }}">Gallery</a></li>
-            <li><a href="{{ route('front.data.contact', $user['username']) }}">Contact</a></li>
+            <li><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
+            <li><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
         </ul>
     </div>
 @endsection
 @section('content')
-
-
     <div id="fh5co-couple">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
-                    <h2>{{ $event[0]->title }}</h2>
-                    <h3>{{ date('F j, Y', strtotime($event[0]->date_wedding)) . ' ' . $event[0]->address }},
-                        {{ $event[0]->city }}</h3>
-                    <p>{{ $event[0]->caption }}</p>
+                    <h2>{{ $event->title }}</h2>
+                    <h3>{{ date('F j, Y', strtotime($event->date_wedding)) . ' ' . $event->address }},
+                        {{ $event->city }}</h3>
+                    <p>{{ $event->caption }}</p>
                 </div>
             </div>
             <div class="couple-wrap animate-box">
                 <div class="couple-half">
                     <div class="groom">
-                        <img src="{{ Storage::url('public/images/' . $event[0]->pic_man) }}" alt="groom"
+                        <img src="{{ Storage::url('public/images/' . $event->pic_man) }}" alt="groom"
                             class="img-responsive">
                     </div>
                     <div class="desc-groom">
-                        <h3>{{ $event[0]->man_first . ' ' . $event[0]->man_last }}</h3>
-                        <p>{{ $event[0]->caption_man }}</p>
+                        <h3>{{ $event->man_first . ' ' . $event->man_last }}</h3>
+                        <p>{{ $event->caption_man }}</p>
                     </div>
                 </div>
                 <p class="heart text-center"><i class="icon-heart2"></i></p>
                 <div class="couple-half">
                     <div class="bride">
-                        <img src="{{ Storage::url('public/images/' . $event[0]->pic_women) }}" alt="groom"
+                        <img src="{{ Storage::url('public/images/' . $event->pic_women) }}" alt="groom"
                             class="img-responsive">
                     </div>
                     <div class="desc-bride">
-                        <h3>{{ $event[0]->women_first . ' ' . $event[0]->women_last }}</h3>
-                        <p>{{ $event[0]->caption_women }}</p>
+                        <h3>{{ $event->women_first . ' ' . $event->women_last }}</h3>
+                        <p>{{ $event->caption_women }}</p>
                     </div>
                 </div>
             </div>
@@ -84,15 +85,15 @@
                                     <h3>Main Ceremony</h3>
                                     <div class="event-col">
                                         <i class="icon-clock"></i>
-                                        <span>{{ $event[0]->ceremony_time_start }}</span>
-                                        <span>{{ $event[0]->ceremony_time_end }}</span>
+                                        <span>{{ $event->ceremony_time_start }}</span>
+                                        <span>{{ $event->ceremony_time_end }}</span>
                                     </div>
                                     <div class="event-col">
                                         <i class="icon-calendar"></i>
-                                        <span>{{ date('l', strtotime($event[0]->ceremony_date)) }}</span>
-                                        <span>{{ date('F j, Y', strtotime($event[0]->ceremony_date)) }}</span>
+                                        <span>{{ date('l', strtotime($event->ceremony_date)) }}</span>
+                                        <span>{{ date('F j, Y', strtotime($event->ceremony_date)) }}</span>
                                     </div>
-                                    <p>{{ $event[0]->ceremony_caption }}</p>
+                                    <p>{{ $event->ceremony_caption }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 text-center">
@@ -100,22 +101,20 @@
                                     <h3>Wedding Party</h3>
                                     <div class="event-col">
                                         <i class="icon-clock"></i>
-                                        <span>{{ $event[0]->party_time_start }}</span>
-                                        <span>{{ $event[0]->party_time_end }}</span>
+                                        <span>{{ $event->party_time_start }}</span>
+                                        <span>{{ $event->party_time_end }}</span>
                                     </div>
                                     <div class="event-col">
                                         <i class="icon-calendar"></i>
-                                        <span>{{ date('l', strtotime($event[0]->party_date)) }}</span>
-                                        <span>{{ date('F j, Y', strtotime($event[0]->party_date)) }}</span>
+                                        <span>{{ date('l', strtotime($event->party_date)) }}</span>
+                                        <span>{{ date('F j, Y', strtotime($event->party_date)) }}</span>
                                     </div>
-                                    <p>{{ $event[0]->party_caption }}</p>
+                                    <p>{{ $event->party_caption }}</p>
                                 </div>
                             </div>
                             <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                                <a type="submit" class="btn btn-primary"
-                                    href="https://goo.gl/maps/{{ $event[0]->gps }}">GPS
+                                <a type="submit" class="btn btn-primary" href="https://goo.gl/maps/{{ $event->gps }}">GPS
                                     Location</a>
-                                {{-- <input type="submit" value="GPS Location" class="btn btn-primary"> --}}
                             </div>
                         </div>
                     </div>
@@ -136,7 +135,7 @@
                     </div>
                     <form action="{{ route('post.wish', $user) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" class="form-control" name="username_id" value="{{ $user->username }}">
+
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="name">Name</label>
@@ -204,7 +203,7 @@
                     <form class="form-inline" action="{{ route('post.attendance', $user) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" class="form-control" name="username_id" value="{{ $user->username }}">
+
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
                                 <label for="name" class="sr-only">Name</label>
@@ -246,22 +245,20 @@
             @else
                 <div class="row">
                     <div class="col-md-12 col-md-offset-0">
-
                         <ul class="timeline animate-box">
-                            @foreach ($wish as $d)
+                            @foreach ($wish as $comment)
                                 <li class="animate-box">
                                     <div class="timeline-badge"
                                         style="background-image:url(wedding/wedding/images/couple-1.jpg);">
                                     </div>
                                     <div class="timeline-panel">
                                         <div class="timeline-heading">
-                                            <h3 class="timeline-title">{{ $d->name }}</h3>
+                                            <h3 class="timeline-title">{{ $comment->name }}</h3>
                                             <span
-                                                class="date">{{ date('F j, Y, g:i a', strtotime($d->created_at)) }}</span>
+                                                class="date">{{ date('F j, Y, g:i a', strtotime($comment->created_at)) }}</span>
                                         </div>
                                         <div class="timeline-body">
-                                            <p>{{ $d->message }}
-                                            </p>
+                                            <p>{{ $comment->message }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -303,7 +300,7 @@
                         </div>
                     </div>
                     <div class="container rounded mx-auto d-block">
-                        <img src="images/prokes6m.jpg" class="img-responsive" alt="prokes">
+                        <img src="{{ asset('images/prokes6m.jpg') }}" class="img-responsive" alt="prokes">
                     </div>
                 </div>
             </div>

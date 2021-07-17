@@ -6,8 +6,8 @@
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
-            <li><a href="{{ route('front.data.wish', $user['username']) }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery', $user['username']) }}">Gallery</a></li>
+            <li><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
+            <li><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
             <li class="active"><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
         </ul>
     </div>
@@ -26,7 +26,7 @@
                     @endif
                     <form action="{{ route('post.contact', $user) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" class="form-control" name="username_id" value="{{ $user->username }}">
+
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="fname">Name</label>
@@ -76,29 +76,27 @@
                     <div class="fh5co-contact-info">
                         <h3>Contact Information</h3>
                         <ul>
-                            @foreach ($contact_info as $item)
-                                <li class="address">{{ $item->address }}</li>
-                                <li class="phone"><a target="_blank" href="tel://{{ $item->phone }}">+
-                                        {{ $item->phone }}</a></li>
-                                <li class="fa fa-whatsapp"><a target="_blank"
-                                        href="https://api.whatsapp.com/send?phone=62{{ $item->wa }}&text=Saya%0Aingin%0Abertanya%0Amengenai%0Aacara%0Apernikahan%0Akamu">+
-                                        {{ $item->wa }}</a></li>
-                                <li class="email"><a target="_blank"
-                                        href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
-                                @if ($contact_info->isEmpty())
-                                    {{ '' }}
-                                @else
-                                    <li class="icon-facebook"><a target="_blank"
-                                            href="https://www.facebook.com/{{ $item->facebook }}">{{ $item->facebook }}</a>
-                                    </li>
-                                    <li class="icon-instagram"><a target="_blank"
-                                            href="https://www.instagram.com/{{ $item->instagram }}">{{ $item->instagram }}</a>
-                                    </li>
-                                    <li class="fa fa-twitter" aria-hidden="true"><a target="_blank"
-                                            href="https://twitter.com/{{ $item->twitter }}">{{ $item->twitter }}</a>
-                                    </li>
-                                @endif
-                            @endforeach
+                            <li class="address">{{ $contact_info->address }}</li>
+                            <li class="phone"><a target="_blank" href="tel://{{ $contact_info->phone }}">+
+                                    {{ $contact_info->phone }}</a></li>
+                            <li class="fa fa-whatsapp"><a target="_blank"
+                                    href="https://api.whatsapp.com/send?phone=62{{ $contact_info->wa }}&text=Saya%0Aingin%0Abertanya%0Amengenai%0Aacara%0Apernikahan%0Akamu">+
+                                    {{ $contact_info->wa }}</a></li>
+                            <li class="email"><a target="_blank"
+                                    href="mailto:{{ $contact_info->email }}">{{ $contact_info->email }}</a></li>
+                            @if (!$contact_info)
+                                {{ '' }}
+                            @else
+                                <li class="icon-facebook"><a target="_blank"
+                                        href="https://www.facebook.com/{{ $contact_info->facebook }}">{{ $contact_info->facebook }}</a>
+                                </li>
+                                <li class="icon-instagram"><a target="_blank"
+                                        href="https://www.instagram.com/{{ $contact_info->instagram }}">{{ $contact_info->instagram }}</a>
+                                </li>
+                                <li class="fa fa-twitter" aria-hidden="true"><a target="_blank"
+                                        href="https://twitter.com/{{ $contact_info->twitter }}">{{ $contact_info->twitter }}</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
 

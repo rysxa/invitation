@@ -11,10 +11,6 @@
     <meta content="Buat Website Undangan Pernikahan Gratisss" name="description">
     <meta content="Wedding Invitation niceWone" name="keywords">
 
-    <!-- Favicons -->
-    {{-- <link href="{{ asset('images/logo_wis.png') }}" rel="icon"> --}}
-    {{-- <link href="{{ asset('Scaffold/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
-
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -47,8 +43,6 @@
         <div class="container d-flex">
 
             <div class="logo mr-auto">
-                {{-- <h1 class="text-light"><a href="/"><span>WIS</span></a></h1> --}}
-                <!-- Uncomment below if you prefer to use an image logo -->
                 <a href="/"><img src="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" alt="WIS Logo"
                         class="img-fluid"></a>
             </div>
