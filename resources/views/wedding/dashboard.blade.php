@@ -175,11 +175,11 @@
 
                 <div class="row" data-aos="zoom-in">
                     <div class="col-lg-9 text-center text-lg-left">
-                        <h3>Sudah Punya Akun ?</h3>
-                        <p> Silahkan Login disini untuk dapat mengakses halaman.</p>
+                        <h3>Contoh Website</h3>
+                        <p> Silahkan Cek disini untuk dapat mengakses halaman.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="{{ route('login') }}">Login</a>
+                        <a class="cta-btn align-middle" href="/rara">Cek disini</a>
                     </div>
                 </div>
 
