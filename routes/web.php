@@ -29,10 +29,10 @@ Auth::routes();
 // User
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'dashboard'])->name('front.dashboard');
-    Route::get('/{username}', [HomeController::class, 'index'])->name('front.data.wish');
+    Route::get('/{data:slug}', [HomeController::class, 'index'])->name('front.data.wish');
 
     Route::get('/{username}/gallery', [FrontendGalleryController::class, 'index'])->name('front.data.gallery');
-    
+
     Route::post('/{username}/message/post', [FrontendWishController::class, 'create'])->name('post.wish');
     Route::post('/{username}/attendance/post', [HomeController::class, 'create'])->name('post.attendance');
 

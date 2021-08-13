@@ -77,6 +77,7 @@ class EventController extends Controller
         $pic_women->storeAs('public/images', $pic_women->hashName());
 
         $data = Event::create([
+            'slug'                  => Str::slug($request->title),
             'username_id'           => $request->username_id,
             'title'                 => $request->title,
             'date_wedding'          => $request->date_wedding,

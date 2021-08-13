@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -49,6 +50,7 @@ class UserController extends Controller
             'username'  => strtolower($request->username),
             'password'  => Hash::make($request->password),
             'role'      => $request->role,
+            'slug'      => Str::slug($request->username),
         ]);
 
         if ($data) {
@@ -70,7 +72,7 @@ class UserController extends Controller
             // 'password'  => $request->password,
             'role'      => $request->role
         ]);
-      
+
         if ($data) {
             return redirect()->route('admin.user.data', $userUpdate)->with('success', 'Data updated successfully');
         }

@@ -64,7 +64,7 @@
             <div class="header-social-links">
                 <a target="_blank" href="https://twitter.com/niceweone" class="twitter"><i
                         class="icofont-twitter"></i></a>
-                <a target="_blank" href="https://www.instagram.com/nicewone/" class="instagram"><i
+                <a target="_blank" href="https://www.instagram.com/niceweone/" class="instagram"><i
                         class="icofont-instagram"></i></a>
             </div>
 

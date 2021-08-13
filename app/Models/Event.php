@@ -10,6 +10,7 @@ class Event extends Model
     use HasFactory;
     protected $fillable = [
         'id',
+        'slug',
         'username_id',
         'title',
         'date_wedding',
@@ -35,4 +36,9 @@ class Event extends Model
         'gps',
         'status',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
