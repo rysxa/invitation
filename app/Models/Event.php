@@ -10,8 +10,7 @@ class Event extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'slug',
-        'username_id',
+        'slug_id',
         'title',
         'date_wedding',
         'address',
@@ -37,8 +36,12 @@ class Event extends Model
         'status',
     ];
 
-    public function getRouteKeyName()
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
+    public function m_slug()
     {
-        return 'slug';
+        return $this->belongsTo(User::class, 'slug_id', 'id');
     }
 }

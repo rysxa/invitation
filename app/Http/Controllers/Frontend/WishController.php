@@ -13,20 +13,20 @@ use Illuminate\Http\Request;
 
 class WishController extends Controller
 {
-    public function create(Request $request, $username)
+    public function create(Request $request)
     {
-        $user = User::where('username', '=', $username)->first()->username;
-
         $data = Wish::create([
-            'name'          => ucwords($request->name),
-            'username_id'   => $user,
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-            'message'       => $request->message
+            'name'      => ucwords($request->name),
+            'slug_id'   => $request->slug_id,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+            'message'   => $request->message,
+            'status'    => $request->status
         ]);
 
+        $user = User::where('id', $data['slug_id'])->first();
         if ($data) {
-            return redirect()->route('front.data.wish', $user)->with('success', 'Thank you for your kind wishes');
+            return redirect()->route('front.data.wish', $user->slug)->with('success', 'Thank you for your kind wishes');
         }
     }
 }

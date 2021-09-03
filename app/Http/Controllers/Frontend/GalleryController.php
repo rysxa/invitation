@@ -7,35 +7,27 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\Gallery;
+use App\Models\Gallery_caption;
+use App\Models\Story;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class GalleryController extends Controller
 {
-    public function index($username)
+    public function index($id)
     {
-        $user = User::where('username', '=', $username)->first()->username;
-        $gallery = User::join('galleries', 'users.username', '=', 'galleries.username_id')
-            ->where('username_id', '=', $username)
-            ->get();
-        $event = DB::table('users')
-            ->join('events', 'users.username', '=', 'events.username_id')
-            ->where('status', '=', 1)
-            ->where('username_id', '=', $username)
-            ->first();
-        $story = DB::table('users')
-            ->join('stories', 'users.username', '=', 'stories.username_id')
-            ->where('username_id', '=', $username)
-            ->get();
-        $gallery_head = DB::table('users')
-            ->join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
-            ->where('username_id', '=', $username)
-            ->first();
-        $contact_info = DB::table('users')
-            ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-            ->where('username_id', '=', $username)
-            ->first();
-
-        return view('wedding.gallery', compact('event', 'gallery', 'story', 'gallery_head', 'contact_info', 'user'));
+        $slug           = User::where('slug', $id)->first();
+        $event          = Event::where('slug_id', $slug->id)->first();
+        $contact_info   = Gallery::where('slug_id', $slug->id)->first();
+        $gallery_head   = Gallery_caption::where('slug_id', $slug->id)->get();
+        $gallery        = Gallery::where('slug_id', $slug->id)->get();
+        $story          = Story::where('slug_id', $slug->id)->get();
+        if ($contact_info == null) {
+            return view('emptypage');
+        } else {
+            return view('wedding.gallery', compact('event' ,'story','gallery' ,'gallery_head', 'contact_info', 'slug'));
+        }
     }
 }

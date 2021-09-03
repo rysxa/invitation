@@ -28,17 +28,17 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @can('create', App\Contact_info::class)
-                    @if ($contact_info->isEmpty() && $role == 'user')
-                        <a href="{{ route('admin.contactinfo.add', $user) }}" class="nav-link">
+                    @if ($contact_info->isEmpty() && $role == 2)
+                        <a href="{{ route('admin.contactinfo.add') }}" class="nav-link">
                             <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
                                     New</i></button>
                         </a>
-                    @elseif ($role == 'admin')
-                        <a href="{{ route('admin.contactinfo.add', $user) }}" class="nav-link">
+                    @elseif ($role == 1)
+                        <a href="{{ route('admin.contactinfo.add') }}" class="nav-link">
                             <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
                                     New</i></button>
                         </a>
-                    @elseif ($contact_info && $role == 'user')
+                    @elseif ($contact_info != null && $role == 2)
                         {{ '' }}
                     @endif
                 @endcan
@@ -66,7 +66,7 @@
                             @foreach ($contact_info as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $d->username_id }}</td>
+                                    <td>{{ $d->m_slug->slug }}</td>
                                     <td>{{ $d->address }}</td>
                                     <td>{{ $d->phone }}</td>
                                     <td>{{ $d->email }}</td>
@@ -119,15 +119,15 @@
                             @csrf
                             @method('PUT')
 
-                            @if ($role == 'user')
-                                <input type="text" class="form-control" name="username_id"
-                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @if ($role == 2)
+                                <input type="text" class="form-control" name="slug_id"
+                                    value="{{ old('slug_id', $item->slug_id) }}" hidden>
                             @else
                                 <div class="form-group row">
-                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <label for="slug_id" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="username_id"
-                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                        <input type="text" class="form-control" name="slug_id"
+                                            value="{{ old('slug_id', $item->m_slug->slug) }}" readonly>
                                     </div>
                                 </div>
                             @endif
@@ -155,7 +155,8 @@
                             <div class="form-group row">
                                 <label for="wa" class="col-sm-2 col-form-label">Whatsapp</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="wa" value="{{ old('wa', $d->wa) }}">
+                                    <input type="number" class="form-control" name="wa"
+                                        value="{{ old('wa', $d->wa) }}">
                                 </div>
                             </div>
                             <div class="form-group row">

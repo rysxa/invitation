@@ -7,16 +7,16 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Add New Admin</h1>
 
-        <form action="{{ route('admin.user.create', $user) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.user.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <input type="text" class="form-control" name="role" value="admin" hidden>
+            <input type="text" name="role_id" value="1" hidden>
             <div class="form-group row">
-                <label for="username" class="col-sm-4 col-form-label">Username</label>
+                <label for="slug" class="col-sm-4 col-form-label">Username</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"
-                        value="{{ old('username') }}" required>
-                    @error('username')
+                    <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug"
+                        value="{{ old('slug') }}" required>
+                    @error('slug')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <a type="button" href="{{ route('admin.user.data', $user) }}" class="btn btn-secondary">Back</a>
+            <a type="button" href="{{ route('admin.user.data') }}" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
 

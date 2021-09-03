@@ -7,22 +7,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function dashboard($username)
+    public function dashboard()
     {
-        $user = Auth::user()->username;
-        if ($username != $user) {
-            return redirect()->route('login');
-        } else {
-            if (!$user) {
-                return redirect()->route('login');
-            } else {
-                return view('admin.index', compact('user'));
-            }
-        }
-        
+        $user = Auth::user()->slug;
+        return view('admin.index', compact('user'));
     }
 }

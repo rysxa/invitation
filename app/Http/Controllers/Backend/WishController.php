@@ -15,33 +15,33 @@ use Illuminate\Support\Facades\Auth;
 
 class WishController extends Controller
 {
-    public function index($username) //ok
+    public function index()
     {
-        $user = Auth::user()->username;
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $wish = User::join('wishes', 'users.username', '=', 'wishes.username_id')->get();
+        $slug = Auth::user()->slug;
+        $role = Auth::user()->role_id;
+        $user = User::where('slug', $slug)->first();
+        if ($role == 1) {
+            $wish = Wish::all();
         } else {
-            $wish = User::join('wishes', 'users.username', '=', 'wishes.username_id')
-            ->where('username_id', '=', $user)
-            ->get();
+            $wish = Wish::where('slug_id', '=', $user->id)->get();
         }
         return view('admin.wishes', compact('user', 'role', 'wish'));
     }
 
-    public function updateMessage(Request $request, Wish $data) //ok
+    public function updateMessage(Request $request, Wish $data)
     {
         $this->authorize('update', Wish::class);
 
-        $userUpdate = Auth::user()->username;
+        $userUpdate = Auth::user()->slug;
         $data = Wish::findOrFail($data->id);
 
         $data->update([
-            'username_id'   => $request->username_id,
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-            'message'       => $request->message
+            'slug_id'   => $request->slug_id,
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+            'message'   => $request->message,
+            'status'    => $request->status,
         ]);
 
         if ($data) {
@@ -49,36 +49,33 @@ class WishController extends Controller
         }
     }
 
-    public function destroyMessage(Wish $wish) //ok
+    public function destroyMessage(Wish $wish)
     {
         $this->authorize('delete', Wish::class);
 
-        $username = $wish['username_id'];
         $wish->find($wish->id)->all();
 
         $wish->delete();
 
         if ($wish) {
-            return redirect()->route('admin.data.wish', $username)->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.data.wish', $wish->id)->with('success', 'Data deleted successfully');
         }
     }
 
-    public function indexAttendance($username) //ok
+    public function indexAttendance()
     {
-        $user = Auth::user()->username;
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $attendance = User::join('attendances', 'users.username', '=', 'attendances.username_id')->get();
+        $slug = Auth::user()->slug;
+        $role = Auth::user()->role_id;
+        $user = User::where('slug', $slug)->first();
+        if ($role == 1) {
+            $attendance = Attendance::all();
         } else {
-            $attendance = User::join('attendances', 'users.username', '=', 'attendances.username_id')
-            ->where('username_id', '=', $user)
-            ->get();
+            $attendance = Attendance::where('slug_id', '=', $user->id)->get();
         }
-
         return view('admin.attendance', compact('role', 'user', 'attendance'));
     }
 
-    public function updateAttendance(Request $request, Attendance $data) //ok
+    public function updateAttendance(Request $request, Attendance $data)
     {
         $this->authorize('update', Attendance::class);
 
@@ -86,10 +83,11 @@ class WishController extends Controller
         $data = Attendance::findOrFail($data->id);
 
         $data->update([
-            'username_id'   => $request->username_id,
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'phone'         => $request->phone
+            'slug_id'   => $request->slug_id,
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+            'status'    => $request->status,
         ]);
 
         if ($data) {
@@ -97,17 +95,16 @@ class WishController extends Controller
         }
     }
 
-    public function destroyAttendance(Attendance $attendance) //ok
+    public function destroyAttendance(Attendance $attendance)
     {
         $this->authorize('delete', Attendance::class);
 
         $attendance->find($attendance->id)->all();
-        $username = $attendance['username_id'];
 
         $attendance->delete();
 
         if ($attendance) {
-            return redirect()->route('admin.data.attendance', $username)->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.data.attendance', $attendance->id)->with('success', 'Data deleted successfully');
         }
     }
 }

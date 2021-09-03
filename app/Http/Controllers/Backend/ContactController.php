@@ -15,16 +15,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    public function index() //ok
+    public function index()
     {
-        $user = Auth::user()->username;
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $contact = User::join('contacts', 'users.username', '=', 'contacts.username_id')->get();
+        $slug = Auth::user()->slug;
+        $role = Auth::user()->role_id;
+        $user = User::where('slug', $slug)->first();
+        if ($role == 1) {
+            $contact = Contact::all();
         } else {
-            $contact = User::join('contacts', 'users.username', '=', 'contacts.username_id')
-            ->where('username_id', '=', $user)
-            ->get();
+            $contact = Contact::where('slug_id', '=', $user->id)->get();
         }
         return view('admin.contact', compact('user', 'role', 'contact'));
     }
@@ -33,14 +32,14 @@ class ContactController extends Controller
     {
         $this->authorize('update', Contact::class);
 
-        $userUpdate = Auth::user()->username;
+        $userUpdate = Auth::user()->slug;
         $data = Contact::findOrFail($data->id);
 
         $data->update([
-            'username_id'   => $request->username_id,
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'phone'         => $request->phone
+            'slug_id'   => $request->slug_id,
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'phone'     => $request->phone
         ]);
 
         if ($data) {
@@ -53,7 +52,7 @@ class ContactController extends Controller
         $this->authorize('delete', Contact::class);
 
         $contact->find($contact->id)->all();
-        $username = $contact['username_id'];
+        $username = $contact['slug_id'];
 
         $contact->delete();
 
@@ -62,36 +61,30 @@ class ContactController extends Controller
         }
     }
 
-    public function indexContactInfo($username) //ok
+    public function indexContactInfo()
     {
-        $user = Auth::user()->username;
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')->get();
+        $slug = Auth::user()->slug;
+        $role = Auth::user()->role_id;
+        $user = User::where('slug', $slug)->first();
+        if ($role == 1) {
+            $contact_info = Contact_info::all();
         } else {
-            $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-            ->where('username_id', '=', $user)
-            ->get();
+            $contact_info = Contact_info::where('slug_id', '=', $user->id)->get();
         }
         return view('admin.contact-info', compact('user', 'role', 'contact_info'));
     }
 
-    public function addContactInfo($username) //ok
+    public function addContactInfo()
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $user = User::where('username', $username)->first();
-        } else {
-            $user = Auth::user()->username;
-        }
+        $user = User::all();
+        $role = Auth::user()->role_id;
         return view('admin.contact-info-add', compact('user', 'role'));
     }
 
-    public function createContactInfo(Request $request, $user) //ok
+    public function createContactInfo(Request $request)
     {
         // privilege
         $this->authorize('create', Contact_info::class);
-        $user = Auth::user()->username;
         $this->validate($request, [
             'address'   => 'required',
             'phone'     => 'required',
@@ -100,7 +93,7 @@ class ContactController extends Controller
         ]);
 
         $data = Contact_info::create([
-            'username_id'   => $request->username_id,
+            'slug_id'       => $request->slug_id,
             'address'       => $request->address,
             'phone'         => $request->phone,
             'email'         => $request->email,
@@ -111,19 +104,19 @@ class ContactController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.contactinfo.data', $user)->with('success', 'Data berhasil ditambahkan, Silahkan cek == Master -> Frontend Web ==');
+            return redirect()->route('admin.contactinfo.data')->with('success', 'Data berhasil ditambahkan, Silahkan cek == Master -> Frontend Web ==');
         }
     }
 
-    public function updateContactInfo(Request $request, Contact_info $data) //ok
+    public function updateContactInfo(Request $request, Contact_info $data)
     {
         $this->authorize('update', Contact_info::class);
 
-        $userUpdate = Auth::user()->username;
+        $userUpdate = Auth::user()->slug;
         $data = Contact_info::findOrFail($data->id);
 
         $data->update([
-            'username_id'   => $request->username_id,
+            'slug_id'       => $request->slug_id,
             'address'       => $request->address,
             'phone'         => $request->phone,
             'email'         => $request->email,
@@ -138,7 +131,7 @@ class ContactController extends Controller
         }
     }
 
-    public function destroyContactInfo(Contact_info $contactInfo) //ok
+    public function destroyContactInfo(Contact_info $contactInfo)
     {
         $this->authorize('delete', Contact_info::class);
 

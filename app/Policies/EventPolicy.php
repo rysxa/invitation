@@ -16,27 +16,27 @@ class EventPolicy
 
     public function viewAny(User $user)
     {
-        return in_array($user->role, ['admin', 'user']);
+        return in_array($user->role_id, [1, 2]);
     }
 
     public function view(User $user)
     {
-        return $user->role === 'user';
+        return $user->role_id === 2;
     }
 
     public function create(User $user)
     {
-        return in_array($user->role, ['admin', 'user']);
+        return in_array($user->role_id, [1, 2]);
     }
 
     public function update(User $user)
     {
-        return in_array($user->role, ['admin', 'user']);
+        return in_array($user->role_id, [1, 2]);
     }
 
     public function delete(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 
     public function restore(User $user, Event $event)
@@ -46,6 +46,6 @@ class EventPolicy
 
     public function forceDelete(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 }

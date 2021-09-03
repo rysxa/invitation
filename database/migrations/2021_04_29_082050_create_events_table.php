@@ -15,8 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('username_id');
+            $table->bigInteger('slug_id')->unsigned();
             $table->string('title');
             $table->string('date_wedding');
             $table->string('address');
@@ -41,6 +40,8 @@ class CreateEventsTable extends Migration
             $table->integer('status');
             $table->string('gps');
             $table->timestamps();
+
+            $table->foreign('slug_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

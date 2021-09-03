@@ -42,7 +42,7 @@
                             @foreach ($attendance as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $d->username_id }}</td>
+                                    <td>{{ $d->m_slug->slug }}</td>
                                     <td>{{ $d->name }}</td>
                                     <td>{{ $d->email }}</td>
                                     <td>{{ $d->phone }}</td>
@@ -94,15 +94,16 @@
                             @csrf
                             @method('PUT')
 
-                            @if ($role == 'user')
-                                <input type="text" class="form-control" name="username_id"
-                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @if ($role == 2)
+                                <input type="text" class="form-control" name="slug_id"
+                                    value="{{ old('slug_id', $item->slug_id) }}" hidden>
                             @else
                                 <div class="form-group row">
-                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <label for="slug_id" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="username_id"
-                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                        <input type="text" class="form-control" name="slug_id"
+                                            value="{{ old('slug_id', $item->slug_id) }}" hidden>
+                                        <p class="pt-2">{{ $item->m_slug->slug }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -127,6 +128,16 @@
                                         value="{{ old('phone', $d->phone) }}">
                                 </div>
                             </div>
+                            @if ($role == 1)
+                                <div class="form-group row">
+                                    <label for="status" class="col-sm-2 col-form-label">Status</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="status"
+                                            value="{{ old('status', $d->status) }}">
+                                        <span>1: Aktif 0: Nonaktif</span>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -139,3 +150,17 @@
         </div>
     @endforeach
 @endsection
+@prepend('datatables')
+    {{-- Datatables --}}
+    <script src="{{ asset('admin2/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "order": [
+                    [2, "desc"]
+                ]
+            });
+        });
+    </script>
+@endprepend

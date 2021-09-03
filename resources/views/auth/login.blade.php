@@ -17,13 +17,25 @@
                                 <form class="user" method="POST" action="{{ route('login') }}">
                                     @csrf
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <input id="username" type="text"
                                             class="form-control form-control-user @error('username') is-invalid @enderror"
                                             name="username" value="{{ old('username') }}" required autocomplete="username"
                                             autofocus placeholder="Username">
 
                                         @error('username')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <input id="email" type="text"
+                                            class="form-control form-control-user @error('email') is-invalid @enderror"
+                                            name="email" value="{{ old('email') }}" required autocomplete="email"
+                                            autofocus placeholder="Email">
+
+                                        @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -55,8 +67,9 @@
                                         </button>
 
                                         {{-- @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                            <a class="underline text-sm text-gray-600 hover:text-gray-900"
+                                                href="{{ route('password.request') }}">
+                                                {{ __('Forgot your password?') }}
                                             </a>
                                         @endif --}}
                                     </div>

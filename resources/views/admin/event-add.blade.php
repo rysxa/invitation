@@ -7,21 +7,20 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Add New Wedding</h1>
 
-        <form action="{{ route('admin.event.create', $user) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.event.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <?php $data = App\Models\User::all('username'); ?>
-            @if ($role == 'user')
-                <input type="text" class="form-control" name="username_id" value="{{ Auth::user()->username }}" hidden>
+
+            @if ($role == 2)
+                <input type="text" class="form-control" name="slug_id" value="{{ Auth::user()->id }}" hidden>
             @else
                 <div class="form-group row">
-                    <label for="username_id" class="col-sm-4 col-form-label">Username</label>
+                    <label for="slug_id" class="col-sm-4 col-form-label">Username</label>
                     <div class="col-sm-8">
-                        <select name="username_id" class="form-control selectpicker" data-live-search="true"
+                        <select name="slug_id" class="form-control selectpicker" data-live-search="true"
                             data-max-options="5">
-                            @foreach ($data as $item)
-                                <option value="{{ $item->username }}"
-                                    {{ old('username_id') == "$item->username" ? selected : '' }}>
-                                    {{ $item->username }}
+                            @foreach ($user as $item)
+                                <option value="{{ $item->id }}" {{ old('slug_id') == "$item->id" ? selected : '' }}>
+                                    {{ $item->slug }}
                                 </option>
                             @endforeach
                         </select>
@@ -170,7 +169,7 @@
                 </div>
             </div>
 
-            <a type="button" href="{{ route('admin.data.event', $user) }}" class="btn btn-secondary">Back</a>
+            <a type="button" href="{{ route('admin.data.event') }}" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
 

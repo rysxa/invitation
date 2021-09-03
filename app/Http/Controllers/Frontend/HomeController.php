@@ -8,45 +8,29 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Contact_info;
+use App\Models\Event;
+use App\Models\Gallery_caption;
 use App\Models\User;
+use App\Models\Wish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function index($username)
+    public function index($id)
     {
-        $user = User::where('username', '=', $username)->first()->username;
-        if ($username == 'admin') {
-            return redirect()->route('admin.dashboard', $user);
+        $slug = User::where('slug', $id)->first();
+        $event = DB::table('events')->where('slug_id', $slug->id)->first();
+        $attendance = Attendance::all();
+        $wish = DB::table('wishes')->where('slug_id', $slug->id)->where('status', '=', 1)->paginate(2);
+        $contact_info = Contact_info::all();
+        $gallery_head = Gallery_caption::all();
+        if ($event == null) {
+            return view('emptypage');
         } else {
-            $attendance = DB::table('users')
-                ->join('attendances', 'users.username', '=', 'attendances.username_id')
-                ->where('username_id', '=', $username)
-                ->first();
-            $wish = DB::table('users')
-                ->join('wishes', 'users.username', '=', 'wishes.username_id')
-                ->where('username_id', '=', $username)
-                ->get();
-            $event = DB::table('users')
-                ->join('events', 'users.username', '=', 'events.username_id')
-                ->where('username_id', '=', $username)
-                ->first();
-            $contact_info = DB::table('users')
-                ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-                ->where('username_id', '=', $username)
-                ->first();
-            $gallery_head = DB::table('users')
-                ->join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
-                ->where('username_id', '=', $username)
-                ->first();
-                
-            if (!$event && !$contact_info && !$gallery_head) {
-                return view('emptypage');
-            } else {
-                return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'user', 'gallery_head'));
-            }
+            return view('wedding.index', compact('attendance', 'wish', 'event', 'contact_info', 'gallery_head', 'slug'));
         }
     }
 
@@ -55,19 +39,19 @@ class HomeController extends Controller
         return view('wedding.dashboard');
     }
 
-    public function create(Request $request, $username)
+    public function create(Request $request)
     {
-        $user = User::where('username', '=', $username)->first()->username;
-
         $data = Attendance::create([
-            'name'          => ucwords($request->name),
-            'username_id'   => $user,
-            'email'         => $request->email,
-            'phone'         => $request->phone
+            'slug_id'   => $request->slug_id,
+            'name'      => ucwords($request->name),
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+            'status'    => $request->status,
         ]);
 
+        $user = User::where('id', $data['slug_id'])->first();
         if ($data) {
-            return redirect()->route('front.data.wish', $user)->with('success', 'Thank you, the form you have filled has been accepted');
+            return redirect()->route('front.data.wish', $user->slug)->with('success', 'Thank you, the form you have filled has been accepted');
         }
     }
 }

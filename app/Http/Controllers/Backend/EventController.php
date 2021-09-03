@@ -12,39 +12,34 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
-    public function index($username)
+    public function index()
     {
-        $user = Auth::user()->username;
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $event = User::join('events', 'users.username', '=', 'events.username_id')->get();
+        $slug = Auth::user()->slug;
+        $role = Auth::user()->role_id;
+        $user = User::where('slug', $slug)->first();
+        if ($role == 1) {
+            $event = Event::all();
         } else {
-            $event = User::join('events', 'users.username', '=', 'events.username_id')
-            ->where('username_id', '=', $user)
-            ->get();
+            $event = Event::where('slug_id', '=', $user->id)->get();
         }
         return view('admin.event', compact('user', 'event', 'role'));
     }
 
-    public function add($username)
+    public function add()
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin') {
-            $user = User::where('username', $username)->first();
-        } else {
-            $user = Auth::user()->username;
-        }
-        return view('admin.event-add', compact('user', 'role'));
+        $role = Auth::user()->role_id;
+        $user = User::all();
+        return view('admin.event-add', compact('role', 'user'));
     }
 
-    public function store(Request $request, $user)
+    public function store(Request $request)
     {
         // privilege
         $this->authorize('create', Event::class);
-        $user = Auth::user()->username;
         $this->validate($request, [
             'pic_man'               => 'required|image|mimes:png,jpg,jpeg',
             'pic_women'             => 'required|image|mimes:png,jpg,jpeg',
@@ -77,8 +72,7 @@ class EventController extends Controller
         $pic_women->storeAs('public/images', $pic_women->hashName());
 
         $data = Event::create([
-            'slug'                  => Str::slug($request->title),
-            'username_id'           => $request->username_id,
+            'slug_id'               => $request->slug_id,
             'title'                 => $request->title,
             'date_wedding'          => $request->date_wedding,
             'address'               => $request->address,
@@ -105,7 +99,7 @@ class EventController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.data.event', $user)->with('success', 'Data berhasil ditambahkan, Silahkan isi form berikutnya == Master -> Head Gallery ==');
+            return redirect()->route('admin.data.event')->with('success', 'Data berhasil ditambahkan, Silahkan isi form berikutnya == Master -> Head Gallery ==');
         }
     }
 
@@ -113,12 +107,12 @@ class EventController extends Controller
     {
         $this->authorize('update', Event::class);
 
-        $userUpdate = Auth::user()->username;
+        $userUpdate = Auth::user()->slug;
         $data = Event::findOrFail($data->id);
 
         if ($request->file('pic_man') == "" || $request->file('pic_women') == "") {
             $data->update([
-                'username_id'           => $request->username_id,
+                'slug_id'               => $request->slug_id,
                 'title'                 => $request->title,
                 'date_wedding'          => $request->date_wedding,
                 'address'               => $request->address,
@@ -150,7 +144,7 @@ class EventController extends Controller
             $pic_women->storeAs('public/images', $pic_women->hashName());
 
             $data->update([
-                'username_id'           => $request->username_id,
+                'slug_id'               => $request->slug_id,
                 'title'                 => $request->title,
                 'date_wedding'          => $request->date_wedding,
                 'address'               => $request->address,
@@ -187,14 +181,13 @@ class EventController extends Controller
         $this->authorize('delete', Event::class);
 
         $event->find($event->id)->all();
-        $username = $event['username_id'];
 
         Storage::disk('local')->delete('public/images/' . $event->pic_man);
         Storage::disk('local')->delete('public/images/' . $event->pic_women);
         $event->delete();
 
         if ($event) {
-            return redirect()->route('admin.data.event', $username)->with('success', 'Data deleted successfully');
+            return redirect()->route('admin.data.event')->with('success', 'Data deleted successfully');
         }
     }
 }

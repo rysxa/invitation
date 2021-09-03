@@ -2,31 +2,34 @@
 @section('title', 'Invitation Wedding')
 @section('meta')
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="{{ $event->man_first }} &amp;
-                                {{ $event->women_first }} Invitation Wedding" />
+    <meta name="keywords"
+        content="{{ $event->man_first }} &amp;
+                                                                                                                            {{ $event->women_first }} Invitation Wedding" />
     <meta name="author" content="Indry Sefviana" />
     <meta property="title" content="" />
     <meta name="description" content="Kami mengundang kamu ke pernikahan kami" />
     <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="{{ $event->man_first }} &amp;
-                                {{ $event->women_first }} Invitation Wedding" />
+    <meta property="og:title"
+        content="{{ $event->man_first }} &amp;
+                                                                                                                            {{ $event->women_first }} Invitation Wedding" />
     <meta property="og:image" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" />
-    <meta property="og:url" content="{{ route('front.data.wish', $user) }}" />
-    <meta property="og:site_name" content="nicewone.com/{{ $event->username_id }}" />
+    <meta property="og:url" content="{{ route('front.data.wish', $slug->slug) }}" />
+    <meta property="og:site_name" content="nicewone.com/{{ $event->slug_id }}" />
     <meta property="og:description" content="Kami mengundang kamu ke pernikahan kami" />
-    <meta name="twitter:title" content="{{ $event->man_first }} &amp;
-                                {{ $event->women_first }} Invitation Wedding" />
+    <meta name="twitter:title"
+        content="{{ $event->man_first }} &amp;
+                                                                                                                            {{ $event->women_first }} Invitation Wedding" />
     <meta name="twitter:image" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" />
-    <meta name="twitter:url" content="{{ route('front.data.wish', $user) }}" />
+    <meta name="twitter:url" content="{{ route('front.data.wish', $slug->slug) }}" />
     <meta name="twitter:card" content="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" />
 @endsection
 
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
-            <li class="active"><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
-            <li><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
+            <li class="active"><a href="{{ route('front.data.wish', $slug->slug) }}">Home</a></li>
+            <li><a href="{{ route('front.data.gallery', $slug->slug) }}">Gallery</a></li>
+            <li><a href="{{ route('front.data.contact', $slug->slug) }}">Contact</a></li>
         </ul>
     </div>
 @endsection
@@ -123,6 +126,7 @@
         </div>
     </div>
 
+    {{-- Wishes --}}
     <div class="fh5co-section">
         <div class="container">
             <div class="row">
@@ -133,9 +137,10 @@
                             <h2>Your Wishes</h2>
                         </div>
                     </div>
-                    <form action="{{ route('post.wish', $user) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('post.wish', $slug->slug) }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
+                        <input type="text" class="form-control hidden" name="slug_id" value="{{ $slug->id }}">
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="name">Name</label>
@@ -189,7 +194,9 @@
             <strong>{{ $message }}</strong>
         </div>
     @endif
-    <div id="fh5co-started" class="fh5co-bg" style="background-image:url(wedding/wedding/images/gallery-3.jpg);">
+
+    {{-- RSVP --}}
+    <div id="fh5co-started" class="fh5co-bg" style="background-image:url(images/polygonal.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row animate-box">
@@ -200,10 +207,11 @@
             </div>
             <div class="row animate-box">
                 <div class="col-md-10 col-md-offset-1">
-                    <form class="form-inline" action="{{ route('post.attendance', $user) }}" method="POST"
+                    <form class="form-inline" action="{{ route('post.attendance', $slug->slug) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
 
+                        <input type="text" class="form-control hidden" name="slug_id" value="{{ $slug->id }}">
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
                                 <label for="name" class="sr-only">Name</label>
@@ -228,7 +236,11 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <button type="submit" class="btn btn-default btn-block">I am Attending</button>
+                            <button type="submit" name="status" class="btn btn-primary" style="height: 55px"
+                                value="1">Hadir</button>
+                            <button type="submit" name="status" class="btn btn-warning"
+                                style="height: 55px; background-color: #C9CCD5" value="0">Tidak
+                                hadir</button>
                         </div>
                     </form>
                 </div>
@@ -236,6 +248,7 @@
         </div>
     </div>
 
+    {{-- Comment --}}
     <div id="fh5co-couple-story">
         <div class="container">
             @if ($wish->isEmpty())
@@ -248,8 +261,7 @@
                         <ul class="timeline animate-box">
                             @foreach ($wish as $comment)
                                 <li class="animate-box">
-                                    <div class="timeline-badge"
-                                        style="background-image:url(wedding/wedding/images/couple-1.jpg);">
+                                    <div class="timeline-badge" style="background-image:url(images/pp-comment.png);">
                                     </div>
                                     <div class="timeline-panel">
                                         <div class="timeline-heading">
@@ -283,12 +295,14 @@
                     </li> --}}
                         </ul>
 
+                        {{ $wish->links() }}
                     </div>
                 </div>
             @endif
         </div>
     </div>
 
+    {{-- Prokes --}}
     <div class="fh5co-section">
         <div class="container">
             <div class="row">

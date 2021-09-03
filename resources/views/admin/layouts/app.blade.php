@@ -81,7 +81,7 @@
         $('.selectpicker').selectpicker();
     </script>
 
-    @yield('datatables')
+    @stack('datatables')
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('admin2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>

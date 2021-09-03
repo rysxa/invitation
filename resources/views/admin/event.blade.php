@@ -19,13 +19,23 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+            @elseif ($event != null)
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Silahkan isi semua data pada <strong>Menu Master</strong> untuk menjalankan semua tampilan web Wedding
+                    Invitation -
+                    <strong>niceWone.com</strong> kamu! Jika sudah disini abaikan pesan ini.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             @else
                 {{ '' }}
             @endif
         @endcan
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Wedding User Page</h1>
+        <h1 class="h3 mb-4 text-gray-800">Wedding User Page <a href="{{ route('front.data.wish', $user) }}"
+                class="badge badge-primary">Web Kamu</a></h1>
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
@@ -41,17 +51,17 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 @can('create', App\Event::class)
-                    @if ($event->isEmpty() && $role == 'user')
-                        <a href="{{ route('admin.event.add', $user) }}" class="nav-link">
+                    @if ($event->isEmpty() && $role == 2)
+                        <a href="{{ route('admin.event.add') }}" class="nav-link">
                             <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
                                     New</i></button>
                         </a>
-                    @elseif ($role == 'admin')
-                        <a href="{{ route('admin.event.add', $user) }}" class="nav-link">
+                    @elseif ($role == 1)
+                        <a href="{{ route('admin.event.add') }}" class="nav-link">
                             <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add
                                     New</i></button>
                         </a>
-                    @elseif (($event[0]->title) && $role == 'user')
+                    @elseif (($event[0]->title) && $role == 2)
                         {{ '' }}
                     @endif
                 @endcan
@@ -79,7 +89,7 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ date('F j, Y, g:i a', strtotime($d->created_at)) }}</td>
-                                    <td>{{ $d->username_id }}</td>
+                                    <td>{{ $d->m_slug->slug }}</td>
                                     <td>{{ $d->man_first . ' ' . $d->man_last }}</td>
                                     <td>{{ $d->women_first . ' ' . $d->women_last }}</td>
                                     <td>{{ $d->address }}</td>
@@ -123,8 +133,8 @@
     </div>
     <!-- /.container-fluid -->
 
-    {{-- Modal Detail --}}
     @foreach ($event as $item)
+        {{-- Modal Detail --}}
         <div class="modal fade col-12" id="modal-detail{{ $item->id }}" tabindex="-1"
             aria-labelledby="modal-detailLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -269,15 +279,16 @@
                             @csrf
                             @method('PUT')
 
-                            @if ($role == 'user')
-                                <input type="text" class="form-control" name="username_id"
-                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @if ($role == 2)
+                                <input type="text" class="form-control" name="slug_id"
+                                    value="{{ old('slug_id', $item->slug_id) }}" hidden>
                             @else
                                 <div class="form-group row">
-                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <label for="slug_id" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="username_id"
-                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                        <input type="text" class="form-control" name="slug_id"
+                                            value="{{ old('slug_id', $item->slug_id) }}" hidden>
+                                        <p class="pt-2">{{ $item->m_slug->slug }}</p>
                                     </div>
                                 </div>
                             @endif

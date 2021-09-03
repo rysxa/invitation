@@ -6,9 +6,9 @@
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
-            <li><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
-            <li><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
-            <li class="active"><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
+            <li><a href="{{ route('front.data.wish', $slug->slug) }}">Home</a></li>
+            <li><a href="{{ route('front.data.gallery', $slug->slug) }}">Gallery</a></li>
+            <li class="active"><a href="{{ route('front.data.contact', $slug->slug) }}">Contact</a></li>
         </ul>
     </div>
 @endsection
@@ -24,7 +24,7 @@
                             <strong>{{ $message }}</strong>
                         </div>
                     @endif
-                    <form action="{{ route('post.contact', $user) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('post.contact', $slug->slug) }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row form-group">
@@ -79,24 +79,21 @@
                             <li class="address">{{ $contact_info->address }}</li>
                             <li class="phone"><a target="_blank" href="tel://{{ $contact_info->phone }}">+
                                     {{ $contact_info->phone }}</a></li>
-                            <li class="fa fa-whatsapp"><a target="_blank"
+                            <li class="email"><a target="_blank"
                                     href="https://api.whatsapp.com/send?phone=62{{ $contact_info->wa }}&text=Saya%0Aingin%0Abertanya%0Amengenai%0Aacara%0Apernikahan%0Akamu">+
                                     {{ $contact_info->wa }}</a></li>
                             <li class="email"><a target="_blank"
-                                    href="mailto:{{ $contact_info->email }}">{{ $contact_info->email }}</a></li>
-                            @if (!$contact_info)
-                                {{ '' }}
-                            @else
-                                <li class="icon-facebook"><a target="_blank"
-                                        href="https://www.facebook.com/{{ $contact_info->facebook }}">{{ $contact_info->facebook }}</a>
-                                </li>
-                                <li class="icon-instagram"><a target="_blank"
-                                        href="https://www.instagram.com/{{ $contact_info->instagram }}">{{ $contact_info->instagram }}</a>
-                                </li>
-                                <li class="fa fa-twitter" aria-hidden="true"><a target="_blank"
-                                        href="https://twitter.com/{{ $contact_info->twitter }}">{{ $contact_info->twitter }}</a>
-                                </li>
-                            @endif
+                                    href="mailto:{{ $contact_info->email }}">{{ $contact_info->email }}</a>
+                            </li>
+                            <li class="icon-facebook"><a target="_blank"
+                                    href="https://www.facebook.com/{{ $contact_info->facebook }}">{{ $contact_info->facebook }}</a>
+                            </li>
+                            <li class="icon-instagram"><a target="_blank"
+                                    href="https://www.instagram.com/{{ $contact_info->instagram }}">{{ $contact_info->instagram }}</a>
+                            </li>
+                            <li class="icon-twitter" aria-hidden="true"><a target="_blank"
+                                    href="https://twitter.com/{{ $contact_info->twitter }}">{{ $contact_info->twitter }}</a>
+                            </li>
                         </ul>
                     </div>
 

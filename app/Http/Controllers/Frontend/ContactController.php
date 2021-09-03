@@ -8,31 +8,27 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Contact_info;
+use App\Models\Event;
+use App\Models\Gallery_caption;
 use App\Models\User;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
-    public function index($username)
-    { 
-        $user = User::where('username', '=', $username)->first()->username;
-        $event = DB::table('users')
-            ->join('events', 'users.username', '=', 'events.username_id')
-            ->where('username_id', '=', $username)
-            ->first();
-        // $contact_info = User::join('contact_infos', 'users.username', '=', 'contact_infos.username_id')->get();
-        $contact_info = DB::table('users')
-            ->join('contact_infos', 'users.username', '=', 'contact_infos.username_id')
-            ->where('username_id', '=', $username)
-            ->first();
-        // $gallery_head = User::join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')->get();
-        $gallery_head = DB::table('users')
-            ->join('gallery_captions', 'users.username', '=', 'gallery_captions.username_id')
-            ->where('username_id', '=', $username)
-            ->first();
-
-        return view('wedding.contact', compact('event', 'contact_info', 'user', 'gallery_head'));
+    public function index($id)
+    {
+        $slug           = User::where('slug', $id)->first();
+        $event          = Event::where('slug_id', $slug->id)->first();
+        $contact_info   = Contact_info::where('slug_id', $slug->id)->first();
+        $gallery_head   = Gallery_caption::where('slug_id', $slug->id)->get();
+        if ($contact_info == null) {
+            return view('emptypage');
+        } else {
+            return view('wedding.contact', compact('event' ,'contact_info', 'gallery_head', 'slug'));
+        }
     }
 
     public function create(Request $request, $username)

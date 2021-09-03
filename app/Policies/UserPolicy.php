@@ -11,36 +11,36 @@ class UserPolicy
 
     public function viewAny(User $user)
     {
-        return in_array($user->role, ['admin', 'user']);
+        return in_array($user->role_id, [1, 2]);
     }
 
     public function view(User $user)
     {
-        return $user->role === 'admin';
+        return in_array($user->role_id, [1]);
     }
 
     public function create(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 
     public function update(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 
     public function delete(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 
     public function restore(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 
     public function forceDelete(User $user)
     {
-        return $user->role === 'admin';
+        return $user->role_id === 1;
     }
 }

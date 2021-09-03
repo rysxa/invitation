@@ -62,7 +62,7 @@
                             @foreach ($story as $d)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $d->username_id }}</td>
+                                    <td>{{ $d->m_slug->slug }}</td>
                                     <td><img src="{{ Storage::url('public/images/' . $d->picture) }}" alt="story"
                                             class="img-responsive" width="80"></td>
                                     <td>{{ $d->subject }}</td>
@@ -113,15 +113,16 @@
                             @csrf
                             @method('PUT')
 
-                            @if ($role == 'user')
-                                <input type="text" class="form-control" name="username_id"
-                                    value="{{ old('username_id', $item->username_id) }}" hidden>
+                            @if ($role == 2)
+                                <input type="text" class="form-control" name="slug_id"
+                                    value="{{ old('slug_id', $item->slug_id) }}" hidden>
                             @else
                                 <div class="form-group row">
-                                    <label for="username_id" class="col-sm-2 col-form-label">Username</label>
+                                    <label for="slug_id" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="username_id"
-                                            value="{{ old('username_id', $item->username_id) }}" readonly>
+                                        <input type="text" class="form-control" name="slug_id"
+                                            value="{{ old('slug_id', $item->slug_id) }}" hidden>
+                                        <p>{{ $item->m_slug->slug }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -165,3 +166,17 @@
         </div>
     @endforeach
 @endsection
+@prepend('datatables')
+    {{-- Datatables --}}
+    <script src="{{ asset('admin2/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "order": [
+                    [4, "desc"]
+                ]
+            });
+        });
+    </script>
+@endprepend

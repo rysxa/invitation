@@ -15,11 +15,13 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('username_id');
+            $table->bigInteger('slug_id')->unsigned();
             $table->string('subject');
             $table->string('caption_head')->nullable();
             $table->string('url');
             $table->timestamps();
+
+            $table->foreign('slug_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

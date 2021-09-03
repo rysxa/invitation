@@ -15,7 +15,7 @@ class CreateContactInfosTable extends Migration
     {
         Schema::create('contact_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('username_id');
+            $table->bigInteger('slug_id')->unsigned();
             $table->string('address');
             $table->string('phone');
             $table->string('email');
@@ -24,6 +24,8 @@ class CreateContactInfosTable extends Migration
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
             $table->timestamps();
+
+            $table->foreign('slug_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

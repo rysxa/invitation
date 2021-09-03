@@ -24,9 +24,13 @@
             <div class="notfound-404">
                 <h1>400</h1>
             </div>
-            <?php $user = Auth::user()->username; ?>
             <h2>Oops, The Page you are looking for can't be found!</h2>
-            <a href="{{ route('admin.data.event', $user) }}"><span class="arrow"></span>Isi Form</a>
+            @if (Auth::user())
+                <p hidden>{{ $user = Auth::user()->slug }}</p>
+                <a href="{{ route('admin.data.event', $user) }}"><span class="arrow"></span>Isi Form</a>
+            @else
+                <a href="{{ route('login') }}"><span class="arrow"></span>Isi Form</a>
+            @endif
         </div>
     </div>
 

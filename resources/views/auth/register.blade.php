@@ -41,12 +41,12 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input id="username" type="text"
-                                            class="form-control form-control-user @error('username') is-invalid @enderror"
-                                            name="username" value="{{ old('username') }}" required autocomplete="username"
+                                        <input id="slug" type="text"
+                                            class="form-control form-control-user @error('slug') is-invalid @enderror"
+                                            name="slug" value="{{ old('slug') }}" required autocomplete="slug"
                                             placeholder="Username">
 
-                                        @error('username')
+                                        @error('slug')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

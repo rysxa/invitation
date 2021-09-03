@@ -15,12 +15,15 @@ class CreateWishesTable extends Migration
     {
         Schema::create('wishes', function (Blueprint $table) {
             $table->id();
-            $table->string('username_id');
+            $table->bigInteger('slug_id')->unsigned();
             $table->string('name');
             $table->string('email');
             $table->bigInteger('phone');
             $table->longText('message');
+            $table->integer('status');
             $table->timestamps();
+
+            $table->foreign('slug_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

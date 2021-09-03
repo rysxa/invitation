@@ -3,7 +3,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center pt-5"
-        href="{{ route('admin.dashboard', $user) }}">
+        href="{{ route('admin.dashboard') }}">
         <div class="sidebar-brand-icon">
             <img src="{{ asset('images/logo-nicewone-landscape-transparant.png') }}" alt="logo" class="img-fluid"
                 width="130">
@@ -15,7 +15,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.dashboard', $user) }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -38,8 +38,8 @@
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{ route('admin.user.data', $user) }}">User</a>
-                    <a class="collapse-item" href="{{ route('admin.status.data', $user) }}">Status</a>
+                    <a class="collapse-item" href="{{ route('admin.user.data') }}">User</a>
+                    <a class="collapse-item" href="{{ route('admin.status.data') }}">Status</a>
                 </div>
             </div>
         </li>
@@ -53,12 +53,13 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('front.data.wish', $user) }}">Frontend Web</a>
-                <a class="collapse-item" href="{{ route('admin.data.event', $user) }}">Event</a>
-                <a class="collapse-item" href="{{ route('admin.gallery.head', $user) }}">Head Gallery</a>
-                <a class="collapse-item" href="{{ route('admin.story.data', $user) }}">Story</a>
-                <a class="collapse-item" href="{{ route('admin.gallery.data', $user) }}">Gallery</a>
-                <a class="collapse-item" href="{{ route('admin.contactinfo.data', $user) }}">Contact Information</a>
+                <a class="collapse-item" href="{{ route('front.data.wish', Auth::user()->slug) }}"><b>Frontend
+                        Web</b></a>
+                <a class="collapse-item" href="{{ route('admin.data.event') }}">Event</a>
+                <a class="collapse-item" href="{{ route('admin.gallery.head') }}">Head Gallery</a>
+                <a class="collapse-item" href="{{ route('admin.story.data') }}">Story</a>
+                <a class="collapse-item" href="{{ route('admin.gallery.data') }}">Gallery</a>
+                <a class="collapse-item" href="{{ route('admin.contactinfo.data') }}">Contact Information</a>
             </div>
         </div>
     </li>
@@ -75,9 +76,9 @@
         </a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.data.wish', $user) }}">Message</a>
-                <a class="collapse-item" href="{{ route('admin.data.attendance', $user) }}">RSVP</a>
-                <a class="collapse-item" href="{{ route('admin.contact.data', $user) }}">Contact</a>
+                <a class="collapse-item" href="{{ route('admin.data.wish') }}">Message</a>
+                <a class="collapse-item" href="{{ route('admin.data.attendance') }}">RSVP</a>
+                <a class="collapse-item" href="{{ route('admin.contact.data') }}">Contact</a>
             </div>
         </div>
     </li>

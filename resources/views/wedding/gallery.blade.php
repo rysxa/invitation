@@ -6,9 +6,9 @@
 @section('navbar')
     <div class="col-xs-10 text-right menu-1">
         <ul>
-            <li><a href="{{ route('front.data.wish', $user) }}">Home</a></li>
-            <li class="active"><a href="{{ route('front.data.gallery', $user) }}">Gallery</a></li>
-            <li><a href="{{ route('front.data.contact', $user) }}">Contact</a></li>
+            <li><a href="{{ route('front.data.wish', $slug->slug) }}">Home</a></li>
+            <li class="active"><a href="{{ route('front.data.gallery', $slug->slug) }}">Gallery</a></li>
+            <li><a href="{{ route('front.data.contact', $slug->slug) }}">Contact</a></li>
         </ul>
     </div>
 @endsection
@@ -19,7 +19,7 @@
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
                     <span>We Love Each Other</span>
                     <h2>Our Story</h2>
-                    <p>{{ $gallery_head->head_story }}</p>
+                    <p>{{ $gallery_head[0]->head_story }}</p>
                 </div>
             </div>
             <div class="row">
@@ -70,7 +70,7 @@
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
                     <span>Our Memories</span>
                     <h2>Wedding Gallery</h2>
-                    <p>{{ $gallery_head->head_gallery }}</p>
+                    <p>{{ $gallery_head[0]->head_gallery }}</p>
                 </div>
             </div>
             <div class="row row-bottom-padded-md">
@@ -94,19 +94,19 @@
 
     <div id="fh5co-services" class="fh5co-section-gray">
         <div class="container">
-            @if ($gallery_head->head_video == null || $gallery_head->url_video == null)
+            @if (!$gallery_head[0]->head_video || !$gallery_head[0]->url_video)
                 {{ '' }}
             @else
                 <div class="row animate-box">
                     <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
                         <h2>Wedding Video</h2>
-                        <p>{{ $gallery_head->head_video }}</p>
+                        <p>{{ $gallery_head[0]->head_video }}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <iframe width="560" height="315"
-                            src="https://www.youtube.com/embed/{{ $gallery_head->url_video }}"
+                            src="https://www.youtube.com/embed/{{ $gallery_head[0]->url_video }}"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>

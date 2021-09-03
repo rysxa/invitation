@@ -10,12 +10,12 @@
     <meta name="keywords" content="Wedding Invitation Gratis" />
     <meta name="keywords" content="Buat Undangan Pernikahan Gratis" />
     <meta name="google" content="Buat Undangan Pernikahan Gratis" />
-    <meta name="author" content="Indry Sefviana - Modify" />
+    <meta name="author" content="Indry Sefviana" />
 
-    <!-- 
+    <!--
  //////////////////////////////////////////////////////
 
- FREE HTML5 TEMPLATE 
+ FREE HTML5 TEMPLATE
  DESIGNED & DEVELOPED by FREEHTML5.CO
 
  Modify     : Indry Sefviana
@@ -52,7 +52,6 @@
 </head>
 
 <body>
-
     <div class="fh5co-loader"></div>
 
     <div id="page">
@@ -61,7 +60,7 @@
                 <div class="row">
                     <div class="col-xs-2">
                         <div>
-                            <a href="{{ route('front.data.wish', $user) }}">{{ $event->man_first }} &amp;
+                            <a href="{{ route('front.data.wish', $slug->slug) }}">{{ $event->man_first }} &amp;
                                 {{ $event->women_first }}<strong>.</strong></a>
                         </div>
                     </div>
@@ -69,26 +68,46 @@
                 </div>
             </div>
         </nav>
-
-        <header id="fh5co-header" class="fh5co-cover" role="banner"
-            style="background-image:url({{ Storage::url('public/images/' . $gallery_head->head_picture) }});"
-            data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center">
-                        <div class="display-t">
-                            <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                                <h1>{{ $event->man_first }} &amp;
-                                    {{ $event->women_first }}</h1>
-                                <h2>We Are Getting Married</h2>
-                                {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
+        @if (!$gallery_head[0]->head_picture)
+            <header id="fh5co-header" class="fh5co-cover" role="banner"
+                style="background-image:url({{ Storage::url('public/wedding/weddingimages/img_bg_5.jpg') }});"
+                data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <div class="display-t">
+                                <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                                    <h1>{{ $event->man_first }} &amp;
+                                        {{ $event->women_first }}</h1>
+                                    <h2>We Are Getting Married</h2>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        @else
+            <header id="fh5co-header" class="fh5co-cover" role="banner"
+                style="background-image:url({{ Storage::url('public/images/' . $gallery_head[0]->head_picture) }});"
+                data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <div class="display-t">
+                                <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                                    <h1>{{ $event->man_first }} &amp;
+                                        {{ $event->women_first }}</h1>
+                                    <h2>We Are Getting Married</h2>
+                                    {{-- <div class="simply-countdown simply-countdown-one"></div> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        @endif
 
         @yield('content')
 
@@ -102,9 +121,10 @@
                         </p>
                         <p>
                         <ul class="fh5co-social-icons">
-                            <li><a target="_blank" href="https://twitter.com/niceweone"><i class="icon-twitter"></i></a>
+                            <li><a target="_blank" href="https://twitter.com/niceweone"><i
+                                        class="icon-twitter"></i></a>
                             </li>
-                            <li><a target="_blank" href="https://www.instagram.com/nicewone/"><i
+                            <li><a target="_blank" href="https://www.instagram.com/niceweone/"><i
                                         class="icon-instagram"></i></a></li>
                         </ul>
                         </p>

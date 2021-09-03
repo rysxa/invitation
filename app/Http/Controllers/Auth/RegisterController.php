@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -67,7 +68,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'slug' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required'],
         ]);
@@ -83,17 +84,17 @@ class RegisterController extends Controller
     {
         $user = User::all();
         if ($user->isEmpty()) {
-            $pick_role = 'admin';
+            $pick_role = 1;
         } else {
-            $pick_role = $data['role'];
+            $pick_role = 2;
         }
 
         return User::create([
+            'slug' => Str::slug(strtolower($data['slug'])),
             'name' => ucwords($data['name']),
             'email' => $data['email'],
-            'username' => strtolower($data['username']),
             'password' => Hash::make($data['password']),
-            'role' => $pick_role,
+            'role_id' => $pick_role,
         ]);
     }
 }
