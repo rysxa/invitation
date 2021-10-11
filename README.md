@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="![logo-nicewone-transparant](https://user-images.githubusercontent.com/61085159/136768781-70ed6680-38bb-40a0-a8cf-79722d2e6b92.png)">
+  ![logo-nicewone-transparant](https://user-images.githubusercontent.com/61085159/136768781-70ed6680-38bb-40a0-a8cf-79722d2e6b92.png)
 </p>
 
 ## Introduction
