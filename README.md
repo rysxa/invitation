@@ -1,6 +1,4 @@
-<img align="center">
-  ![logo-nicewone-transparant](https://user-images.githubusercontent.com/61085159/136768781-70ed6680-38bb-40a0-a8cf-79722d2e6b92.png)
-</img>
+![logo-nicewone-transparant](https://user-images.githubusercontent.com/61085159/136768781-70ed6680-38bb-40a0-a8cf-79722d2e6b92.png)
 
 ## Introduction
 
