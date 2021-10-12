@@ -5,10 +5,9 @@
 Thank you Laravel 8 for helping me finish my project quickly, thank you also for the website theme that I got for free ^-^
 
 - [Home Page](https://nicewone.com).
-- [Login Page](https://nicewone.com/login).
-- [Registration Page](https://nicewone.com/register). first register automatically becomes admin, and then becomes user
+- [Login User Page](https://nicewone.com/login).
+- [Registration User Page](https://nicewone.com/register). first register automatically becomes admin, and then becomes user
 - [Frontend Page Example](https://nicewone.com/rara). must be accompanied by parameters as URI
-- [Backend Page](https://nicewone.com/admin).
 
 ## Aplication Wedding Invitation
 ![image](https://user-images.githubusercontent.com/61085159/116580830-f2690480-a93d-11eb-97f0-1e425e00f001.png)
@@ -21,5 +20,5 @@ Message sayings be happy
 RSVP Attendance
 ![image](https://user-images.githubusercontent.com/61085159/116581231-5095e780-a93e-11eb-9472-95e7b1a14b40.png)
 
-# invitation
+# Donate
 Support author https://saweria.co/donate/sailingxlt
