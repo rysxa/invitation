@@ -25,10 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -110,13 +106,3 @@ Route::prefix('/admin')->namespace('Backend')->middleware(['auth', 'verified'])-
 
     Route::get('/profile', [BackendContactController::class, 'index'])->name('admin.profile.data');
 });
-
-
-
-// // Auth
-// Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-// Route::post('login', 'Auth\LoginController@login')->name('store.login');
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-// // Registration Routes...
-// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-// Route::post('register', 'Auth\RegisterController@register')->name('store.register');
