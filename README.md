@@ -12,7 +12,7 @@ Thank you Laravel 8 for helping me finish my project quickly, thank you also for
 ## Installation Local Project
 
 ```elixir 
-git clone https://github.com/indrysfa/invitation.git
+git clone https://github.com/rysxa/invitation.git
 ```
 
 then
