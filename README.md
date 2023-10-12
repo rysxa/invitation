@@ -67,4 +67,4 @@ RSVP Attendance
 ![image](https://user-images.githubusercontent.com/61085159/116581231-5095e780-a93e-11eb-9472-95e7b1a14b40.png)
 
 # Donate
-Support author https://saweria.co/donate/sailingxlt
+Support author https://saweria.co/donate/piekacuh
